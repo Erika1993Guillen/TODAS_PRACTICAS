@@ -1,0 +1,255 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estad\'istico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 05}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section {ESTRUCTURA CONDICIONAL: LA ORDEN IF() Y IFELSE()}
+\begin{itemize}
+\item Por ejemplo, ejecute las siguientes instrucciones
+\end {itemize}
+<<>>=
+x <- c(6:-4); 
+x
+sqrt(x) # Produce un mensaje de advertencia
+
+
+
+sqrt(ifelse(x >= 0, x, NA)) # No produce advertencia
+
+
+
+ifelse(x >= 0, sqrt(x), NA) # Produce un mensaje de advertencia
+# Comente las diferencias entre cada una de las instrucciones anteriores.
+
+@
+\newpage
+\section {ESTRUCTURAS ITERATIVAS O DE REPETICI\'ON: FOR(), WHILE() Y REPEAT()}
+\begin{itemize}
+\item Ejemplo:
+\end {itemize}
+<<>>=
+x <- c(2, 6, 4, 7, 5, 1)
+suma<-0; for(i in 1:3) suma = suma+x[i]; suma
+@
+
+
+\section {FUNCIONES ESCRITAS POR EL USUARIO}
+\begin {itemize}
+\item Ejemplo 1: Definir en R la funci\'on cuadr\'atica y = f ( x) = (3x^2) - (5x) + 2
+\end {itemize}
+<<>>=
+func.cuadratica <- function(x)
+{
+3*x^2-5*x+2
+}
+y <- func.cuadratica(2);y
+@
+\textbf{NOTA: Toda funci\'on para usarla debe estar cargada en el \'area de trabajo (Workspace). Es decir, primero es necesario correr el c\'odigo necesario el c\'odigo de la funci\'on y asegurarse que no contenga errores de sintaxis.}
+\begin{itemize}
+\item Ejemplo 2: Se quiere definir una funci\'on para calcular la media de un vector de datos
+\end {itemize}
+Una definici\'on podr\'ia ser:
+<<>>=
+media <- function(x)
+{
+
+  n = length(x)
+suma <- 0.0
+for(i in 1:n) suma = suma + x[i]
+media = suma/n
+
+}
+save(media, file= "media.RData")
+rm(list=ls(all=TRUE))
+load("media.RData")
+
+x <- 1:5;
+(media(x)) # Se usa doble par\'entesis para que muestre el resultado en pantalla
+
+y <- c(5, NA , 4, 9);
+(media(y)) # El resultado no puede calcularse pues falta un dato
+
+z <- c(5, 1 , 4, 9);
+(media(z))
+
+(media) # Nos muestra el c\'odigo de la funci\'on
+@
+\begin{itemize}
+\item Ejemplo 3: Se quiere definir una funci\'on para graficar la funci\'on seno de x
+\end {itemize}
+Una definici\'on de esta funci\'on puede ser:
+<<>>=
+Seno <- function(x)
+{
+
+  y = sin(x)
+plot(x, y, main="Ejemplo de gr\'aficos en R",
+xlab="x", ylab="y = Seno(x)", col="blue", pch=1)
+
+}
+# Pruebe la funci\'on con el siguiente vector:
+
+x<-seq(-pi, pi, len=100)
+
+Seno(x)
+@
+\newpage
+\section{EJERCICIOS PROPUESTOS}
+\begin{itemize}
+\item Ejercicio 1: Escriba una funci\'on para encontrar el factorial de un n\'umero mayor que cero
+\end{itemize}
+<<>>=
+fac<-function(f){ prod<-1 # Inicializar el producto en 1
+if (f==0){ # Cuando el valor ingresado es cero
+  prod<-1 # El factorial es 1
+  return(prod) 
+}
+  else{
+    if(f<0) # Cuando el valor ingresado es negativo
+      print("No existe el factorial de un n\'umero negativo")
+    else {
+      int<-c(1:f) # Cuando el valor es positivo
+      
+      for(i in int)
+        prod<-prod * i  
+      return(prod)
+    }
+  }
+  
+  }
+fac(4)
+
+@
+\begin{itemize}
+\item Ejercicio 2: Escriba una funci\'on para encontrar la varianza o la cuasi-varianza de un vector de
+datos.
+\end{itemize}
+<<>>=
+vx<-function(k) { suma <- 0.0
+  z<-length(k)
+  for(i in 1:z){
+    suma = suma + k[i]
+    media = suma/z # Obtener la media aritmetica del vector
+    for(i in 1:z){
+      vx<-k[i]-media
+      vx<-(vx)/z
+    }
+  } 
+  return(vx) 
+}
+k <- c(2,3,4)
+(vx(k))
+@
+\begin{itemize}
+\item Ejercicio 3: Escriba una funci\'on para encontrar la media geom\'etrica de un vector de datos
+\end{itemize}
+<<>>=
+# Obtener la ra?z n-esima de cualquier valor 
+raiz=function(m,n){ # Este es la funci\'on que llamamos en los dos c\'odigos siguientes
+  raiz=n^(1/m)
+  return(raiz)
+}
+raiz(3,27)
+# Caso cuando el vector esta ordenado, es decir desde 1 hasta el valor deseado
+MG<-function(m)
+  {prod<-1 # Este c\'odigo se parece al del factorial de un numero positivo
+  int<-c(1:m)
+
+  for(i in int)
+    prod<-prod * i  
+  raiz=raiz(m,prod) 
+  # Obtener la ra\'iz n-esima (corresponde a la cantidad de valores en el vector)
+  return(raiz)
+  }
+MG(5) 
+
+# Caso cuando el vector es de calquier forma que el usuario desee
+MG2<-function(g) {product<-1 # Inicializar el producto
+  p<- length(g) # Guardar la longitud del vector
+  for(i in 1:p)
+    product<-product * g[i] # Realizar el producto de cada valor del vector
+  MG2<-product # Guardar el producto en MG2
+  raiz<-raiz(length(g),MG2) 
+  # Obtener la raiz n-esima (corresponde a la cantidad de valores en el vector)
+  return(raiz)
+}
+g<-c(2,3,4,5) # Pasar el vector de datos
+(MG2(g))
+
+@
+\newpage
+\begin{itemize}
+\item Ejercicio 4: Escriba una funci\'on para encontrar la media arm?nica de un vector de datos
+\end{itemize}
+<<>>=
+MA <- function(x)
+  {suma <- 0.0 # Inicializar suma
+  n <- length(x) # Guardar la longitud del vector
+  for(i in 1:n) 
+    suma <- suma + (1/x[i]) 
+  # Realizar la suma, pero de los reciprocos (1/x[i]) de los valores del vector
+  denom <- suma/n # Encontrar la media de los reciprocos
+  MA<-1/denom
+  
+}
+x <- c(2,3) 
+# Pasar el vector de datos
+(MA(x))
+@
+
+
+\end{document}

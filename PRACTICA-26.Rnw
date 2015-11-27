@@ -1,0 +1,296 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD SEIS"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 26}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+\section{INTRODUCCI\'ON}
+Los dise\~nos bifactoriales se diferencian a los dise\~nos por bloques en que ahora si nos interesa conocer el efecto entre este segundo factor(variable bloque) y nuestra variable dependiente; y adem\'as los dos factores ya no son independientes, por lo que es necesario conocer tambi\'en el efecto de la interacci\'on de ambos factores en nuestra variable dependiente.\\
+
+Supondremos que tenemos un primer factor, A, con k niveles; mientras que tenemos un segundo factor, B, con n niveles. Supondremos que tomamos para cada combinaci\'on posible de los niveles de ambos factores un total de m observaciones. De lo contrario tendremos m\'as par\'ametros a estimar en el modelo que el n\'umero de observaciones disponibles; y por consiguiente ser\'a imposible realizar el contraste.\\
+
+El modelo que genera los datos es el siguiente:\\
+
+$y_ \ ijl$ = $\μ$ + $τ_i$ + $B_j$ + $($τB$)_ \ij$ + $u_\ ijl$\\
+
+Donde:
+\begin{itemize}
+  \item $y_ \ ijl$: Representa la l-\'esima observaci\'on para la combinaci\'on ij-\'esima de niveles de los factores A y B (celda ij-\'esima de la matriz de datos). 
+  \item $\μ$: Representa un promedio o efecto global. 
+  \item $τ_i$: Representa el efecto del factor A cuando \'este se encuentra en el i-\'esimo nivel. Debe cumplirse que la sumatoria de $τ_i$ = 0.
+  \item $B_j$: Representa el efecto del factor B cuando \'este se encuentra en el j-\'esimo nivel. Deben cumplir que la sumatoria de $B_j$ = 0.
+  \item  $($τB$)_ \ij$: Representa el efecto de la interacci\'on de los factores A y B cuando el primero se encuentra en el nivel i y el segundo en el nivel j.
+  \item $u_\ ijl$: Representa un componente de error aleatorio, llamado perturbaciones, que incorpora todas las dem\'as fuentes de variabilidad del experimento.
+\end{itemize}
+
+Las cuatro hip\'otesis b\'asicas del modelo se resumen como siempre en\\
+$u_ \ ijl$ = $NIID$ N(0; $sigma^2$) =; para todo i,j,l.\\
+
+El primer contraste de hip\'otesis a realizar es (efecto del factor A):\\
+
+$H_o$: $τ_1$ = $τ_2$ ... $τ_k$ = 0\\
+
+$H_1$: $τ_i$ distinto 0; para al menos un $i$\\
+
+El segundo contraste de hip\'otesis a realizar es (efecto del factor B):\\
+
+$H_o$: $B_1$ = $B_2$ ... $B_k$ = 0\\
+
+$H_1$: $B_j$ distinto 0; para al menos un $j$\\
+
+Mientras que el tercer contraste de hip\'otesis a realizar es (efecto de la interacci\'on de los factores A y B):\\
+
+$H_o$: $($τB$)_ \ij$ = 0; para todo i,j\\
+
+$H_1$: $($τB$)_ \ij$ disntinto 0 para al menos una combinaci\'on ij\\
+
+No resulta dif\'icil verificar utilizando el m\'etodo de m\'axima verosimilitud que el modelo estimado para una muestra aleatoria de tama\~no Nkn = es:\\
+
+$\^y_ \ ij$ = $\^\μ$ + $\^τ_i$ + $\^B_j$ + $\^ ($alfaB$)_\ ij\\
+
+Y por consiguiente:\\
+
+$y_ \ ijl$ = $\^\μ$ + $\^τ_i$ + $\^B_j$ + $\^ ($alfaB$)_\ij$ + $\^ u_\ ijl$\\
+
+Donde: 
+\begin{itemize}
+  \item $\^\μ$ = $\~y_..$
+  \item $\^τ_i$ =  $\~y_i..$ -  $\~y_..$
+  \item $\^B_j$ = $\~y_.j.$ -  $\~y_..$
+  \item $\^ ($alfaB$)_\ij$ = $\~y_ij.$ -  $\~y_i..$ - $\~y_.j.$ -  $\~y_..$
+  \item $\^ u_\ ijl$ = $y_\ ijl$ - $\~y_ij.$
+\end{itemize}
+
+Y se tendr\'an las siguientes medidas de inter\'es:
+
+\begin{itemize}
+  \item $\~y_i..$ es el promedio para el i-\'esimo nivel del factor A.
+  \item $\~y_.j.$ es el promedio para el j-\'esimo nivel del factor B.
+  \item $\~y_ij.$ es el promedio para la combinaci\'on ij-\'esima de los factores A y B.
+  \item $\~y_..$ es la media general de la caracter\'istica de inter\'es.
+\end{itemize}
+
+El An\'alisis de Varianza establece que se debe cumplir la siguiente relaci\'on (al ser cada uno de las fuentes ortogonales entre s\'i):\\
+
+VT = VE(τ) + VE(B) + VE(τB) + VNE\\
+
+Donde: 
+\begin{itemize}
+  \item VT es la variabilidad total del experimento.
+  \item VE(τ) es la variabilidad explicada por el factor A.
+  \item VE(B) es la variabilidad explicada por el factor B. 
+  \item VE(τB) es la variabilidad explicada por la combinaci\'on de los factores A y B. 
+  \item VNE es la variabilidad no explicada o residual.
+\end{itemize}
+
+Para poder contrastar cada una de los diferentes contrastes anteriores, se utiliza la tabla ANOVA siguiente:\\
+
+\textbf{Factor A:}
+\begin{itemize}
+  \item Sumas de Cuadrados: VE($τ$).
+  \item Grados de Libertad: $K-1$
+  \item Medias de Cuadrados: $MCE($τ$)$ = $VE($τ$)$ / $K-1$ 
+  \item $F_o$: $F_\ τ$ = $MCE($τ$)$/$MCNE$
+\end{itemize}
+
+\textbf{Factor B:}
+\begin{itemize}
+  \item Sumas de Cuadrados: $VE(B)$.
+  \item Grados de Libertad: $n - 1$
+  \item Medias de Cuadrados: $MCNE(B)$ = $VE($τ$)$ / $k-1$
+  \item $F_o$: $F_\ B$ = $MCE(B)$/$MCNE$
+\end{itemize}
+
+\textbf{Interacci\'on:}
+\begin{itemize}
+  \item Sumas de Cuadrados: $VE($τB$)$.
+  \item Grados de Libertad: $(K - 1)(n - 1)$
+  \item Medias de Cuadrados: $MCNE$ = $VNE($τB$)$ / $(K - 1)(n - 1)$
+  \item $F_o$: $F_\ τB$ = $MCE($τB$)$/$MCNE$
+\end{itemize}
+
+\textbf{Error:}
+\begin{itemize}
+  \item Sumas de Cuadrados: $VNE$.
+  \item Grados de Libertad: $kn(m - 1)$
+  \item Medias de Cuadrados: $MCNE$ = $VNE$ / $kn(m - 1)$
+\end{itemize}
+
+\textbf{Total:}
+\begin{itemize}
+  \item Sumas de Cuadrados: $VT$ = $VE($τ$)$ + $VE(B)$ + $VE($τB$)$ + $VNE$
+  \item grados de Libertad: $N - 1$
+\end{itemize}
+
+De tal modo que la hip\'otesis nula de igualdad de los efectos del factor A se rechaza (a un nivel de confianza del 100(1 - $alfa$)\% si\\
+
+$F_τ$ $>$ $F_\ alfa,(K-1),kn(m-1)$\\
+
+De tal modo que la hip\'otesis nula de igualdad de los efectos del factor B se rechaza (a un nivel de confianza del 100(1 - $alfa$)\% si\\
+
+$F_B$ $>$ $F_\ alfa,(n-1),kn(m-1)$\\
+
+De tal modo que la hip\'otesis nula de igualdad de los efectos del factor A y B se rechaza (a un nivel de confianza del 100(1 - $alfa$)\% si\\
+
+$F_\ τB$ $>$ $F_\ alfa,(k-1)(n-1),kn(m-1)$\\
+
+\section{EJEMPLO 1.}
+
+Se llev\'o a cabo un estudio del efecto de la temperatura sobre el porcentaje de encogimiento de telas te\~nidas, con dos r\'eplicas para cada uno de cuatro tipos de tela en un dise\~no totalmente aleatorizado. Los datos son el porcentaje de encogimiento de dos r\'eplicas de tela secadas a cuatro temperaturas; los cuales se muestran a continuaci\'on. 
+
+<<>>=
+# Definiendo el vector que contendr\'a el factor A. El primer novillo es
+# asignado al bloque 1, el siguiente al 2, el tercero al 3 el cuarto al 4,
+# y se inicia el ciclo. 
+
+FactorA <- gl(n=4, k=8, length=32);FactorA
+
+# k=8 especifica que se introducir\'an las observaciones en orden de cada
+# factor. Para mayor comodidad se introducir\'an los datos en orden de
+# celda. 
+
+# Se crea el vector que contendr\'a los tratamientos de los novillos
+# (raciones de alimento) los primeros cuatros se les asigna el tratamiento
+# 1, los siguientes cuatro el 2, y as\'i sucesivamente.
+
+FactorB<- gl(n=4, k=2,length=32);FactorB 
+
+# k=2 especifica que las primeras dos observaciones ser\'an correspondien
+# tes al primer nivel, las dos siguientes al segundo, y as\'is 
+# sucesivamente. Cuando se finalice en el cuarto nivel se iniciar\'a 
+# nuevamente en el nivel 1. 
+
+# Se digitan los pesos de los novillos 
+
+Porcentaje <- c(1.8, 2.1, 2.0, 2.1, 4.6, 5.0, 7.5, 7.9, 2.2, 2.4,
+                4.2, 4.0, 5.4, 5.6, 9.8, 9.2, 2.8, 3.2, 4.4, 4.8, 
+                8.7, 8.4, 13.2, 13.0, 3.2, 3.6, 3.3, 3.5, 5.7, 5.8,
+                10.9, 11.1)
+Porcentaje 
+
+# Se registra en una hoja de datos los resultados del experimento 
+
+datos3 <- data.frame(FactorA = FactorA, FactorB = FactorB, Porcentaje=Porcentaje)
+datos3 
+@
+
+Utilizando un nivel de significancia del 5\%, contraste el siguiente conjunto de hip\'otesis:
+\begin{itemize}
+  \item Las hip\'otesis a contrastar para el factor A son:\\ 
+  $H_o$: $τ_1$ = $τ_2$ = $τ_3$ = $τ_4$\\
+  $H_1$: $τ_i$ distinto 0; para al menos un $i$
+  \item Las hip\'otesis a contrastar para el factor B son:\\
+  $H_o$: $B_1$ = $B_2$ = $B_3$ = $B_4$\\
+  $H_1$: $B_j$ distinto 0; para al menos un $j$
+  \item Las hip\'otesis a contrastar para la interacci\'on de los factores A y B son:\\
+  $H_o$: $($τB$)_ \ij$ = 0; para todo i,j\\
+  $H_1$: $($τB$)_ \ij$ disntinto 0 para al menos una combinaci\'on ij
+  \item Ejecutar el script "anova3.R"
+
+<<>>=
+# Definiendo el vector que contendr\'a el factor A. El primer novillo es
+# asignado al bloque 1, el siguiente al 2, el tercero al 3 el cuarto al 4,
+# y se inicia el ciclo. 
+
+FactorA <- gl(n=4, k=8, length=32);FactorA
+
+# k=8 especifica que se introducir\'an las observaciones en orden de cada
+# factor. Para mayor comodidad se introducir\'an los datos en orden de
+# celda. 
+
+# Se crea el vector que contendr\'a los tratamientos de los novillos
+# (raciones de alimento) los primeros cuatros se les asigna el tratamiento
+# 1, los siguientes cuatro el 2, y as\'i sucesivamente.
+
+FactorB<- gl(n=4, k=2,length=32);FactorB 
+
+# k=2 especifica que las primeras dos observaciones ser\'an correspondien
+# tes al primer nivel, las dos siguientes al segundo, y as\'is 
+# sucesivamente. Cuando se finalice en el cuarto nivel se iniciar\'a 
+# nuevamente en el nivel 1. 
+
+# Se digitan los pesos de los novillos 
+
+Porcentaje <- c(1.8, 2.1, 2.0, 2.1, 4.6, 5.0, 7.5, 7.9, 2.2, 2.4,
+                4.2, 4.0, 5.4, 5.6, 9.8, 9.2, 2.8, 3.2, 4.4, 4.8, 
+                8.7, 8.4, 13.2, 13.0, 3.2, 3.6, 3.3, 3.5, 5.7, 5.8,
+                10.9, 11.1)
+Porcentaje 
+
+# Se registra en una hoja de datos los resultados del experimento 
+
+datos3 <- data.frame(FactorA = FactorA, FactorB = FactorB, Porcentaje=Porcentaje)
+datos3 
+
+# Se aplica el análisis de varianza 
+
+mod3 <- aov(Porcentaje ~ FactorA * FactorB, data = datos3) 
+
+# Observe con el signo * se indican c\'omo se descompone la varianza; es
+# decir, ser\'a el efecto del Factor A m\'as el efecto del Factor B m\'as
+# el efecto de la interacci\'on de los factores A y B (* indica que tome
+# en cuenta los efectos principales m\'as efecto de la interacci\'on).
+
+# Se muestra la tabla ANOVA del experimento 
+
+summary(mod3) 
+
+# Note que seg\'un los resultados, rechazamos cada una de las hip\'otesis. 
+@
+
+
+
+\end{itemize}
+\end{document}

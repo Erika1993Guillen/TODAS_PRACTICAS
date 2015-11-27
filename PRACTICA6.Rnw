@@ -1,0 +1,184 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\ [0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\ [0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\ [0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{"UNIDAD DOS"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 06}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+\section{ESCALAS DE MEDICI\'ON} 
+
+Los tipos de datos univariados que vamos a analizar en esta pr\'actica son:
+
+\textbf{Categ\'iricos:} Tienen la caracter\'istica de que todos los miembros de una categor\'ia se consideran
+iguales en lo que se refiere a ese tipo. Este tipo de datos se subdivide en nominales y ordinales.
+
+\textbf{Nominales:}Los valores que pueden asumir sirven para clasificarlos pero no para
+ordenarlos. En caso de usarse n?meros, s\'olo se adoptan como nombres o identificaciones.
+
+\textbf{Ordinales:} Los valores que puede asumir este tipo de datos son categor?as que conllevan un juicio de valor que exige comparar a los diferentes elementos de la muestra con respecto a este tipo con el objeto de establecer un orden. Es decir, que los datos se organizan a trav\'es de las relaciones de igualdad, mayor o menor.
+
+\subsection{AN\'ALISIS ESTAD?STICO DE DATOS CATEG\'ORICOS}  
+
+Ejemplo: Se realiza un estudio para conocer las preferencias sobre el tipo de gaseosa que se
+consume: "CC"=Coca Cola, "PC"=Pepsi Cola, "SC"=Salva Cola, para ello se toma una muestra
+aleatoria de 20 personas
+
+1) Activar el directorio de trabajo
+<<>>=
+getwd()
+setwd("C:/Users/User/Documents/TODAS_PRACTICAS")
+@
+
+2) Crear un nuevo script y llamarle Script06-DatosCategoricos
+
+
+3) Crear un vector con el tipo de gaseosa y otro con la muestra generada aleatoriamente:
+<<>>=
+Tipo <- c("CC", "PC", "SC"); 
+Tipo # crea un vector en las que contiene los tres tipos de refrescos
+
+Consumo <- sample(Tipo, 20, replace=TRUE); 
+Consumo 
+# genera una muestra de tama?o 20 obtenida de los elementos del vector Tipo 
+# y los elementos se seleccionan con reemplazamiento
+
+# Suponiendo que se quiere editar o agregar datos
+data.entry(Consumo)
+@
+
+4) Guarde el vector en un archivo de datos
+<<>>=
+# Guardar los datos en su directorio de trabajo
+write(Consumo, "Consumo.txt")
+@
+
+5) Eliminar los objetos que existen en el espacio de trabajo (Workspace)
+<<>>=
+ls()
+rm(list=ls(all=TRUE))
+ls()
+@
+
+6) Leer o recuperar el vector de datos o archivo de texto
+<<>>=
+Consumo <- scan("Consumo.txt", what = character(), na.strings = "NA",flush=FALSE);
+Consumo
+ls()
+# Si el vector contiene caracteres se ocupa: what = character()
+# na.strings ="NA", le indica a R que los valores faltantes son identificados con "NA"
+@
+
+7) Crear la tabla de distribuci\'on de frecuencias y proporciones
+<<>>=
+frec <- table(Consumo); 
+frec
+
+prop <- table(Consumo)/length(Consumo); 
+prop
+# Note que la salida por defecto no es para nada atractiva en comparaci?n 
+# con el resto de paquetes estad\'isticos.En cambio, si estamos usando 
+# LATEX y queremos incorporar estos cuadros o cualquier otro podemos utilizar 
+# el comando xtable(table(Consumo)) (NOTE QUE EL ARGUMENTO DEBE SER UN CUADRO), 
+# y con esto autom\'aticamente se nos genera el c\'odigo en LATEX y luego 
+#incorporarlo a nuestro informe, lo mejor de todo es que salida 
+# resultante es mucho m\'as presentable.
+@
+
+8) Conocer un resumen de los datos
+<<>>=
+summary(Consumo)
+# note que por tratarse de variables cualitativas ?nicamente 
+# muestra el n?mero de elementos, y el tipo de datos.
+@
+
+9) Realizar un gr?fico de barras
+<<>>=
+# Para las frecuencias absolutas
+barplot(frec, main="Gr\'afico de barras", xlab=" Consumo", 
+        col=c("yellow", "purple", "red"),sub="Agosto-2012")
+
+# Para las frecuencias relativas
+barplot(prop, main="Gr\'afico de barras", xlab=" Consumo\n", 
+        col=c("yellow", "purple","red"), sub="Agosto-2012")
+@
+
+10) Realizar un gr\'afico de pastel
+<<>>=
+pie(frec, main="Gr\'afico de pastel", xlab="Tipo de Consumo", 
+    col=c("yellow", "purple","cyan"), sub="Agosto-2012")
+
+
+# Se puede especificar nombres para las categor?as y el color de los sectores
+names(frec) = c("Coca Cola", "Pepsi", "Salva Cola")
+pie(frec, main="Gr\'afico de pastel", xlab=" Consumo", radius=0.8, 
+    col=c("red", "gray","cyan"), sub="Agosto-2012")
+
+# Los colores se asignas dependiendo del orden en que han sido 
+# especificados por names().Note con la instrucci\'on radius se 
+# especifica el tama\~no de la figura, mientras m\'as cerca de
+# uno (uno de menos uno) se encuentre m\'as grande ser\'a (el \'angulo cambia).
+@
+
+11) Colocar valores num\'ericos en los sectores del gr\'afico
+<<>>=
+n <- length(frec)
+hoja <- data.frame(frec); 
+hoja
+
+etiq <- c(paste(hoja$Var1, "-", hoja$Freq)); 
+etiq
+pie(frec, main="Gr\'afico de pastel", labels=etiq, col=rainbow(n), border=TRUE)
+@
+
+\end{document}

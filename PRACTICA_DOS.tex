@@ -1,0 +1,1279 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Defincion}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estadist\'ica}\\[1.25cm]
+{\large Control Estad\'istico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboracion}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposicion}[section]
+
+\lhead{Practica 02}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{CREACI\'ON Y MANEJO DE VECTORES DE DATOS}
+
+\subsection{VECTORES NUM\'ERICOS}
+\textbf{FORMA 1-Crear un vector num\'erico vac\'io y a\~nadirle luego sus elementos.}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{v} \hlkwb{<-} \hlkwd{numeric}\hlstd{(}\hlnum{3}\hlstd{);v}
+\end{alltt}
+\begin{verbatim}
+## [1] 0 0 0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# El vector tiene longitud 3 y sus componentes ser\textbackslash{}'an NA (datos omitidos o faltantes).}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{v[}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlnum{17}\hlstd{; v}
+\end{alltt}
+\begin{verbatim}
+## [1]  0  0 17
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Asigna el valor de 17 en la tercera posici\textbackslash{}'on del vector v.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+
+\textbf{FORMA 2-Crear un vector num\'erico asign\'andole todos sus elementos o valores.}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{3.1}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{6}\hlstd{);}
+\hlstd{x;}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.0 4.0 3.1 8.0 6.0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.integer}\hlstd{(x);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.double}\hlstd{(x);}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{length}\hlstd{(x)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Modifique el vector agreg\'andole el valor 9 en la posici?n 3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#x <- edit(x)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf{FORMA 3-Crear un vector num\'erico dando un rango de valores}
+\begin{itemize}
+\item Ejemplo 1: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{y} \hlkwb{=} \hlnum{1}\hlopt{:}\hlnum{4}\hlstd{;}
+\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 2 3 4
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea un vector de valores enteros en que su primer elemento es 1 su \textbackslash{}'ultimo es 4}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Modificaci\'on de los elementos de un vector
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{y[}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlnum{5}\hlstd{;}
+\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 5 3 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3: Crear un vector con elementos de otro
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{u} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{12}\hlstd{;}
+\hlstd{u;}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+\end{verbatim}
+\begin{alltt}
+\hlstd{u1}\hlkwb{=}\hlstd{u[}\hlnum{2} \hlopt{*} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{];}
+\hlstd{u1}
+\end{alltt}
+\begin{verbatim}
+## [1]  2  4  6  8 10
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Vector de tama?o 5 con elementos de las posiciones pares de u}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf{FORMA 4-Crear un vector nu\'erico utilizando la funci\'on assign()}
+\begin{itemize}
+\item Ejemplo 1
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{assign}\hlstd{(}\hlstr{"z"}\hlstd{,} \hlkwd{c}\hlstd{(x,} \hlnum{0}\hlstd{, x));}
+\hlstd{z}
+\end{alltt}
+\begin{verbatim}
+##  [1] 2.0 4.0 3.1 8.0 6.0 0.0 2.0 4.0 3.1 8.0 6.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea un vector en dos copias de x con un cero entre ambas}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\newpage
+
+\textbf{FORMA 5-Crear un vector num\'erico generando una sucesi\'on de valores}
+\begin{itemize}
+\item Ejemplo 1: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s1} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{10}\hlstd{);}
+\hlstd{s1}
+\end{alltt}
+\begin{verbatim}
+## [1]  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Comp\textbackslash{}'arese a como fue generado el vector y y u}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s2} \hlkwb{=} \hlkwd{seq}\hlstd{(}\hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{5}\hlstd{);}
+\hlstd{s2}
+\end{alltt}
+\begin{verbatim}
+## [1] -1  0  1  2  3  4  5
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea un vector cuyo elemento inicial es 1 y su elemento final es 5, y cada dos}
+\hlcom{#elementos consecutivos del vector tienen una diferencia de una unidad.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s3}\hlkwb{<-}\hlkwd{seq}\hlstd{(}\hlkwc{to}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{2}\hlstd{);}
+\hlstd{s3}
+\end{alltt}
+\begin{verbatim}
+## [1] -2 -1  0  1  2
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Note que puede invertir el orden de "to" y de "from"}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 4: Secuencia con incremento o decremento:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s4}\hlkwb{=}\hlkwd{seq}\hlstd{(}\hlkwc{from}\hlstd{=}\hlopt{-}\hlnum{3}\hlstd{,} \hlkwc{to}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{by}\hlstd{=}\hlnum{0.2}\hlstd{);}
+\hlstd{s4}
+\end{alltt}
+\begin{verbatim}
+##  [1] -3.0 -2.8 -2.6 -2.4 -2.2 -2.0 -1.8 -1.6 -1.4 -1.2 -1.0 -0.8 -0.6 -0.4
+## [15] -0.2  0.0  0.2  0.4  0.6  0.8  1.0  1.2  1.4  1.6  1.8  2.0  2.2  2.4
+## [29]  2.6  2.8  3.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea una secuencia que inicia en -3 y termina en 3 con incrementos de 0.2 en 0.2.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 5. Repetici\'on de una secuencia
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{s5} \hlkwb{<-} \hlkwd{rep}\hlstd{(s3,} \hlkwc{times}\hlstd{=}\hlnum{3}\hlstd{);}
+\hlstd{s5}
+\end{alltt}
+\begin{verbatim}
+##  [1] -2 -1  0  1  2 -2 -1  0  1  2 -2 -1  0  1  2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+
+\subsubsection{OPERACIONES CON VECTORES NUM\'ERICOS}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{1}\hlopt{/}\hlstd{x;}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5000000 0.2500000 0.3225806 0.1250000 0.1666667
+\end{verbatim}
+\begin{alltt}
+\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.0 4.0 3.1 8.0 6.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Observe que calcula el inverso de cada elemento del vector}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{v}\hlkwb{=}\hlnum{2}\hlopt{*}\hlstd{x}\hlopt{+}\hlstd{z}\hlopt{+}\hlnum{1}\hlstd{;}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in 2 * x + z: longitud de objeto mayor no es múltiplo de la longitud de uno menor}}\begin{alltt}
+\hlstd{v}
+\end{alltt}
+\begin{verbatim}
+##  [1]  7.0 13.0 10.3 25.0 19.0  5.0 11.0 11.2 20.1 21.0 11.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Genera un nuevo vector, v, de longitud 11, construido sumando,}
+\hlcom{# elemento a elemento, el vector 2*x repetido 2.2 veces, el vector y, }
+\hlcom{# y el n?mero 1 repetido 11 veces "Reciclado en R es repetir }
+\hlcom{# las veces necesarias un vector cuando en una }
+\hlcom{# operaci?n intervienen vectores de distinta longitud"}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{e1} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{4}\hlstd{);}
+\hlstd{e2}\hlkwb{<-}\hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{7}\hlstd{);}
+\hlkwd{crossprod}\hlstd{(e1, e2)}
+\end{alltt}
+\begin{verbatim}
+##      [,1]
+## [1,]   60
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Calcula el producto interno entre dos vectores. }
+\hlcom{# Ambos deben tener el mismo número de elementos.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{t}\hlstd{(e1)}\hlopt{%*%}\hlstd{e2}
+\end{alltt}
+\begin{verbatim}
+##      [,1]
+## [1,]   60
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Calcula el producto interno entre dos vectores. }
+\hlcom{# Ambos deben tener el mismo n?mero de elementos.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\subsubsection{OPERACIONES DE FUNCIONES SOBRE VECTORES NUM\'ERICOS}
+\begin{itemize}
+\item Ejemplo 1: Vector transpuesto del vector x:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{xt} \hlkwb{=} \hlkwd{t}\hlstd{(x);}
+\hlstd{xt}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    2    4  3.1    8    6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{u} \hlkwb{=} \hlkwd{exp}\hlstd{(y);}
+\hlstd{y;}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 5 3 4
+\end{verbatim}
+\begin{alltt}
+\hlstd{u}
+\end{alltt}
+\begin{verbatim}
+## [1]   2.718282 148.413159  20.085537  54.598150
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea un nuevo vector de la misma longitud que y, en el cual cada}
+\hlcom{# elemento es la exponencial elevando a su respectivo elemento en y}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{options}\hlstd{(}\hlkwc{digits}\hlstd{=}\hlnum{10}\hlstd{);}
+\hlstd{u}
+\end{alltt}
+\begin{verbatim}
+## [1]   2.718281828 148.413159103  20.085536923  54.598150033
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Permite visualizar un m\textbackslash{}'inimo de 10 d\textbackslash{}'igitos}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\newpage
+
+\textbf{OTRAS OPERACIONES:}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{resum} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwd{length}\hlstd{(y),} \hlkwd{sum}\hlstd{(y),} \hlkwd{prod}\hlstd{(y),} \hlkwd{min}\hlstd{(y),} \hlkwd{max}\hlstd{(y));}
+\hlstd{y;}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 5 3 4
+\end{verbatim}
+\begin{alltt}
+\hlstd{resum}
+\end{alltt}
+\begin{verbatim}
+## [1]  4 13 60  1  5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Ordenamiento de un vector
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{yo} \hlkwb{<-} \hlkwd{sort}\hlstd{(y);}
+\hlstd{y;}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 5 3 4
+\end{verbatim}
+\begin{alltt}
+\hlstd{yo}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 3 4 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\subsection{VECTORES DE CARACTERES}
+\textbf {FORMA 1-Crear un vector de caracteres vac\'io y a\~nadirle luego sus elementos}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{S}\hlkwb{<-}\hlkwd{character}\hlstd{()}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {FORMA 2-Crear un vector de caracteres asign\'andole todos sus elementos}
+\begin{itemize}
+\item Ejemplo 1: Crear el vector de caracteres:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{deptos} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Santa Ana"}\hlstd{,} \hlstr{"Sonsonate"}\hlstd{,} \hlstr{"San Salvador"}\hlstd{);}
+\hlstd{deptos}
+\end{alltt}
+\begin{verbatim}
+## [1] "Santa Ana"    "Sonsonate"    "San Salvador"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Agregue el elemento "Ahuachap\'an" en la cuarta posici\'on.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{deptos[}\hlnum{4}\hlstd{]}\hlkwb{=}\hlstr{"Ahuachap\textbackslash{}'an"}\hlstd{;}
+\hlstd{deptos}
+\end{alltt}
+\begin{verbatim}
+## [1] "Santa Ana"    "Sonsonate"    "San Salvador" "Ahuachap'an"
+\end{verbatim}
+\begin{alltt}
+\hlcom{# R Permite incrementar el tama\textbackslash{}~no del vector en cualquier instante.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {FORMA 3-Crear un vector de caracteres d\'andole nombres a los elementos para identificarlos m\'as f\'acilmente}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{codDeptos} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{11}\hlstd{,} \hlnum{12}\hlstd{,} \hlnum{13}\hlstd{,} \hlnum{14}\hlstd{)}
+\hlkwd{names}\hlstd{(codDeptos)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Usulut\textbackslash{}'an"}\hlstd{,} \hlstr{"San Miguel"}\hlstd{,} \hlstr{"Moraz\textbackslash{}'an"}\hlstd{,} \hlstr{"La Uni\textbackslash{}'on"}\hlstd{);}
+\hlstd{codDeptos}
+\end{alltt}
+\begin{verbatim}
+##  Usulut'an San Miguel   Moraz'an  La Uni'on 
+##         11         12         13         14
+\end{verbatim}
+\begin{alltt}
+\hlstd{Oriente} \hlkwb{<-} \hlstd{codDeptos [}\hlkwd{c}\hlstd{(}\hlstr{"La Uni\textbackslash{}'on"}\hlstd{,} \hlstr{"San Miguel"}\hlstd{)];}
+\hlstd{Oriente}
+\end{alltt}
+\begin{verbatim}
+##  La Uni'on San Miguel 
+##         14         12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Crear un vector con las etiquetas X1, Y2, ... , X9, Y10
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{etiqs}\hlkwb{<-}\hlkwd{paste}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"X"}\hlstd{,} \hlstr{"Y"}\hlstd{),} \hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{);}
+\hlstd{etiqs}
+\end{alltt}
+\begin{verbatim}
+##  [1] "X1"  "Y2"  "X3"  "Y4"  "X5"  "Y6"  "X7"  "Y8"  "X9"  "Y10"
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea un vector de caracteres resultado de la Uni\textbackslash{}'on de "X" o de "Y"}
+\hlcom{# con uno de los n\textbackslash{}'umero comprendidos entre 1 y 10, sep=""}
+\hlcom{# indica que no se deja espaciado en la Uni\textbackslash{}'on.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\newpage
+
+\section{CREACI\'ON Y MANEJO DE MATRICES}
+\subsection{CREACI\'ON DE MATRICES NUM\'ERICAS}
+\textbf {FORMA 1-Crear una matriz num\'erica vac\'ia y a\~nadirle luego sus elementos}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{M} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{numeric}\hlstd{(),} \hlkwc{nrow} \hlstd{=} \hlnum{3}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{4}\hlstd{);}
+\hlstd{M}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]   NA   NA   NA   NA
+## [2,]   NA   NA   NA   NA
+## [3,]   NA   NA   NA   NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Asignaci\'on de los elementos de una matriz:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{M[}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlnum{6}\hlstd{;}
+\hlstd{M}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]   NA   NA   NA   NA
+## [2,]   NA   NA    6   NA
+## [3,]   NA   NA   NA   NA
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Similar a la de un vector pero considerando que deben utilizarse }
+\hlcom{#dos \textbackslash{}'indices para indicar fila y columna.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {FORMA 2-Crear una matriz num?rica asign\'andole todos sus elementos o valores}
+\begin{itemize} 
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{6}\hlstd{,} \hlnum{8}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{12}\hlstd{),} \hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{3}\hlstd{);}
+\hlstd{A;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{mode}\hlstd{(A);}
+\end{alltt}
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(A);}
+\end{alltt}
+\begin{verbatim}
+## [1] 2 3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{attributes}\hlstd{(A);}
+\end{alltt}
+\begin{verbatim}
+## $dim
+## [1] 2 3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.matrix}\hlstd{(A);}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.array}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Observe que R almacena los elementos por columna.  }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {FORMA 3-Crear una matriz num\'erica dando un rango de valores}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{B} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{12}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{4}\hlstd{);}
+\hlstd{B}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {FORMA 4-Crear una matriz a partir de la uni\'on de vectores}
+\begin{itemize}
+\item Crear tres vectores
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x1} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{2}\hlstd{);}
+\hlstd{x1}
+\end{alltt}
+\begin{verbatim}
+## [1]  0  2  4  6  8 10
+\end{verbatim}
+\begin{alltt}
+\hlstd{x2} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{11}\hlstd{,} \hlnum{2}\hlstd{);}
+\hlstd{x2}
+\end{alltt}
+\begin{verbatim}
+## [1]  1  3  5  7  9 11
+\end{verbatim}
+\begin{alltt}
+\hlstd{x3} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{6}\hlstd{);}
+\hlstd{x3} \hlcom{# Vector con valores de una uniforme(0,1)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.7326048017 0.6463201276 0.8487335455 0.1686438974 0.5014995523
+## [6] 0.9206388814
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Unir los tres vectores en una matriz por columnas.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Xcol} \hlkwb{<-} \hlkwd{cbind}\hlstd{(x1, x2, x3);}
+\hlstd{Xcol}
+\end{alltt}
+\begin{verbatim}
+##      x1 x2           x3
+## [1,]  0  1 0.7326048017
+## [2,]  2  3 0.6463201276
+## [3,]  4  5 0.8487335455
+## [4,]  6  7 0.1686438974
+## [5,]  8  9 0.5014995523
+## [6,] 10 11 0.9206388814
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Unir los tres vectores en una matriz por filas.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Xfil} \hlkwb{<-} \hlkwd{rbind}\hlstd{(x1, x2, x3);}
+\hlstd{Xfil}
+\end{alltt}
+\begin{verbatim}
+##            [,1]         [,2]         [,3]         [,4]         [,5]
+## x1 0.0000000000 2.0000000000 4.0000000000 6.0000000000 8.0000000000
+## x2 1.0000000000 3.0000000000 5.0000000000 7.0000000000 9.0000000000
+## x3 0.7326048017 0.6463201276 0.8487335455 0.1686438974 0.5014995523
+##             [,6]
+## x1 10.0000000000
+## x2 11.0000000000
+## x3  0.9206388814
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Acceso a las filas y columnas de una matriz.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlstd{Xfil[}\hlnum{1}\hlopt{:}\hlnum{3}\hlstd{,} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{3}\hlstd{)];}
+\hlstd{X}
+\end{alltt}
+\begin{verbatim}
+##            [,1]         [,2]
+## x1 2.0000000000 4.0000000000
+## x2 3.0000000000 5.0000000000
+## x3 0.6463201276 0.8487335455
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Crea una submatriz de dimensi\textbackslash{}'on 3x2 (el 3 se indica por 1:3), las}
+\hlcom{# columnas est\textbackslash{}'an conformadas por la segunda y tercera columna de la }
+\hlcom{# matriz Xfill (se indica por C(2,3))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\subsection{OPERACIONES CON MATRICES NUM\'ERICAS}
+
+\textbf {MULTIPLICACI\'ON DE MATRICES NUM\'ERICAS:}
+
+\begin{itemize}
+\item Ejemplo 1: Multiplicaci\'on de un vector por una matriz:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{v}\hlkwb{<-}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{);}
+\hlstd{v} \hlopt{%*%}\hlstd{A}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   10   22   34
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2: Multiplicaci\'on de matrices:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{P} \hlkwb{<-} \hlstd{A} \hlopt{%*%} \hlstd{B;}
+\hlstd{P}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]   44   98  152  206
+## [2,]   56  128  200  272
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3: Multiplicaci\'on de un escalar por una matriz:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{2}\hlopt{*}\hlstd{A}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    4   12   20
+## [2,]    8   16   24
+\end{verbatim}
+\begin{alltt}
+\hlcom{# N?tese que al usar 2%*%A se obtiene un error pues las }
+\hlcom{# dimensiones no son compatibles.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {OPERACIONES DE FUNCIONES SOBRE MATRICES NUM?RICAS:}
+
+\begin{itemize}
+\item Ejemplo 1: Longitud o n?mero de elementos:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{length}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{T}\hlkwb{=}\hlkwd{sqrt}\hlstd{(B);}
+\hlstd{B;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12
+\end{verbatim}
+\begin{alltt}
+\hlstd{T}
+\end{alltt}
+\begin{verbatim}
+##             [,1]        [,2]        [,3]        [,4]
+## [1,] 1.000000000 2.000000000 2.645751311 3.162277660
+## [2,] 1.414213562 2.236067977 2.828427125 3.316624790
+## [3,] 1.732050808 2.449489743 3.000000000 3.464101615
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Observe que la ra?z se saca a cada elemento de la matriz}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3: Transpuesta de una matriz:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{t}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2    4
+## [2,]    6    8
+## [3,]   10   12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 4: Determinante de una matriz:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{C} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{12}\hlstd{),} \hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{2}\hlstd{);}
+\hlstd{C}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2   10
+## [2,]    1   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{det}\hlstd{(C)}
+\end{alltt}
+\begin{verbatim}
+## [1] 14
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 5: Inversa de una matriz, resulta de resolver el sistema Ax = b con b=I:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{InvC} \hlkwb{<-} \hlkwd{solve}\hlstd{(C) ;}
+\hlstd{C;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2   10
+## [2,]    1   12
+\end{verbatim}
+\begin{alltt}
+\hlstd{InvC}
+\end{alltt}
+\begin{verbatim}
+##                [,1]          [,2]
+## [1,]  0.85714285714 -0.7142857143
+## [2,] -0.07142857143  0.1428571429
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+O tambi?n:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{b}\hlkwb{=}\hlkwd{diag}\hlstd{(}\hlnum{2}\hlstd{); InvC}\hlkwb{<-}\hlkwd{solve}\hlstd{(C, b);}
+\hlstd{C;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2   10
+## [2,]    1   12
+\end{verbatim}
+\begin{alltt}
+\hlstd{InvC}
+\end{alltt}
+\begin{verbatim}
+##                [,1]          [,2]
+## [1,]  0.85714285714 -0.7142857143
+## [2,] -0.07142857143  0.1428571429
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 6: Autovalores y autovectores de uma matriz sim\'etrica:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{C;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    2   10
+## [2,]    1   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{eigen}\hlstd{(C)}
+\end{alltt}
+\begin{verbatim}
+## $values
+## [1] 12.916079783  1.083920217
+## 
+## $vectors
+##               [,1]           [,2]
+## [1,] -0.6754894393 -0.99583021557
+## [2,] -0.7373696613  0.09122599279
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 7: La funci\'on diag(nombMatriz), devuelve un vector formado por los elementos en la
+diagonal de la matriz nombMatriz.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{diag}\hlstd{(A)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2 8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 8: La funci\'on diag(nomVector), devuelve una matriz diagonal cuyos elementos en la diagonal son los elementos del vector nomVector.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{y;}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 5 3 4
+\end{verbatim}
+\begin{alltt}
+\hlkwd{diag}\hlstd{(y)}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    5    0    0
+## [3,]    0    0    3    0
+## [4,]    0    0    0    4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 9: La funci\'on diag(escalar), devuelve la matriz identidad de tama\~no nxn.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{diag}\hlstd{(}\hlnum{4}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\textbf {OTRAS OPERACIONES:}
+
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{A;}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12
+\end{verbatim}
+\begin{alltt}
+\hlkwd{c}\hlstd{(}\hlkwd{length}\hlstd{(A),} \hlkwd{sum}\hlstd{(A),} \hlkwd{prod}\hlstd{(A),} \hlkwd{min}\hlstd{(A),} \hlkwd{max}\hlstd{(A))}
+\end{alltt}
+\begin{verbatim}
+## [1]     6    42 46080     2    12
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{O} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{sort}\hlstd{(C),} \hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{2}\hlstd{);}
+\hlstd{O}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1   10
+## [2,]    2   12
+\end{verbatim}
+\begin{alltt}
+\hlcom{# sort() genera um vector en los cual sus elementos han sido ordenados }
+\hlcom{# de menor a mayor a partir de los elementos de la matriz C}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\newpage
+
+\subsection{CREACI\'ON DE UNA MATRIZ DE CADENAS}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{nombres} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"Carlos"}\hlstd{,} \hlstr{"Jos\textbackslash{}'e"}\hlstd{,} \hlstr{"Ana"}\hlstd{,} \hlstr{"Ren?"}\hlstd{,} \hlstr{"Mar?a"}\hlstd{,} \hlstr{"Mario"}\hlstd{),}\hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{,}
+                  \hlkwc{ncol}\hlstd{=}\hlnum{2}\hlstd{);}
+\hlstd{nombres}
+\end{alltt}
+\begin{verbatim}
+##      [,1]     [,2]   
+## [1,] "Carlos" "Ren?" 
+## [2,] "Jos'e"  "Mar?a"
+## [3,] "Ana"    "Mario"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+
+\section{CREACI\'ON Y MANEJO DE MATRICES INDEXADAS (ARRAY)}
+Una variable indexada (array) es una colecci\'on de datos, por ejemplo num\'ericos, indexada por varios \'indices. R permite crear y manipular variables indexadas en general y en particular, matrices. Una variable indexada puede utilizar no s\'olo un vector de \'indices, sino incluso una variable indexada de ?ndices, tanto para asignar un vector a una colecci\'on irregular de elementos de una variable indexada como para extraer una colecci\'on irregular de elementos.\\\\
+Un vector es un array unidimensional y una matiz es un array bidimensional.\\\\
+Una variable indexada se construye con la funci\'on array(), que tiene la forma general siguiente:
+\textbf {NombMatriz <- array(vector-de-datos, vector-de-dimensiones)}
+\begin{itemize}
+\item Ejemplo 1:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlkwd{array}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{7}\hlstd{,} \hlnum{9}\hlstd{,} \hlnum{11}\hlstd{),} \hlkwc{dim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{3}\hlstd{));}
+\hlstd{X}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    3    7   11
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 2:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Z} \hlkwb{<-} \hlkwd{array}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{));}
+\hlstd{Z}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    1    1
+## [2,]    1    1    1
+## [3,]    1    1    1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 3: Operaciones aritm\'eticas:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{W} \hlkwb{<-} \hlnum{2}\hlopt{*}\hlstd{Z}\hlopt{+}\hlnum{1}\hlstd{;}
+\hlstd{W}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    3    3    3
+## [2,]    3    3    3
+## [3,]    3    3    3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\newpage
+\item Ejemplo 4: Operaciones con funciones:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{TX} \hlkwb{<-} \hlkwd{t}\hlstd{(X);}
+\hlstd{TX}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    5    7
+## [3,]    9   11
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\item Ejemplo 5: Producto exterior de dos vectores con: operador %o%
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{a} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{6}\hlstd{);}
+\hlstd{a}
+\end{alltt}
+\begin{verbatim}
+## [1] 2 4 6
+\end{verbatim}
+\begin{alltt}
+\hlstd{b} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{3}\hlstd{;}
+\hlstd{b}
+\end{alltt}
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+\begin{alltt}
+\hlstd{M} \hlkwb{<-} \hlstd{a} \hlopt{%o%} \hlstd{b;}
+\hlstd{M}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    4    6
+## [2,]    4    8   12
+## [3,]    6   12   18
+\end{verbatim}
+\begin{alltt}
+\hlcom{# M es un array o matriz}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+Nota: c = a * b; c devuelve un vector con el producto de elemento por elemento
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{c} \hlkwb{=} \hlstd{a} \hlopt{*} \hlstd{b;}
+\hlstd{c}
+\end{alltt}
+\begin{verbatim}
+## [1]  2  8 18
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\newpage
+\item Ejemplo 6. Una matriz de tres dimensiones (i, j, k)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Arreglo3} \hlkwb{<-} \hlkwd{array}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{8}\hlstd{,} \hlnum{11}\hlopt{:}\hlnum{18}\hlstd{,} \hlnum{111}\hlopt{:}\hlnum{118}\hlstd{),} \hlkwc{dim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{3}\hlstd{));}
+\hlstd{Arreglo3}
+\end{alltt}
+\begin{verbatim}
+## , , 1
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    5    7
+## [2,]    2    4    6    8
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]   11   13   15   17
+## [2,]   12   14   16   18
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]  111  113  115  117
+## [2,]  112  114  116  118
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Un arreglo de 3 matrices cada una de 2 filas y 4 columnas.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}

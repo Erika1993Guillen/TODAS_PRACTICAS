@@ -1,0 +1,184 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CUATRO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 18}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{INTERVALOS DE CONFIANZA PARA UNA MEDIAPOBLACIONAL.}
+
+\textbf{PRIMER CASO: VARIANZA CONOCIDA}
+
+
+<<>>=
+# Define una variable n para poder cambiar facilmente el tama\~no de la muestra
+
+n = 10
+
+# Define una variable para alfa 
+
+alfa = 0.95
+
+# Genera dos conjuntos de n muestras aleatorias 
+# Ambos siguen una distribuci\'on normal de parametros 
+
+mu = 174.7 
+sigma = 1.5
+x = rnorm(n, 174.7, 1.5)
+x2 = rnorm(n, 174.7, 1.5)
+
+sigma = 1.5
+media = 174.7
+margenError = qnorm(alfa/2, mean=0, sd=1, lower.tail = FALSE)*sigma/sqrt(n)
+extrIzq = media - margenError
+extrDer = media + margenError
+print(c(extrIzq, extrDer))
+
+@
+
+\begin{center}
+\textbf{CASO DOS: VARIANZA DESCONOCIDA}
+\end{center}
+
+<<>>=
+media <- function(x)
+{
+
+  n = length(x)
+suma <- 0.0
+for(i in 1:n) suma = suma + x[i]
+media = suma/n
+
+}
+save(media, file= "media.RData")
+rm(list=ls(all=TRUE))
+load("media.RData")
+
+z <-c(3.4, 2.8, 4.4, 2.5, 3.3,4.0, 4.8, 2.9, 5.6, 5.2, 3.7, 3.0, 3.6, 2.8, 4.8);
+(media(z))
+(sd(z))
+
+t.test(z, conf.level = 0.95)
+
+@
+
+\begin{center}
+\textbf{INTERVALOS DE CONFIANZA PARA UNA PROPORCI\'ON.}
+\end{center}
+
+<<>>=
+# Utilizando la funci\'on proporcionada por el R.
+
+prop.test(360, 1200, alternative = "two.sided", conf.level=0.95)
+
+@
+
+<<>>=
+# Creando nuestra propia funci\'on
+
+intervaloProp <- function(x, n, nivel.conf = 0.95) 
+  
+{ 
+pe <- x/n 
+alfa <- (1 - nivel.conf) 
+z <- qnorm(1-alfa/2) 
+SE <- sqrt(pe*(1-pe)/n) 
+  print(rbind(pe, alfa, z, SE))  
+LInf <- pe-z*SE 
+LSup <- pe+z*SE 
+print(" ") 
+  print(paste("Intervalo para p es: [", round(LInf, 2), 
+              ",", round(LSup, 2), "]")) 
+} 
+x=360; n=1200; nivel.conf=0.95 
+
+intervaloProp(x, n, nivel.conf)
+@
+
+\begin{center}
+\textbf{INTERVALOS DE CONFIANZA PARA LA VARIANZA POBLACIONAL}
+\end{center}
+
+<<>>=
+h <- c (46.4, 46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2, 46.0);
+h
+
+# Creando nuestra propia funci\'on
+
+intervalovarpobla <- function(n, nivel.conf=0.95)
+{
+  varianza = (var(h)) # varianza
+  gl = n - 1 # grados de libertad
+  alfa = 1 - nivel.conf # valor de alfa
+  X_1 <- qnorm(1-(alfa/2), gl)
+  X_2 <- qnorm((alfa/2), gl)
+  u <- ((n - 1)*varianza)
+  print(rbind(varianza, gl, alfa, X_1, X_2, u))  
+  LInf <- u/X_1 
+  LSup <- u/X_2 
+print(" ") 
+  print(paste("Intervalo para D es: [", round(LInf, 2), ",", round(LSup, 2), "]"))
+              
+}
+ n=10; nivel.conf=0.95 
+intervalovarpobla ( n, nivel.conf)   
+  
+
+
+@
+
+
+\end{document}

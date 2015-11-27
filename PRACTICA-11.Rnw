@@ -1,0 +1,203 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estad\'istico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD DOS"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci?n}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{PR\'aCTICA 11}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\textbf{Ejemplo:}\\
+El tiempo que tarda un sistema inform\'atico en red en ejecutar una instrucci\'on depende del n\'umero de usuarios conectados a \'el. S\'i no hay usuarios el tiempo es cero.\\\\
+\textbf{REALICE UN AN\'ALISIS ESTAD\'ISTICO.}
+
+\begin{enumerate}
+\item\textbf{Activa tu directorio de trabajo}   
+
+<<>>=
+getwd() 
+setwd("C:/Users/User/Documents/TODAS_PRACTICAS")
+@
+
+\item\textbf{Crea un nuevo script y llAmaRle "Script11-DatosBivariados4"} 
+
+\item\textbf{Crea los dos vectores para las dos variables} 
+
+<<>>=
+# Numero de usuarios = Variable explicativa o independiente
+
+usuarios <- c(10, 15, 20, 20, 25, 30, 30); 
+usuarios 
+tiempo = c(1.0, 1.2, 2.0, 2.1, 2.2, 2.0, 1.9); 
+tiempo 
+@
+
+\item\textbf{Crea una hoja de datos que tenga como componentes o columnas los dos vectores.}
+
+<<>>=
+Sistema <- data.frame(Usuarios=usuarios, Tiempo=tiempo);
+Sistema 
+
+# Para editar o ampliar los datos puede utilizar la funci?n fix() 
+fix(Sistema)
+@
+
+\item\textbf{Guarda la hoja de datos en un archivo.} 
+
+<<>>=
+write.table(Sistema, file="Sistema.txt", append=FALSE, quote=TRUE, 
+            sep=" ", na="NA", col.names = TRUE) 
+@
+
+\item\textbf{Elimina los objetos almacenados en el \'area de trabajo (Workspace)}
+
+<<>>=
+ls(); 
+rm(list=ls(all=TRUE));
+ls() 
+@
+
+\item\textbf{Recupera la hoja de datos}
+  
+<<>>=
+Sistema <- read.table("Sistema.txt", header=TRUE); 
+Sistema 
+@
+
+\item\textbf{Conecta la hoja de datos a la segunda ruta o lista de b\'usqueda}
+
+<<>>=
+attach(Sistema, pos=2); 
+search()
+@
+
+\item\textbf{Muestra un resumen de principales estad?sticos de las variables}
+
+<<>>=
+summary(Sistema) 
+cov(Sistema) # Matriz de covarianzas 
+
+cor(Sistema, use = "all.obs", method="pearson") 
+# Matriz de correlaciones 
+@
+
+\item\textbf{Elabora un gr\'afico de dispersi?n para analizar alguna relaci\'on entre las variables.}  
+
+<<>>=
+plot(Usuarios, Tiempo, xlim= c(5, 35), ylim= c(0.0, 2.5), 
+type = "p", pch=1, col = "blue", main = "Grafico de dispersion 
+(Usuarios, Tiempo)", xlab="Numero de usuarios", ylab="Tiempo de 
+ejecucion")
+@
+
+\item\textbf{Para identificar un punto arbitrario, se procede de la siguiente manera:} 
+
+<<>>=
+# Sin cerrar la ventana del grafico anterior, ejecuta la siguiente instruccion
+
+plot(Usuarios, Tiempo, xlim= c(5, 35), ylim= c(0.0, 2.5), 
+type = "p", pch=1, col = "blue", main = "Grafico de dispersion 
+(Usuarios, Tiempo)", xlab="Numero de usuarios", ylab="Tiempo de 
+ejecucion")
+
+identify(Usuarios, Tiempo, n=1)
+
+# n=1 indicaque solamente ser\'a un punto seleccionado 
+# Y luego selecciona un punto en el gr?fico haciendo clic con el raton.
+# Esto es util para identificar puntos que podrian ser atipicos.
+# Debera aparecer en la R-Console el indice que corresponde a este punto. 
+@
+
+\item\textbf{Aplica la funci\'on lm() para encontrar el modelo lineal que se ajusta a los datos.}
+
+<<>>=
+reg.Y.X <- lm(Tiempo ~ -1 + Usuarios, Sistema, na.action=NULL, 
+              method="qr", model=TRUE) 
+
+#-1 indica que no se toma en cuenta la constante en el modelo. 
+
+summary(reg.Y.X) 
+
+# Note que es necesaria la instrucci\'on anterior para poder visualizar los 
+# resultados mas sobre salientes de la regresi\'on encontrada. Nos muestra la
+# estimaci\'on de los par\'ametros junto con su significancia, el coeficiente de
+# determinaci\'on. 
+@
+
+\item\textbf{Agrega la recta de regresi\'on al gr\'afico de dispersi\'on.}
+
+<<>>=
+
+plot(Usuarios, Tiempo, xlim= c(5, 35), ylim= c(0.0, 2.5), 
+type = "p", pch=1, col = "blue", main = "Grafico de dispersion 
+(Usuarios, Tiempo)", xlab="Numero de usuarios", ylab="Tiempo de 
+ejecucion")
+
+abline(reg.Y.X) 
+@
+
+\textbf{Observaci\'on: Alternativamente si quiere una recta m\'as exacta use:}
+
+<<>>=
+line(Usuarios, 0.079437*Usuarios)
+@
+
+\item\textbf{Efect\'ua una an\'alisis de variabilidad del modelo o descomposici\'on de la varianza.} 
+
+<<>>=
+reg.anova <- anova(reg.Y.X); 
+reg.anova 
+@
+\end{enumerate}
+
+
+\end{document}

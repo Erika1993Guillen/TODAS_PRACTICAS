@@ -1,0 +1,310 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CUATRO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 18}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{INTERVALOS DE CONFIANZA PARA UNA MEDIAPOBLACIONAL.}
+
+\textbf{PRIMER CASO: VARIANZA CONOCIDA}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Define una variable n para poder cambiar facilmente el tama\textbackslash{}~no de la muestra}
+
+\hlstd{n} \hlkwb{=} \hlnum{10}
+
+\hlcom{# Define una variable para alfa }
+
+\hlstd{alfa} \hlkwb{=} \hlnum{0.95}
+
+\hlcom{# Genera dos conjuntos de n muestras aleatorias }
+\hlcom{# Ambos siguen una distribuci\textbackslash{}'on normal de parametros }
+
+\hlstd{mu} \hlkwb{=} \hlnum{174.7}
+\hlstd{sigma} \hlkwb{=} \hlnum{1.5}
+\hlstd{x} \hlkwb{=} \hlkwd{rnorm}\hlstd{(n,} \hlnum{174.7}\hlstd{,} \hlnum{1.5}\hlstd{)}
+\hlstd{x2} \hlkwb{=} \hlkwd{rnorm}\hlstd{(n,} \hlnum{174.7}\hlstd{,} \hlnum{1.5}\hlstd{)}
+
+\hlstd{sigma} \hlkwb{=} \hlnum{1.5}
+\hlstd{media} \hlkwb{=} \hlnum{174.7}
+\hlstd{margenError} \hlkwb{=} \hlkwd{qnorm}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{)}\hlopt{*}\hlstd{sigma}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
+\hlstd{extrIzq} \hlkwb{=} \hlstd{media} \hlopt{-} \hlstd{margenError}
+\hlstd{extrDer} \hlkwb{=} \hlstd{media} \hlopt{+} \hlstd{margenError}
+\hlkwd{print}\hlstd{(}\hlkwd{c}\hlstd{(extrIzq, extrDer))}
+\end{alltt}
+\begin{verbatim}
+## [1] 174.6703 174.7297
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{CASO DOS: VARIANZA DESCONOCIDA}
+\end{center}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{media} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)}
+\hlstd{\{}
+
+  \hlstd{n} \hlkwb{=} \hlkwd{length}\hlstd{(x)}
+\hlstd{suma} \hlkwb{<-} \hlnum{0.0}
+\hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{n) suma} \hlkwb{=} \hlstd{suma} \hlopt{+} \hlstd{x[i]}
+\hlstd{media} \hlkwb{=} \hlstd{suma}\hlopt{/}\hlstd{n}
+
+\hlstd{\}}
+\hlkwd{save}\hlstd{(media,} \hlkwc{file}\hlstd{=} \hlstr{"media.RData"}\hlstd{)}
+\hlkwd{rm}\hlstd{(}\hlkwc{list}\hlstd{=}\hlkwd{ls}\hlstd{(}\hlkwc{all}\hlstd{=}\hlnum{TRUE}\hlstd{))}
+\hlkwd{load}\hlstd{(}\hlstr{"media.RData"}\hlstd{)}
+
+\hlstd{z} \hlkwb{<-}\hlkwd{c}\hlstd{(}\hlnum{3.4}\hlstd{,} \hlnum{2.8}\hlstd{,} \hlnum{4.4}\hlstd{,} \hlnum{2.5}\hlstd{,} \hlnum{3.3}\hlstd{,}\hlnum{4.0}\hlstd{,} \hlnum{4.8}\hlstd{,} \hlnum{2.9}\hlstd{,} \hlnum{5.6}\hlstd{,} \hlnum{5.2}\hlstd{,} \hlnum{3.7}\hlstd{,} \hlnum{3.0}\hlstd{,} \hlnum{3.6}\hlstd{,} \hlnum{2.8}\hlstd{,} \hlnum{4.8}\hlstd{);}
+\hlstd{(}\hlkwd{media}\hlstd{(z))}
+\end{alltt}
+\begin{verbatim}
+## [1] 3.786667
+\end{verbatim}
+\begin{alltt}
+\hlstd{(}\hlkwd{sd}\hlstd{(z))}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9709102
+\end{verbatim}
+\begin{alltt}
+\hlkwd{t.test}\hlstd{(z,} \hlkwc{conf.level} \hlstd{=} \hlnum{0.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	One Sample t-test
+## 
+## data:  z
+## t = 15.105, df = 14, p-value = 4.64e-10
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  3.248995 4.324339
+## sample estimates:
+## mean of x 
+##  3.786667
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{INTERVALOS DE CONFIANZA PARA UNA PROPORCI\'ON.}
+\end{center}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Utilizando la funci\textbackslash{}'on proporcionada por el R.}
+
+\hlkwd{prop.test}\hlstd{(}\hlnum{360}\hlstd{,} \hlnum{1200}\hlstd{,} \hlkwc{alternative} \hlstd{=} \hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level}\hlstd{=}\hlnum{0.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	1-sample proportions test with continuity correction
+## 
+## data:  360 out of 1200, null probability 0.5
+## X-squared = 191.2, df = 1, p-value < 2.2e-16
+## alternative hypothesis: true p is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2743388 0.3269581
+## sample estimates:
+##   p 
+## 0.3
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Creando nuestra propia funci\textbackslash{}'on}
+
+\hlstd{intervaloProp} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{n}\hlstd{,} \hlkwc{nivel.conf} \hlstd{=} \hlnum{0.95}\hlstd{)}
+
+\hlstd{\{}
+\hlstd{pe} \hlkwb{<-} \hlstd{x}\hlopt{/}\hlstd{n}
+\hlstd{alfa} \hlkwb{<-} \hlstd{(}\hlnum{1} \hlopt{-} \hlstd{nivel.conf)}
+\hlstd{z} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{alfa}\hlopt{/}\hlnum{2}\hlstd{)}
+\hlstd{SE} \hlkwb{<-} \hlkwd{sqrt}\hlstd{(pe}\hlopt{*}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{pe)}\hlopt{/}\hlstd{n)}
+  \hlkwd{print}\hlstd{(}\hlkwd{rbind}\hlstd{(pe, alfa, z, SE))}
+\hlstd{LInf} \hlkwb{<-} \hlstd{pe}\hlopt{-}\hlstd{z}\hlopt{*}\hlstd{SE}
+\hlstd{LSup} \hlkwb{<-} \hlstd{pe}\hlopt{+}\hlstd{z}\hlopt{*}\hlstd{SE}
+\hlkwd{print}\hlstd{(}\hlstr{" "}\hlstd{)}
+  \hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Intervalo para p es: ["}\hlstd{,} \hlkwd{round}\hlstd{(LInf,} \hlnum{2}\hlstd{),}
+              \hlstr{","}\hlstd{,} \hlkwd{round}\hlstd{(LSup,} \hlnum{2}\hlstd{),} \hlstr{"]"}\hlstd{))}
+\hlstd{\}}
+\hlstd{x}\hlkwb{=}\hlnum{360}\hlstd{; n}\hlkwb{=}\hlnum{1200}\hlstd{; nivel.conf}\hlkwb{=}\hlnum{0.95}
+
+\hlkwd{intervaloProp}\hlstd{(x, n, nivel.conf)}
+\end{alltt}
+\begin{verbatim}
+##            [,1]
+## pe   0.30000000
+## alfa 0.05000000
+## z    1.95996398
+## SE   0.01322876
+## [1] " "
+## [1] "Intervalo para p es: [ 0.27 , 0.33 ]"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\textbf{INTERVALOS DE CONFIANZA PARA LA VARIANZA POBLACIONAL}
+\end{center}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{h} \hlkwb{<-} \hlkwd{c} \hlstd{(}\hlnum{46.4}\hlstd{,} \hlnum{46.1}\hlstd{,} \hlnum{45.8}\hlstd{,} \hlnum{47.0}\hlstd{,} \hlnum{46.1}\hlstd{,} \hlnum{45.9}\hlstd{,} \hlnum{45.8}\hlstd{,} \hlnum{46.9}\hlstd{,} \hlnum{45.2}\hlstd{,} \hlnum{46.0}\hlstd{);}
+\hlstd{h}
+\end{alltt}
+\begin{verbatim}
+##  [1] 46.4 46.1 45.8 47.0 46.1 45.9 45.8 46.9 45.2 46.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Creando nuestra propia funci\textbackslash{}'on}
+
+\hlstd{intervalovarpobla} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{n}\hlstd{,} \hlkwc{nivel.conf}\hlstd{=}\hlnum{0.95}\hlstd{)}
+\hlstd{\{}
+  \hlstd{varianza} \hlkwb{=} \hlstd{(}\hlkwd{var}\hlstd{(h))} \hlcom{# varianza}
+  \hlstd{gl} \hlkwb{=} \hlstd{n} \hlopt{-} \hlnum{1} \hlcom{# grados de libertad}
+  \hlstd{alfa} \hlkwb{=} \hlnum{1} \hlopt{-} \hlstd{nivel.conf} \hlcom{# valor de alfa}
+  \hlstd{X_1} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{), gl)}
+  \hlstd{X_2} \hlkwb{<-} \hlkwd{qnorm}\hlstd{((alfa}\hlopt{/}\hlnum{2}\hlstd{), gl)}
+  \hlstd{u} \hlkwb{<-} \hlstd{((n} \hlopt{-} \hlnum{1}\hlstd{)}\hlopt{*}\hlstd{varianza)}
+  \hlkwd{print}\hlstd{(}\hlkwd{rbind}\hlstd{(varianza, gl, alfa, X_1, X_2, u))}
+  \hlstd{LInf} \hlkwb{<-} \hlstd{u}\hlopt{/}\hlstd{X_1}
+  \hlstd{LSup} \hlkwb{<-} \hlstd{u}\hlopt{/}\hlstd{X_2}
+\hlkwd{print}\hlstd{(}\hlstr{" "}\hlstd{)}
+  \hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Intervalo para D es: ["}\hlstd{,} \hlkwd{round}\hlstd{(LInf,} \hlnum{2}\hlstd{),} \hlstr{","}\hlstd{,} \hlkwd{round}\hlstd{(LSup,} \hlnum{2}\hlstd{),} \hlstr{"]"}\hlstd{))}
+
+\hlstd{\}}
+ \hlstd{n}\hlkwb{=}\hlnum{10}\hlstd{; nivel.conf}\hlkwb{=}\hlnum{0.95}
+\hlkwd{intervalovarpobla} \hlstd{( n, nivel.conf)}
+\end{alltt}
+\begin{verbatim}
+##                [,1]
+## varianza  0.2862222
+## gl        9.0000000
+## alfa      0.0500000
+## X_1      10.9599640
+## X_2       7.0400360
+## u         2.5760000
+## [1] " "
+## [1] "Intervalo para D es: [ 0.24 , 0.37 ]"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}

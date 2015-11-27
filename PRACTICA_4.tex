@@ -1,0 +1,482 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 04}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section{IMPORTACI\'ON Y EXPORTACI\'ON DE DATOS EN R}
+
+Generalmente los datos suelen leerse desde archivos externos y no teclearse desde la consola. Las capacidades de lectura de archivos de R son sencillas y sus requisitos son bastante estrictos, por lo que hay que tenerlas muy en cuenta, de lo contrario los resultados en la lectura no ser\'an los esperados.
+\subsection{USO DE LA FUNCI\'ON READ.TABLE()}
+\begin{itemize}
+\item Ejemplo: Guardar (escribir) determinados datos en un archivo de texto (ASCII) y luego recuperar
+(leer) dicho archivo desde R.
+\end{itemize}
+\begin{itemize}
+\item {1) } Cambiar el directorio de trabajo a su directorio de trabajo, en el cual ha almacenado sus
+pr?cticas, desde el men\'u File.
+\item {2) } Abrir el R Editor para crear un nuevo script desde el men\'u File.
+\item {3) } En la ventana del R Editor, teclee los datos tal como se muestra:
+\end{itemize}
+Observaciones:
+\begin{itemize}
+\item La primera l\'inea del archivo debe contener el nombre de cada objeto o variable.
+\item En cada una de las siguientes l?neas, el primer elemento es la etiqueta de la fila, y a continuaci\'on deben aparecer los valores de cada variable.
+\item Si el archivo tiene un elemento menos en la primera l\'inea que en las restantes,
+obligatoriamente se\'i el dise\~no anterior el que se utilice.
+\item A menudo no se dispone de etiquetas de filas. En ese caso, tambi\'en es posible la lectura y el
+programa a\'~nadir? unas etiquetas predeterminadas.
+\item La \'ultima l\'inea debe finalizar con ENTER para que R reconozca el fin del archivo.
+\end{itemize}
+\begin{itemize}
+\item{4) } Oprimir con el puntero del rat\'on el icono que representa un disquete (Save script as) y guarde el archivo con el nombre "datos01.txt". Tambi\'en puede darle el nombre de "datos01.dat" (otro formato soportado por la funci\'on read.table), e incluso puede leer datos directamente desde una p\'agina de internet, solamente proporcionando la direcci\'on URL completa
+\end{itemize}
+
+\newpage
+\begin{itemize}
+\item{5) } Recuperar los objetos o datos guardados en el archivo "datos01.txt" 
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Entrada1} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"datos01.txt"}\hlstd{,} \hlkwc{header}\hlstd{=T);Entrada1}
+\end{alltt}
+\begin{verbatim}
+##   Edad Estatura Peso Sexo
+## 1   26     1.65  146    F
+## 2   21     1.73  158    M
+## 3   21     1.81  167    M
+## 4   20     1.70  152    F
+\end{verbatim}
+\begin{alltt}
+\hlstd{Entrada2} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"datos01.dat"}\hlstd{,} \hlkwc{header}\hlstd{=T);Entrada2}
+\end{alltt}
+\begin{verbatim}
+##   Edad Estatura Peso Sexo
+## 1   26     1.65  146    F
+## 2   21     1.73  158    M
+## 3   21     1.81  167    M
+## 4   20     1.70  152    F
+\end{verbatim}
+\begin{alltt}
+\hlcom{# No existe diferencia entre ambos archivos a la hora de leerlos}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+NOTA: La funci\'on read.table() lee los datos y los almacena en una hoja de datos (data.frame), si b\'usqueda.
+\begin{itemize}
+\item{6) } Leer los datos contenidos en el archivo "airline.dat" 
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{airline} \hlkwb{<-} \hlkwd{read.table}\hlstd{(}\hlstr{"airline.dat"}\hlstd{,}\hlkwc{nrows} \hlstd{=} \hlnum{20}\hlstd{);airline}
+\end{alltt}
+\begin{verbatim}
+##        V1
+## 1  112,00
+## 2  115,00
+## 3  145,00
+## 4  171,00
+## 5  196,00
+## 6  204,00
+## 7  242,00
+## 8  284,00
+## 9  315,00
+## 10 340,00
+## 11 360,00
+## 12 417,00
+## 13 118,00
+## 14 126,00
+## 15 150,00
+## 16 180,00
+## 17 196,00
+## 18 188,00
+## 19 233,00
+## 20 277,00
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Note que la instrucci\textbackslash{}'on header=T es por defecto y puede omitirla (R reconocer? }
+\hlcom{# siempre que en la primera l?nea se encuentran los nombres de las variables).}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+La sintaxis completa de la funci\'on read.table() es:\\
+
+read.table(file, header = FALSE, sep = "", quote = "\"'", dec = ".", row.names, col.names, 
+as.is =FALSE, na.strings = "NA", colClasses = NA, nrows = -1, skip = 0, 
+check.names = TRUE, fill =!blank.lines.skip, strip.white = FALSE, blank.lines.skip = TRUE, 
+comment.char = "#")
+
+\section{USO DE LA FUNCI\'ON SCAN()}
+La funci\'on scan() es m\'as flexible que read.table() y permite realizar lecturas m?s complejas, como puede consultar en la ayuda: help(scan)
+\begi{itemize}
+\item Ejemplo 1: Leer s\'olo las dos primeros objetos o columnas del archivo "datos01.txt"
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Edat1} \hlkwb{<-} \hlkwd{scan}\hlstd{(}\hlstr{"datos01.txt"}\hlstd{,} \hlkwd{list}\hlstd{(}\hlkwc{X1}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{X2}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{skip} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{flush} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{quiet} \hlstd{=} \hlnum{TRUE}\hlstd{);}
+\hlstd{Edat1}
+\end{alltt}
+\begin{verbatim}
+## $X1
+## [1] 26 21 21 20
+## 
+## $X2
+## [1] 1.65 1.73 1.81 1.70
+\end{verbatim}
+\begin{alltt}
+\hlstd{Edat2}\hlkwb{<-} \hlkwd{scan}\hlstd{(}\hlstr{"datos01.dat"}\hlstd{,} \hlkwd{list}\hlstd{(}\hlkwc{X1}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{X2}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{skip} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{flush} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{quiet} \hlstd{=} \hlnum{TRUE}\hlstd{);}
+\hlstd{Edat2}
+\end{alltt}
+\begin{verbatim}
+## $X1
+## [1] 26 21 21 20
+## 
+## $X2
+## [1] 1.65 1.73 1.81 1.70
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Observe que en list(X1=0, X2=0) se les da el nombre a las dos primeras }
+\hlcom{# columnas o variables (puede darle el nombre que crea m\textbackslash{}'as conveniente) y se }
+\hlcom{# indica que son variables num\textbackslash{}'ericas; sin embargo, del archivo \textbackslash{}'unicamente se }
+\hlcom{# leen las dos primeras columnas, si se quisiera leer las columnas primera y }
+\hlcom{# tercera, nos ver\textbackslash{}'iamos obligados a leer las tres primeras}
+
+\hlcom{# Note que si escribimos list(0, 0), indica que se leer\textbackslash{}'an las dos primeras }
+\hlcom{# columnas del archivos y que los datos le?dos son num\textbackslash{}'ericos (asigna nombres }
+\hlcom{# por defecto). Para indicar que los datos que se leen son cadenas se utiliza}
+\hlcom{# "" en lugar de 0.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\newpage
+\begin{itemize}
+\item Ejemplo 2: Crear un archivo con la funci\'on cat() y luego recuperarlo
+\end{itemeze}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{cat}\hlstd{(}\hlstr{"TITULO L\textbackslash{}'inea extra"}\hlstd{,} \hlstr{"2 3 5 7"}\hlstd{,} \hlstr{"11 13 17"}\hlstd{,} \hlkwc{file}\hlstd{=}\hlstr{"datos02.txt"}\hlstd{,} \hlkwc{sep}\hlstd{=}\hlstr{"\textbackslash{}n"}\hlstd{)}
+
+\hlcom{# El archivo lo recuperamos con la funci\textbackslash{}'on scan():}
+\hlstd{pp} \hlkwb{<-} \hlkwd{scan}\hlstd{(}\hlstr{"datos02.txt"}\hlstd{,} \hlkwc{skip} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{quiet}\hlstd{=} \hlnum{TRUE}\hlstd{);pp}
+\end{alltt}
+\begin{verbatim}
+## [1]  2  3  5  7 11 13 17
+\end{verbatim}
+\begin{alltt}
+\hlcom{# La funci?n scan es muy \textbackslash{}'util cuando en el archivo de datos a importar }
+\hlcom{# cada l?nea representa un ?nico caso. En caso contrario (cada cierta}
+\hlcom{# cantidad de columnas representa un caso) es mucho m\textbackslash{}'as f\textbackslash{}'acil y }
+\hlcom{# recomendable utilizar la funci\textbackslash{}'on read.table.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+La sintaxis completa de la funci?n scan() es:\\
+
+scan(file = "", what = double(0), nmax = -1, n = -1, sep = "", quote = if (sep=="\n") "" else "'\"", dec
+= ".", skip = 0, nlines = 0, na.strings = "NA", flush = FALSE, fill = FALSE, strip.white = FALSE,
+quiet = FALSE, blank.lines.skip = TRUE, multi.line = TRUE, comment.char = "#")
+\section{USO DE LA FUNCI\'AN READ.CSV()}
+Leer un conjunto de datos de Microsoft Excel pero los datos no est\'an almacenados en el formato
+conocido de Excel ".xls", sino m\'as bien un formato menos conocido como ".csv".
+\begin {itemize}
+\item {1) } Ingresar al Microsoft Excel y crear la hoja de datos siguiente:\\
+Observe que debe guardar la hoja Excel en su directorio de trabajo y que el archivo debe ser de
+tipo: CSV(delimitado por comas)
+\item 2) Regresar al entorno de R y recuperar el archivo "HojaE1.csv".
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{hojaR} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"HojaE1.csv"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{";"}\hlstd{,} \hlkwc{strip.white} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{hojaR}
+\end{alltt}
+\begin{verbatim}
+##   Producto.Cantidad.S1.Cantidad.S2.Cantidad.S3.Cantidad.S4
+## 1                                 Desayuno,132,125,142,120
+## 2                                 Almuerzo,120,125,122,114
+## 3                                    Cenas,115,105,130,108
+## 4                            Tazas de café,200,180,210,140
+## 5                                     Gaseosas,75,90,62,80
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\textbf{Note que R ha reemplazado "-" en los encabezados de las columnas por "."; en general
+reemplazar\'a cualquier car\'acter.}
+\newpage
+Puede investigar el tipo de objeto que es hojaR con:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{is.matrix}\hlstd{(hojaR);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.list}\hlstd{(hojaR);}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.data.frame}\hlstd{(hojaR)}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Acceda a la componente Producto de hojaR con:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{hojaR}\hlopt{$}\hlstd{Producto}
+\end{alltt}
+\begin{verbatim}
+## [1] Desayuno,132,125,142,120      Almuerzo,120,125,122,114     
+## [3] Cenas,115,105,130,108         Tazas de café,200,180,210,140
+## [5] Gaseosas,75,90,62,80         
+## 5 Levels: Almuerzo,120,125,122,114 ... Tazas de café,200,180,210,140
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Observe que R toma est\'a columna (variable de caracteres) como un Factor Nominal,
+verif\'iquelo tecleando:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{is.vector}\hlstd{(hojaR}\hlopt{$}\hlstd{Producto);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.factor}\hlstd{(hojaR}\hlopt{$}\hlstd{Producto)}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+Qu\'e tipo de objeto es la columna Cantidad.S1?
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{is.vector}\hlstd{(hojaR}\hlopt{$}\hlstd{Cantidad.S1);}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{alltt}
+\hlkwd{is.factor}\hlstd{(hojaR}\hlopt{$}\hlstd{Cantidas.S1)}
+\end{alltt}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\newpage
+\section{USO DEL PAQUETE RODBC}
+Si por el contrario los datos a los cuales deseamos realizar el an?lisis estad?stico se encuentran en
+formato XLS (versi\'on 2003 de Microsoft Excel), debemos de seguir los siguientes pasos
+(Ilustraremos el procedimiento con el archivo "contaminaci\'on-mexico.xls"):
+\begin{itemize}
+
+\item Instalar el paquete RODBC, con la siguiente instrucci\'on 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"RODBC"}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Installing package into 'C:/Users/User/Documents/R/win-library/3.2'\\\#\# (as 'lib' is unspecified)}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in contrib.url(repos, "{}source"{}): trying to use CRAN without setting a mirror}}\begin{alltt}
+\hlcom{# O desde el men\textbackslash{}'u como en el caso de la instalaci\textbackslash{}'on del paquete Foreing.}
+\hlcom{# Con este procedimiento se instalan los paquetes directamente desde internet, }
+\hlcom{# es necesario para ello contar con una conexi\textbackslash{}'on a internet en el momento. }
+\hlcom{# Posteriormente se selecciona un mirror (un servidor desde el cual se }
+\hlcom{# descargar\textbackslash{}'an los paquetes), y finalmente buscar el paquete deseado del listado.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Cargar el paquete con la siguiente instrucci\'on:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(RODBC)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'RODBC' was built under R version 3.2.2}}\end{kframe}
+\end{knitrout}
+\item Seleccionar el archivo (el cual puede contener m?s de una hoja de datos)"contaminaci\'on-mexico.xls", con la instrucci\'on:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{datos.xls} \hlkwb{<-} \hlkwd{odbcConnectExcel}\hlstd{(}\hlkwd{file.choose}\hlstd{())}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in odbcConnectExcel(file.choose()): odbcConnectExcel is only usable with 32-bit Windows}}\end{kframe}
+\end{knitrout}
+\item Seleccionar la hoja en la cual se encuentran los datos 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# datoshoja1.xls <- sqlFetch(datos.xls,"contaminacion-mexico")}
+\hlcom{# Con esta instrucci\textbackslash{}'on se indica la hoja en la cual se encuentran los }
+\hlcom{# datos con los que se desea trabajar (contaminaci?n_mexico) }
+\hlcom{# o cargar en R. Siempre es necesario especificarlo.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Realizar los an\'alisis o c\'alculos correspondientes
+\end{itemize}
+
+\newpage
+\section{IMPORTAR DATOS DE SPSS HACIA R}
+A parte de leer archivos en formato texto y delimitados por comillas, R permite leer datos en una gran variedad de formato entre ellos se encuentra archivos el formato de SPSS ".sav". Para poder leerlos primero debemos de cargar el paquete correspondiente en el cual se encuentran la funci\'on que nos permitir? leer los ficheros de datos. Para el caso de SPSS, debe cargar el paquete foreign. El cual es necesario para lectura y escritura de datos.\\\\
+Para leer los datos se usa la siguiente funci\'on Read.spss("nombreArchivo", use.values.labels.=FALSE, max.value.label=Inf, to.data.frame=T); donde use.values.labels=TRUE significa que si en el archivo existen variables categ\'oricas que han sido previamente codificadas con su respectiva etiqueta, entonces se leer\'an directamente las etiquetas y no los valores de esta (por ejemplo, si 1 representa Femenino, se leer? Femenino en lugar de 1). to.data.frame =T indica que los datos ser?n almacenados en un data.frame, muy recomendable para an?lisis estad\'istico. Puede consultar m\'as ayuda de la funci\'on con la instrucci\'on help(read.spss).
+\begin{itemize}
+\item Instalar el paquete foreign, con la siguiente instrucci\'on 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"foreign"}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Installing package into 'C:/Users/User/Documents/R/win-library/3.2'\\\#\# (as 'lib' is unspecified)}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in contrib.url(repos, "{}source"{}): trying to use CRAN without setting a mirror}}\end{kframe}
+\end{knitrout}
+\item Cargar el paquete con la siguiente instrucci\'on:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(foreign)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Leer el contenido del archivo "demo.sav", con la instrucci\'on:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#read.spss("demo.sav", use.value.labels=TRUE, max.value.label=Inf, to.data.frame=T)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\item Realizar los an?lisis o c\'alculos correspondientes.
+\end{itemize}
+
+
+\end{document}

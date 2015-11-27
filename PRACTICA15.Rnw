@@ -1,0 +1,459 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\ [0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\ [0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD TRES"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr?\'actica 15}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section {DISTRIBUCIONES CONTINUAS.} 
+
+\begin{description}
+  \item \textbf{a) Distribuci\'on uniforme.}
+\end{description}
+
+\begin{itemize}
+  \item \textbf{Par\'ametros.}
+  \begin{center}
+\item x = valor cualquiera
+\item p = probabilidad
+\item n = tama?o de la muestra 
+\item min = valor m\'inimo
+\item max = valor m\'aximo
+\end{center}
+
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item punif(x, min, max, lower.tail = TRUE, log.p = FALSE)
+  \item qunif(p, min, max, lower.tail = TRUE, log.p = FALSE) 
+  \item runif(n, min, max) 
+\end{enumerate}
+\end{itemize}
+
+\begin{description}
+  \item \textbf{b) Distribuci\'on Normal.}
+\end{description}
+
+\begin{itemize}
+  \item \textbf{Par\'ametros.}
+  \begin{center}
+\item x = valor cualquiera
+\item p = probabilidad
+\item mean = media
+\item sd = desviaci\'on t\'ipica
+\item n = tama\~no de la muestra
+\end{center}
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item pnorm(x, mean, sd, lower.tail = TRUE, log.p = FALSE) 
+  \item qnorm(p, mean, sd, lower.tail = TRUE, log.p = FALSE) 
+  \item rnorm(n, mean, sd)  
+\end{enumerate}
+\end{itemize}
+
+\begin{description}
+  \item \textbf{c) Distribuci\'on T-Student.}
+\end{description}
+\begin{itemize}
+  \item \textbf{Par\'ametros.}
+  \begin{center}
+\item x = valor cualquiera
+\item p = probabilidad
+\item df = grados de libertad  
+\end{center}
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item pt(x, df, lower.tail = TRUE, log.p = FALSE)
+  \item pt(x, df, lower.tail = TRUE, log.p = FALSE) 
+  \item rt(n, df)   
+\end{enumerate}
+\end{itemize}
+
+\begin{description}
+  \item \textbf{d) Distribui\'on Chi-cuadrado.}
+\end{description}
+\begin{itemize}
+  \item \textbf{Par\'ametros.}
+  \begin{center}
+\item x = valor cualquiera
+\item df = grados de libertad
+\item p = probabilidad 
+\end{center}
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item pchisq(x, df, lower.tail = TRUE, log.p = FALSE)
+  \item qchisq(p, df, lower.tail = TRUE, log.p = FALSE)
+  \item rchisq(n, df,)    
+\end{enumerate}
+\end{itemize}
+
+\begin{description}
+  \item \textbf{d) Distribuci\'on F de Snedecor.}
+\end{description}
+\begin{itemize}
+  \item \textbf{Par?metros.}
+  \begin{center}
+\item x,q = vector cuantiles
+\item df1 = grados de libertad en el numerador
+\item df2 = grados de libertad en el denominador 
+\item p = vector probabilidad
+\end{center}
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item pf(q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE)
+  \item qf(p, df1, df2, ncp, lower.tail=TRUE, log.p = FALSE) 
+  \item rf(n, df1, df2, ncp) 
+\end{enumerate}
+\end{itemize}
+
+\begin{description}
+  \item \textbf{d) Distribuci\'on Exponencial.}
+\end{description}
+\begin{itemize}
+  \item \textbf{Par\'ametros.}
+  \begin{center}
+\item x,q = vector cuantiles
+\item rate = raz?n = 1/E[X]
+\item p = vector probabilidad 
+\item lower.tail = T 
+\end{center}
+\item \textbf{Sintaxis de la funci\'on utilizada en R}
+\begin{enumerate}
+  \item pexp(q, rate = 1, lower.tail = TRUE, log.p = FALSE)
+  \item qexp(p, rate = 1, lower.tail = TRUE, log.p = FALSE)
+  \item rexp(n, rate = 1)  
+\end{enumerate}
+\end{itemize}
+
+
+\section{C\'ALCULO DE PROBABILIDADES.}
+
+\begin{itemize}
+  \item \textbf{Ejemplo 1:}
+\end{itemize}
+
+Una persona informal hace esperar a su pareja aleatoriamente entre 0 y 90 minutos. Harto de esta situaci\'on, la persona que sufre la espera se plantea un ultim\'atum; s\'i al d\'ia siguiente su pareja tarda menos de 15 minutos mantiene la relaci\'on, s\'i la espera est\'e entre 15 y 55 minutos, decide en la siguiente cita con los mismos criterios, mientras que si tarda m\'as de 55 minutos la relaci\'on termina en ese momento.
+
+\begin{description}
+  \item a) Calcule la probabilidad de que la relaci'on contin\'ue hasta la siguiente cita. 
+<<>>=
+x <- 55; a=0; b <- 90 
+
+# usando la funcion propia de R 
+
+punif(x, min=a, max=b, lower.tail=TRUE)
+@
+\end{description}
+
+\begin{description}
+  \item b) Calcule la probabilidad de que la relaci\'on termine en la segunda cita.
+  
+Suponiendo que el tiempo de espera en una cita es independiente respecto de otras citas, se calcula la probabilidad P(15$<$X$<$55) = P(X$<$55) - P(X$<$=15) = 0.6111 - 0.1666 = 0.4445,
+<<>>=
+F55=punif(55, min=a, max=b, lower.tail=TRUE) 
+F15=punif(15, min=a, max=b, lower.tail=TRUE) 
+F55-F15 
+@
+\end{description}
+que es la probabilidad de que aplace la decisi\'on para la segunda cita y, en la segunda cita, la probabilidad de que lo deje definitivamente es P(X$>$55) = 0.3888,
+<<>>=
+F55=punif(55, min=a, max=b, lower.tail=TRUE);F55 
+@
+luego multiplicando ambas probabilidades se obtiene el valor pedido 0.1728.
+<<>>=
+(1-F55)*( F55-F15) 
+@
+
+\begin{itemize}
+  \item \textbf{Ejemplo 2:}
+\end{itemize}
+
+Una empresa est\'a buscando personal para su departamento de mercadeo. El perfil solicitado es el de sujetos extrovertidos y creativos. Se han presentado 50 candidatos y la empresa ha establecido como criterio de selecci\'on que los candidatos superen el percentil 80 en creatividad y extroversi\'on. Sabiendo que la variable extroversi\'on (X) se distribuye seg\'un una Normal de media 5 y desviaci\'on t\'ipica 1, que la variable creatividad (Y) sigue una t-Student de 10 grados de libertad y que las puntuaciones de creatividad y extroversi\'on son independientes: 
+\begin{description}
+  \item a) Cu\'antos candidatos ser\'an seleccionados?
+  
+Al ser X e Y independientes, la probabilidad:
+
+\textbf{P(X$>$=P80∩Y$>$=P80)=P(X$>$=P80)P(Y$>$=P80)=(0.20)(0.20)=0.04.Como se han presentado 50 aspirantes, ser?n seleccionadas (50)(0.04)=2 personas.}
+
+\end{description}
+
+\begin{description}
+  \item b) Qu\'e puntuaciones debe superar un aspirante en creatividad y extroversi\'on para ser admitido?
+  
+Seg\'un el criterio de selecci\'on se debe superar el percentil 80, en ambas variables, para ser admitido. Se calcular? pues el percentil 80 de la variable X e Y,utilizando los cuantiles-normales para la variable X: 
+<<>>=
+# y los cuantiles-normales para la variable X:
+
+p <- c(0.80); media=5; d.t=1 
+qnorm(p, mean=media, sd=d.t, lower.tail=TRUE) 
+@
+
+<<>>=
+#y los cuantiles-t para la variable Y:
+
+p <- c(0.80); g.l <- 10 
+qt(p, df=g.l, lower.tail=TRUE)
+@
+\end{description}
+
+\begin{description}
+  \item c) Si se extraen al azar 16 candidatos, cu\'al es la probabilidad de que su media aritm\'etica en extroversi\'on sea mayor que 4.5? 
+Se sabe que al extraer una muestra de una poblaci\'on normal de tama\~no n, lamedia muestral, sigue otra distribuci\'on normal de media igual que la poblacional y desviaci\'on t\'ipica sigma/sqrt(n).\\
+
+Como se desea calcular P(media$>$=4.5):
+<<>>=
+n <- 16; x <- 4.5; mu=5; sigma=1; d.t=sigma/sqrt(n) 
+pnorm(x, mean=mu, sd=d.t, lower.tail=FALSE)
+@
+\end{description}
+
+\begin{itemize}
+  \item \textbf{Ejemplo 3:}
+\end{itemize}
+La duraci\'on media de un modelo de marcapasos es de 7 a\~nos. 
+\begin{description}
+  \item a) Cu\'al es la probabilidad de que dure al menos 5 a\~nos? y menos de 3 a\~nos?
+  
+Suponiendo que la variable X="tiempo de funcionamiento del marcapasos" sigue una distribuci\'on exponencial.
+
+La probabilidad P(X$>$=5) se obtiene as\'i:
+<<>>=
+x <- 5; teta=7 
+pexp(x, rate=1/teta, lower.tail=FALSE)
+@
+
+y de igual forma  P(X$<$3): 
+<<>>=
+x <- 3; teta=7 
+pexp(x, rate=1/teta, lower.tail=TRUE) 
+@
+
+
+  \item b) Si han transcurrido ya 4 a?os desde su implantaci\'on, cu\'al es la probabilidad de que dure otros 4? Nos piden P(X$>$=8/X$>$=4)
+  
+Teniendo en cuenta que la funci\'on de distribuci?n es la \'unica distribuci\'on continua no tiene memoria resulta que P(X$>$=8/X$>$=4)=P(X$>$=4)=0.5647182
+<<>>=
+pexp(4, rate=1/teta, lower.tail=FALSE)
+@
+
+\item c) Cu\'anto tiempo deber\'ia funcionar un marcapasos para estar entre el 10\% de los que m\'as duran?
+
+Hay que calcular el percentil 90:
+<<>>=
+p <- 0.9; teta <- 7 
+qexp(p, rate=1/teta, lower.tail=TRUE) 
+#resultando 16.12 a\~nos. 
+@
+
+\item d) Calcular el valor que deben tener a y b para que P(X$<$a)=0.5 PX a 0.5 y P(X$>$b)=0.32
+
+De forma an\'aloga al apartado anterior, en el primer caso habr\'ia que calcular la mediana (percentil 50), a = 4.852,
+<<>>=
+qexp(0.5, rate=1/teta, lower.tail=TRUE)
+@
+<<>>=
+# y en el segundo caso, el percentil 68, b = 7.97
+
+qexp(0.68, rate=1/teta, lower.tail=TRUE) 
+@
+<<>>=
+# o de esta otra manera
+
+qexp(0.32, rate=1/teta, lower.tail=FALSE) 
+@
+\end{description}
+
+\newpage
+
+\section{GENERACI\'ON DE MUESTRAS ALEATORIAS DE LAS DISTRIBUCIONES.} 
+
+
+\begin{itemize}
+  \item \textbf{Ejemplo 1:}
+\end{itemize}
+Generar 100 n\'umeros aleatorios de una distribuci\'on Uniforme en [-2, 4]
+<<>>=
+# Definir los par\'ametros apropiados
+min <- -2; max <- 4 
+
+# generar 100 n\'umeros aleatorios de la distribuci\'on 
+x = runif(100, min, max); x 
+
+# Histograma para la nuestra aleatoria de tama\~no 100 
+hist(x, main="X ~ Uniforme(min=-2, max=4", xlab="X", 
+     ylab="densidad de probabilidad", probability=TRUE, col="green") 
+
+# Graficar la funci?n de densidad, use la funci\'on curve() para variable continua 
+curve(dunif(x, min, max), col="blue", add=TRUE) 
+@
+
+\begin{itemize}
+  \item \textbf{Ejemplo 2:}
+\end{itemize}
+Supongamos que tenemos una muestra de tama?o n=200 perteneciente a una poblaci\'on normal N(10,2) con media igual a 10 y con una desviaci\'on estandar igual a 2:
+<<>>=
+# genera los valores aleatorios de la distribuci\'on 
+x.norm <- rnorm(n=200,mean=10, sd=2) 
+
+# Podemos obtener un histograma usando la funci\'on hist() 
+hist(x.norm, breaks = "Sturges", freq = TRUE, probability = FALSE, 
+     include.lowest = TRUE, right = TRUE, density = NULL, 
+angle = 45, col = "steelblue1", border = NULL, 
+main = "Histograma de datos observados", axes = TRUE, 
+plot = TRUE, labels = FALSE)
+
+# Podemos estimar la densidad de frecuencia usando la funci\'on 
+# density() y plot() para dibujar su "gr\'afica"
+plot(density(x.norm), main="Densidad estimada de los datos")
+
+# R permite calcular la funci\'on de distribuci\'on acumulada te\'erica con ecdf() 
+plot(ecdf(x.norm),main="Funcion de distribucion acumulada teorica") 
+@
+
+\begin{itemize}
+  \item \textbf{Ejemplo 3:}
+\end{itemize}
+Generar 100 n\'umeros aleatorios de una distribuci\'on Normal con media 4.5 y desviaci\'on est\'andar 0.75.
+<<>>=
+# Definir los par\'ametros apropiados 
+media <- 4.5; desviacion <- 0.75
+
+# generar 100 n\'umeros aleatorios de la distribuci\'on 
+x = rnorm(100, media, desviacion); x
+
+# Histograma para la nuestra aleatoria de tama\~no 100 
+hist(x,main=expression(paste("X ~ N(", mu, " = 4.5, ", sigma, " = 0.75)")), 
+xlab="X", ylab="densidad de probabilidad", probability=TRUE, col=gray(0.9))
+
+# Graficar la funci\'on de densidad te\'orica, usando la funci\'on curve() 
+curve(dnorm(x, media, desviacion), col="red", lwd=2, add=TRUE) 
+@
+
+\begin{itemize}
+  \item \textbf{Ejemplo 4:}
+\end{itemize}
+Generar n\'umeros aleatorios de una distribuci\'on exponencial. Por ejemplo, si la vida media de un bulbo de luz es 2500 horas, uno puede pensar que el tiempo de vida es aleatorio con una distribuci\'on exponencial que tiene media 2500. El \'unico par\'ametro es la raz\'on = 1/media.
+<<>>=
+# Definir el par?metro apropiado 
+media <- 2500; razon <- 1/media;n=100 
+
+# generar 100 n\'umeros aleatorios de la distribuci\'on 
+x = rexp(n, razon); x 
+
+# Histograma para la nuestra aleatoria de tama\~no 100 
+hist(x, main="X ~ Exponencial( media = 2500 )", xlab="X", 
+     ylab="densidad de probabilidad", probability=TRUE, col="green")
+
+# Graficar la funci?n de densidad, usando la funci?n curve() 
+curve(dexp(x, razon), col="blue", lwd=2, add=TRUE) 
+@
+
+\newpage
+
+
+\section{FUNCIONES DE DISTRIBUCI\'ON Y SU INVERSA (LOS CUANTILES).}
+
+
+En R, las funciones a las que se les antepone una "p" permiten contestar cu?l es la probabilidad de que una variable aleatoria X sea menor o igual que x, esto es F(x)=P[X$<$=x]. Las funciones a las que se les antepone una "q" son lo inverso de esto, ellas permiten conocer qu\'e valor de una variable aleatoria X corresponde a una probabilidad p dada. Esto es el cuantil Xq o punto en el que los datos son partidos, P[X$<$=x_q]=p.\\
+
+\begin{itemize}
+  \item \textbf{Ejemplo 1:}
+\end{itemize}
+Para una Variable aleatoria X con distribuci\'on normal de media 1 y desviaci\'on 
+est\'andar 1, cu\'al es la probabilidad de que sea menor que 0.7?
+<<>>=
+x <- 0.7 
+p <- pnorm(x, mean=1, sd=1, lower.tail = TRUE); p
+@
+\textbf{Observaci\'on:} lower.tail=TRUE es el valor por defecto, para indicar las probabilidades son P[X$<$=x], en otro caso ser\'a P[X$>$x].
+
+\begin{itemize}
+  \item \textbf{Ejemplo 2:}
+\end{itemize}
+Para una variable aleatoria con distribuci\'on normal est\'andar, encontrar 
+P[Z$<$=0.7] y P[Z$>$0.7]. 
+<<>>=
+z <- 0.7 
+p1 <- pnorm(z, mean=0, sd=1); p1 
+p2 <- pnorm(z, mean=0, sd=1, lower.tail=FALSE); p2 
+@
+\textbf{Observaci\'on:} ya que P[Z$>$0.7]=1-[Z$<$=0.7], obtenemos el mismo resultado con
+<<>>=
+p3 <- 1-pnorm(z, mean=0, sd=1);p3
+@
+
+\begin{itemize}
+  \item \textbf{Ejemplo 3:}
+\end{itemize}
+Qu\'e valor de una variable aleatoria con distribuci\'on normal est\'andar, tiene 75\% 
+del ?rea a la izquierda?. 
+<<>>=
+p <- 0.75 
+z <- qnorm(p, mean=0, sd=1, lower.tail = TRUE); z 
+@
+\textbf{Observaci\'on:} note que el valor de z que resuelve P[Z$<$=z]=0.75 es el tercer cuartil (Q3), esto es z=0.6744898.
+
+\begin{itemize}
+  \item \textbf{Ejemplo 4:}
+\end{itemize}
+Cu\'al es la probabilidad a la derecha de 18.55 para una Variable aleatoria X con 
+distribuci\'on Chi-cuadrado de 12 grados de libertad?
+<<>>=
+x <- 18.55; gl <- 12 
+p <- pchisq(x, gl, lower.tail = FALSE); p 
+@
+
+\end{document}

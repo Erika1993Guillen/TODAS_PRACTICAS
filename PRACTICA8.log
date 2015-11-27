@@ -1,0 +1,719 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.10)  27 NOV 2015 14:46
+entering extended mode
+**PRACTICA8.tex
+(PRACTICA8.tex
+LaTeX2e <2015/01/01> patch level 2
+Babel <3.9m> and hyphenation patterns for 69 languages loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size12.clo"
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 142.
+) (framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip43
+\fb@frw=\dimen105
+\fb@frh=\dimen106
+\FrameRule=\dimen107
+\FrameSep=\dimen108
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\alltt.sty"
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen109
+\Gm@wd@mp=\dimen110
+\Gm@odd@mp=\dimen111
+\Gm@even@mp=\dimen112
+\Gm@layoutwidth=\dimen113
+\Gm@layoutheight=\dimen114
+\Gm@layouthoffset=\dimen115
+\Gm@layoutvoffset=\dimen116
+\Gm@dimlist=\toks15
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2015/03/17 v1.2c Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ansinew.def"
+File: ansinew.def 2015/03/17 v1.2c Input encoding file
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2015/08/03 3.9m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf"
+Language: spanish.ldf 2014/04/24 v5.0n Spanish support from the babel system
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2015/08/03 3.9m Babel common definitions
+\babel@savecnt=\count91
+\U@D=\dimen117
+)
+\es@quottoks=\toks18
+\es@quotdepth=\count92
+Package babel Info: Making " an active character on input line 516.
+Package babel Info: Making . an active character on input line 617.
+Package babel Info: Making < an active character on input line 662.
+Package babel Info: Making > an active character on input line 662.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip44
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks19
+\ex@=\dimen118
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen119
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count93
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count94
+\leftroot@=\count95
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count96
+\DOTSCASE@=\count97
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen120
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count98
+\c@MaxMatrixCols=\count99
+\dotsspace@=\muskip10
+\c@parentequation=\count100
+\dspbrk@lvl=\count101
+\tag@help=\toks20
+\row@=\count102
+\column@=\count103
+\maxfields@=\count104
+\andhelp@=\toks21
+\eqnshift@=\dimen121
+\alignsep@=\dimen122
+\tagshift@=\dimen123
+\tagwidth@=\dimen124
+\totwidth@=\dimen125
+\lineht@=\dimen126
+\@envbody=\toks22
+\multlinegap=\skip45
+\multlinetaggap=\skip46
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\dstroke\dsfont.sty"
+Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\multicol.sty"
+Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
+\c@tracingmulticols=\count105
+\mult@box=\box28
+\multicol@leftmargin=\dimen127
+\c@unbalance=\count106
+\c@collectmore=\count107
+\doublecol@number=\count108
+\multicoltolerance=\count109
+\multicolpretolerance=\count110
+\full@width=\dimen128
+\page@free=\dimen129
+\premulticols=\dimen130
+\postmulticols=\dimen131
+\multicolsep=\skip47
+\multicolbaselineskip=\skip48
+\partial@page=\box29
+\last@line=\box30
+\maxbalancingoverflow=\dimen132
+\mult@rightbox=\box31
+\mult@grightbox=\box32
+\mult@gfirstbox=\box33
+\mult@firstbox=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\@tempa=\box50
+\@tempa=\box51
+\c@columnbadness=\count111
+\c@finalcolumnbadness=\count112
+\last@try=\dimen133
+\multicolovershoot=\dimen134
+\multicolundershoot=\dimen135
+\mult@nat@firstbox=\box52
+\colbreak@box=\box53
+\mc@col@check@num=\count113
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip49
+\subfigcapskip=\skip50
+\subfigcaptopadj=\dimen136
+\subfigbottomskip=\skip51
+\subfigcapmargin=\dimen137
+\subfiglabelskip=\skip52
+\c@subfigure=\count114
+\c@lofdepth=\count115
+\c@subtable=\count116
+\c@lotdepth=\count117
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.cfg")
+\subfig@top=\skip53
+\subfig@bottom=\skip54
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count118
+\float@exts=\toks24
+\float@box=\box54
+\@float@everytoks=\toks25
+\@floatcapt=\box55
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks26
+\verbatim@line=\toks27
+\verbatim@in@stream=\read1
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip55
+\f@ncyO@elh=\skip56
+\f@ncyO@erh=\skip57
+\f@ncyO@olh=\skip58
+\f@ncyO@orh=\skip59
+\f@ncyO@elf=\skip60
+\f@ncyO@erf=\skip61
+\f@ncyO@olf=\skip62
+\f@ncyO@orf=\skip63
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption.sty"
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen138
+\captionmargin@=\dimen139
+\captionwidth=\dimen140
+\caption@tempdima=\dimen141
+\caption@indent=\dimen142
+\caption@parindent=\dimen143
+\caption@hangindent=\dimen144
+)
+\c@ContinuedFloat=\count119
+Package caption Info: float package is loaded.
+Package caption Info: subfigure package is loaded.
+)
+\c@definicion=\count120
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(PRACTICA8.aux
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
+)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count121
+\scratchdimen=\dimen145
+\scratchbox=\box56
+\nofMPsegments=\count122
+\nofMParguments=\count123
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count124
+\MPscratchDim=\dimen146
+\MPnumerator=\count125
+\makeMPintoPDFobject=\count126
+\everyMPtoPDFconversion=\toks29
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(56.9055pt, 500.484pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 681.15898pt, 56.9055pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=500.484pt
+* \textheight=681.15898pt
+* \oddsidemargin=-15.36449pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=44.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Redefining \. on input line 70.
+LaTeX Info: Redefining \% on input line 70.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+<minerva.jpg, id=1, 398.4486pt x 398.4486pt>
+File: minerva.jpg Graphic file (type jpg)
+ <use minerva.jpg>
+Package pdftex.def Info: minerva.jpg used on input line 82.
+(pdftex.def)             Requested size: 113.81102pt x 113.80829pt.
+
+Overfull \hbox (11.66539pt too wide) in paragraph at lines 83--84
+ [][] 
+ []
+
+[1
+
+{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./minerva.jp
+g>]
+\c@teorema=\count127
+\c@prop=\count128
+Package color Info: Redefining color shadecolor on input line 120.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 122.
+Package color Info: Redefining color shadecolor on input line 137.
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 147--147
+[]\OT1/cmtt/m/n/12 ##  [1] 4.47 4.47 3.48 5.00 3.42 3.78 3.10 3.57 4.20 4.50 3.
+60 3.75 4.50 2.85 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 148--148
+[]\OT1/cmtt/m/n/12 ## [15] 3.70 4.20 3.20 4.05 4.90 5.10 5.30 4.16 4.56 3.54 3.
+50 5.20 4.71 3.70[] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 149--149
+[]\OT1/cmtt/m/n/12 ## [29] 4.78 4.14 4.14 4.80 4.10 3.83 3.60 2.98 4.32 5.10 4.
+30 3.90 3.96 3.54[] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 150--150
+[]\OT1/cmtt/m/n/12 ## [43] 4.80 4.30 3.39 4.47 3.19 3.75 3.10 4.70 3.69 3.30 2.
+85 5.25 4.68 4.04[] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 158--158
+[]\OT1/cmtt/m/n/12 ##  [1] 4.47 4.47 3.48 5.00 3.42 3.78 3.10 3.57 4.20 4.50 3.
+60 3.75 4.50 2.85 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 159--159
+[]\OT1/cmtt/m/n/12 ## [15] 3.70 4.20 3.20 4.05 4.90 5.10 5.30 4.16 4.56 3.54 3.
+50 5.20 4.71 3.70[] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 160--160
+[]\OT1/cmtt/m/n/12 ## [29] 4.78 4.14 4.14 4.80 4.10 3.83 3.60 2.98 4.32 5.10 4.
+30 3.90 3.96 3.54[] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 161--161
+[]\OT1/cmtt/m/n/12 ## [43] 4.80 4.30 3.39 4.47 3.19 3.75 3.10 4.70 3.69 3.30 2.
+85 5.25 4.68 4.04[] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 175.
+LaTeX Info: Redefining \. on input line 179.
+LaTeX Info: Redefining \% on input line 179.
+LaTeX Info: Redefining \. on input line 179.
+LaTeX Info: Redefining \% on input line 179.
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1]
+Package color Info: Redefining color shadecolor on input line 184.
+Package color Info: Redefining color shadecolor on input line 203.
+Package color Info: Redefining color shadecolor on input line 221.
+Package color Info: Redefining color shadecolor on input line 248.
+LaTeX Info: Redefining \. on input line 269.
+LaTeX Info: Redefining \% on input line 269.
+LaTeX Info: Redefining \. on input line 269.
+LaTeX Info: Redefining \% on input line 269.
+ [2]
+Package color Info: Redefining color shadecolor on input line 273.
+Package color Info: Redefining color shadecolor on input line 290.
+LaTeX Info: Redefining \. on input line 319.
+LaTeX Info: Redefining \% on input line 319.
+LaTeX Info: Redefining \. on input line 319.
+LaTeX Info: Redefining \% on input line 319.
+ [3]
+Package color Info: Redefining color shadecolor on input line 323.
+
+Overfull \hbox (189.61603pt too wide) in paragraph at lines 328--328
+[][]\OT1/cmtt/m/n/12 fi[] []<-[] []cbind[][]([][]table[][]([][]cut[][](X,[] []b
+reaks[] []= limites,[] []labels[][]=[][]NULL[][],[] []include.lowest[][]=[][]FA
+LSE[][],[] []right[][]=[][]FALSE[][],[] []dig.lab[][]=[][]4[][]))); fi[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 339.
+
+Overfull \hbox (9.76962pt too wide) in paragraph at lines 342--342
+[][]\OT1/cmtt/m/it/12 # labelsindica que no hay nombres para los intervalos o c
+lases, por defecto [][] 
+ []
+
+
+Overfull \hbox (22.3695pt too wide) in paragraph at lines 345--345
+[][]\OT1/cmtt/m/it/12 # include.lowestindica que si un X[i] es igual al corte i
+nferior (0 superior, [][] 
+ []
+
+
+Overfull \hbox (16.06956pt too wide) in paragraph at lines 348--348
+[][]\OT1/cmtt/m/it/12 # rightindica que si el intervalo debe ser cerradoa la de
+recha y abierto a la[][] 
+ []
+
+
+Overfull \hbox (3.46968pt too wide) in paragraph at lines 352--352
+[][]\OT1/cmtt/m/it/12 # determina el numero de digitos usado en el formato de n
+umeros de cortes. [][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 358.
+Package color Info: Redefining color shadecolor on input line 374.
+Package color Info: Redefining color shadecolor on input line 388.
+LaTeX Info: Redefining \. on input line 398.
+LaTeX Info: Redefining \% on input line 398.
+LaTeX Info: Redefining \. on input line 398.
+LaTeX Info: Redefining \% on input line 398.
+[4]
+Package color Info: Redefining color shadecolor on input line 402.
+
+Overfull \hbox (35.24095pt too wide) in paragraph at lines 410--410
+[]\OT1/cmtt/m/n/12 ## Error in data.frame(ci = ci, fi = fi, fri = fri, Fi = Fi,
+ Fri = Fri): arguments
+ []
+
+
+Overfull \hbox (53.76596pt too wide) in paragraph at lines 415--415
+[]\OT1/cmtt/m/n/12 ## Error in names(tablaFrec) <- c("ci", "fi", "fri", "Fi", "
+Fri"): objeto 'tablaFrec'
+ []
+
+Package color Info: Redefining color shadecolor on input line 429.
+LaTeX Font Info:    Try loading font information for U+msa on input line 439.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 439.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Overfull \hbox (46.16602pt too wide) in paragraph at lines 439--440
+[]\OT1/cmtt/m/n/12 ## Warning in breaks + fuzz: longitud de objeto mayor no es 
+m[]A$[]$ltiplo de la longitud
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 441--441
+[]\OT1/cmtt/m/n/12 ## Error in hist.default(X, breaks = c(limites[1] - a, limit
+es, limites[k + :
+ []
+
+
+Overfull \hbox (16.71594pt too wide) in paragraph at lines 446--446
+[]\OT1/cmtt/m/n/12 ## Error in text(h$mids, h$density, h$counts, adj = c(0.5, -
+0.5), col = "red"):
+ []
+
+
+Overfull \hbox (10.54094pt too wide) in paragraph at lines 453--453
+[]\OT1/cmtt/m/n/12 ## Error in axis(side = side, at = at, labels = labels, ...)
+: plot.new has not
+ []
+
+LaTeX Info: Redefining \. on input line 463.
+LaTeX Info: Redefining \% on input line 463.
+LaTeX Info: Redefining \. on input line 463.
+LaTeX Info: Redefining \% on input line 463.
+[5]
+Package color Info: Redefining color shadecolor on input line 469.
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 473
+.
+ (C:/PROGRA~1/R/R-32~1.1/share/texmf/tex/latex\omscmtt.fd
+File: omscmtt.fd 
+)
+LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 473.
+
+Overfull \hbox (46.16602pt too wide) in paragraph at lines 480--481
+[]\OT1/cmtt/m/n/12 ## Warning in breaks + fuzz: longitud de objeto mayor no es 
+m[]A$[]$ltiplo de la longitud
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 482--482
+[]\OT1/cmtt/m/n/12 ## Error in hist.default(X, breaks = c(limites[1] - a, limit
+es, limites[k + :
+ []
+
+
+Overfull \hbox (10.54094pt too wide) in paragraph at lines 487--487
+[]\OT1/cmtt/m/n/12 ## Error in text(h$mids, h$density, h$counts, adj = c(0.5, 0
+.2), col = "red"):
+ []
+
+
+Overfull \hbox (10.54094pt too wide) in paragraph at lines 494--494
+[]\OT1/cmtt/m/n/12 ## Error in axis(side = side, at = at, labels = labels, ...)
+: plot.new has not
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 495--495
+[][]\OT1/cmtt/m/n/12 curve[][]([][]dnorm[][](x,[] []mean[][]=[][]mean[][](X),[]
+ []sd[][]=[][]sd[][](X)),[] []col[] []=[] []2[][],[] []lty[] []=[] []2[][],[][]
+lwd[] []=[] []2[][],[] []add[] []=[] []TRUE[][])[][] 
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 499--499
+[]\OT1/cmtt/m/n/12 ## Error in plot.xy(xy.coords(x, y), type = type, ...): plot
+.new has not been
+ []
+
+Package color Info: Redefining color shadecolor on input line 504.
+LaTeX Info: Redefining \. on input line 504.
+LaTeX Info: Redefining \% on input line 504.
+LaTeX Info: Redefining \. on input line 504.
+LaTeX Info: Redefining \% on input line 504.
+[6]
+Overfull \hbox (22.89095pt too wide) in paragraph at lines 509--509
+[][]\OT1/cmtt/m/n/12 lty[][]=[][]1[][],[] []border[] []=[] []"purple"[] [],[] [
+]xlab[][]=[][]" Notas de aspirantes"[] [],[] []ylab[][]=[][]"Frecuencia (fi)"[]
+[],[][] 
+ []
+
+
+Overfull \hbox (46.16602pt too wide) in paragraph at lines 514--515
+[]\OT1/cmtt/m/n/12 ## Warning in breaks + fuzz: longitud de objeto mayor no es 
+m[]A$[]$ltiplo de la longitud
+ []
+
+
+Overfull \hbox (4.36594pt too wide) in paragraph at lines 516--516
+[]\OT1/cmtt/m/n/12 ## Error in hist.default(X, breaks = c(limites[1] + a, limit
+es, limites[k + :
+ []
+
+
+Overfull \hbox (16.71594pt too wide) in paragraph at lines 521--521
+[]\OT1/cmtt/m/n/12 ## Error in text(h$mids, h$density, h$counts, adj = c(0.5, -
+0.5), col = "red"):
+ []
+
+
+Overfull \hbox (10.54094pt too wide) in paragraph at lines 528--528
+[]\OT1/cmtt/m/n/12 ## Error in axis(side = side, at = at, labels = labels, ...)
+: plot.new has not
+ []
+
+
+Overfull \hbox (29.06595pt too wide) in paragraph at lines 547--547
+[]\OT1/cmtt/m/n/12 ## Error in lines(vCi, vfi, col = "blue", type = "l"): objet
+o 'vCi' no encontrado[] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 552.
+
+Overfull \hbox (41.41595pt too wide) in paragraph at lines 566--566
+[]\OT1/cmtt/m/n/12 ## Error in text.default(limites, h$density, Fia, adj = c(0.
+5, -0.5), col = "red"):
+ []
+
+LaTeX Info: Redefining \. on input line 569.
+LaTeX Info: Redefining \% on input line 569.
+LaTeX Info: Redefining \. on input line 569.
+LaTeX Info: Redefining \% on input line 569.
+[7] <figure/unnamed-chunk-19-1.pdf, id=35, 505.89pt x 505.89pt>
+File: figure/unnamed-chunk-19-1.pdf Graphic file (type pdf)
+
+<use figure/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-19-1.pdf used on input line 570.
+(pdftex.def)             Requested size: 471.1093pt x 471.12125pt.
+Package color Info: Redefining color shadecolor on input line 576.
+LaTeX Info: Redefining \. on input line 591.
+LaTeX Info: Redefining \% on input line 591.
+LaTeX Info: Redefining \. on input line 591.
+LaTeX Info: Redefining \% on input line 591.
+ [8 <./figure/unnamed-chunk-19-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 595.
+LaTeX Info: Redefining \. on input line 616.
+LaTeX Info: Redefining \% on input line 616.
+LaTeX Info: Redefining \. on input line 616.
+LaTeX Info: Redefining \% on input line 616.
+
+[9] (PRACTICA8.aux
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
+) ) 
+Here is how much of TeX's memory you used:
+ 5077 strings out of 493673
+ 71817 string characters out of 3141533
+ 153046 words of memory out of 3000000
+ 8339 multiletter control sequences out of 15000+200000
+ 10362 words of font info for 40 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 36i,12n,43p,348b,563s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on PRACTICA8.pdf (10 pages, 340196 bytes).
+PDF statistics:
+ 71 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+

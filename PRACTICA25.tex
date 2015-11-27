@@ -1,0 +1,243 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD SEIS"]\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{PR\'ACTICA 25}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section{INTRODUCCI\'ON}
+Una variable o factor cuyo efecto sobre la variable respuesta no es directamente de inter\'es, pero que se introduce en el experimento para obtener comparaciones m\'as homog\'eneas, se denomina una variable bloque. La diferencia principal entre un factor cualquiera y una variable bloque es que, en general, se supone que no hay interacci\'on entre la variable bloque y la variable factor. En resumen, la variable bloque se introduce para eliminar de manera sistem\'atica las comparaciones estad\'isticas entre los tratamientos (la variable bloque se introduce con el fin de reducir la variabilidad experimental).\\
+
+Supondremos que tenemos una variable factor con k niveles, o mejor dicho tenemos k tratamientos; mientras que tenemos una variable bloque con nniveles, o si lo prefiere n bloques. Supondremos que tomamos una observaci\'on para cada combinaci\'on de tratamiento-bloques (se supone que los tratamientos son asignados de manera aleatoria dentro de cada uno de los bloques).\\
+
+El modelo (basado en los resultados para un \'unico factor) que genera los datos es el siguiente:\\
+
+$y_\ij$ = $\µ$ + $t_i$ + $B_j$ + $e_\ij$\\
+
+Donde:
+\begin{itemize}
+  \item $y_\ij$: Representa la observaci\'on en el j-\'esimo bloque del i-\'esimo tratamiento.
+  \item $\µ$: Representa un promedio o efecto global.
+  \item $t_i$: Representa el efecto del i-\'esimo tratamiento. Debe cumplirse sumatoria de $t_i$ = 0.
+  \item $B_j$: Representa el efecto del j-\'esimo bloque. Deben cumplir sumatoria de $B_j$ = 0.
+  \item $e_\ij$: Representa un componente de error aleatorio, llamado perturbaciones, que incorpora todas las dem\'as fuentes de variabilidad del experimento (no incluidas ni en los tratamientos ni en los bloque). 
+\end{itemize}
+
+Las cuatro hip\'otesis b\'asicas del modelo se resumen en $u_\ij$ = $NIID$ N(0; $sigma^2$) =; para todo i,j.\\
+
+La hip\'otesis a probar es como siempre:\\
+$H_o$: $\µ_1$ = $\µ_2$ = $\µ_3$ ... $\µ_k$\\
+$H_1$: $\µ_i$ distinto $\µ_j$; para al menos un par $i$ distinto de $j$\\
+
+Que en t\'erminos de efectos de grupos son:\\
+$H_o$: $t_1$ = $t_2$ ... $t_k$ = 0\\
+$H_1$: $t_i$ distinto 0; para al menos un $i$\\
+
+No resulta dif\'icil verificar utilizando el m\'etodo de m\'axima verosimilitud que el modelo estimado para una muestra aleatoria de tama\~no $N = kn$ es:\\
+
+$\^y_\ij$ = $\^\µ$ + $\^t_i$ + $\^B_\j$\\
+
+Y por consiguiente:\\
+
+$y_\ij$ = $\^\µ$ + $\^t_i$ + $\^B_\j$ + $\^u_\ij$\\
+
+Donde: 
+\begin{itemize}
+  \item $\^\µ$ = $\~y\ ..$
+  \item $\^t_i$ = $\~y\ i.$ - $\~y\ ..$
+  \item $\^B_\j$ = $\~y\ .j$ - $\~y\ ..$
+  \item $\^u_\ij$ = $y\ ij$ - $\~y\ .j$ - $\~y\ i.$ + $\~y\ ..$
+\end{itemize}
+
+Y se tendr\'an las siguientes medidas de inter\'es:
+\begin{itemize}
+  \item $\~y\ i.$ es el promedio para el i-\'esimo tratamiento.
+  \item $\~y\ .j$ es el promedio para el j-\'esimo bloque.
+  \item $\~y\ ..$ es la media general de la caracter\'istica de inter\'es.
+\end{itemize}
+
+El An\'alisis de Varianza establece que se debe cumplir la siguiente relaci\'on (al ser cada uno de las fuentes ortogonales entre s\'i):\\
+
+VT = VE($t$) + VE(B) + VNE\\
+
+Donde:
+\begin{itemize}
+  \item VT es la variabilidad total del experimento.
+  \item VE($t$) es la variabilidad explicada por los tratamientos.
+  \item VE(B) es la variabilidad explicada por los bloques.
+  \item VNE es la variabilidad no explicada o residual.
+\end{itemize}
+
+Para poder contrastar simult\'aneamente la igualdad de las k medias, se hace uso de lo siguiente:\\
+
+Tratamientos:
+\begin{itemize}
+  \item Sumas de Cuadrados: VE($t$).
+  \item Grados de Libertad: $K-1$
+  \item Medias de Cuadrados: $MCE($t$)$ = $VE($t$)$ / $K-1$ 
+  \item $F_o$: $F_($t$)$ = $MCE($t$)$/$MCNE$
+\end{itemize}
+
+Bloques:
+\begin{itemize}
+  \item Sumas de Cuadrados: $VE(B)$.
+  \item Grados de Libertad: $n - 1$
+  \item Medias de Cuadrados: $MCNE(B)$ = $VE(B)$ / $n-1$
+  \item $F_o$: $F_(B)$ = $MCE(B)$/$MCNE$
+\end{itemize}
+
+Error:
+\begin{itemize}
+  \item Sumas de Cuadrados: $VNE$.
+  \item Grados de Libertad: $(K - 1)(n - 1)$
+  \item Medias de Cuadrados: $MCNE$ = $VNE$ / $(K - 1)(n - 1)$
+\end{itemize}
+Total:
+\begin{itemize}
+  \item Sumas de Cuadrados: $VT$ = $VE$t$)$ + $VE(B)$ + $VE$
+  \item rados de Libertad: $N - 1$
+\end{itemize}
+
+De tal modo que la hip\'otesis nula se rechaza (a un nivel de confianza del  100(1 - $alfa$)\% si\\
+
+$F_o$$>$$F_\ alfa,(K-1),(K-1)(N-1)$\\
+
+Por otra parte el contraste de que los bloques no influyen, se realiza con las siguientes hip\'otesis:\\
+
+$H_o$: $B_1$ = $B_2$ = $B_3$ ... $B_k$ \\
+
+$H_1$: $B_j$ distinto $B_j$; para al menos un par $j$ distinto de $j$\\
+
+De tal modo que la hip\'otesis nula se rechaza (a un nivel de confianza del 100(1 - $alfa$)\% si\\
+
+$F_B$$>$$F_\ alfa,(K-1),(K-1)(n-1)$\\
+
+Y es un contraste independiente del anterior.\\ 
+
+\section{EJEMPLO 1.}
+
+Se probaran 5 raciones respecto a sus diferencias en el engorde de novillos. Se dispone de 20 novillos para el experimento, que se distribuyen en 4 bloques (5 novillos por bloque) con base a sus pesos, al iniciar la prueba de engorde, los novillos más pesados se agruparon en un bloque, en otro se agruparon los 5 siguientes m\'as pesados y as\'i sucesivamente. Los 5 tratamientos (raciones) se asignaron al azar dentro de cada bloque. Se obtuvieron los siguientes datos:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{peso} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0.9}\hlstd{,} \hlnum{1.4}\hlstd{,} \hlnum{1.4}\hlstd{,} \hlnum{2.3}\hlstd{,} \hlnum{3.6}\hlstd{,} \hlnum{3.2}\hlstd{,} \hlnum{4.5}\hlstd{,} \hlnum{4.1}\hlstd{,} \hlnum{0.5}\hlstd{,} \hlnum{0.9}\hlstd{,} \hlnum{0.5}\hlstd{,} \hlnum{0.9}\hlstd{,} \hlnum{3.6}\hlstd{,} \hlnum{3.6}\hlstd{,} \hlnum{3.2}\hlstd{,} \hlnum{3.6}\hlstd{,} \hlnum{1.8}\hlstd{,} \hlnum{1.8}\hlstd{,} \hlnum{0.9}\hlstd{,} \hlnum{1.4} \hlstd{);peso}
+\end{alltt}
+\begin{verbatim}
+##  [1] 0.9 1.4 1.4 2.3 3.6 3.2 4.5 4.1 0.5 0.9 0.5 0.9 3.6 3.6 3.2 3.6 1.8
+## [18] 1.8 0.9 1.4
+\end{verbatim}
+\begin{alltt}
+\hlstd{datos2} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{bloques} \hlstd{= bloques,} \hlkwc{tratamientos} \hlstd{= tratamientos,} \hlkwc{peso} \hlstd{= peso);datos2}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in data.frame(bloques = bloques, tratamientos = tratamientos, peso = peso): objeto 'bloques' no encontrado}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): objeto 'datos2' no encontrado}}\end{kframe}
+\end{knitrout}
+
+
+
+\end{document}

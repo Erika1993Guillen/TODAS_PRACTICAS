@@ -1,0 +1,785 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CINCO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'i Guill\'en Pineda}\\[3 cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 22}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{PRUEBA DE HIP\'OTESIS ACERCA DEL VALOR DE UNA PROPORCI\'ON.}
+
+
+Una muestra de 100 empleados que hab\'ian estado encontacto con sangre o derivados de \'esta, fue examinada por presentar evidencia serol\'ogica de hepatitis B. Se encontr\'o que 23 de ellos presentaron reacci\'on positiva. \¿Puede concluirse a partir de estos datos que la proporci\'on de los positivos es mayor que 0.15? Tome un nivel de significancia del 5\%.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+  \item\textbf{Formular las hip\'otesis}\\
+  Sea para la proporci\'on de positivos en la poblaci\'on}\\
+  $H_0$: $p$$<$=0.15\\
+  $H_1$: $p$$>$0.15
+  \item\textbf {Establecer n y alfa}
+  $n=100$ $alfa=0.05$\\
+  \item\textbf {Determinar el estad\'istico de prueba}\\
+  $z_0$=\^ p-$p_0$/sqrt($p_0$(1-$p_0$)/n)\\
+  \item\textbf {Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)}\\
+  Regi\'on cr\'itica (RC)={$z_0$$>$$z_\ 0.05$=1.645}\\
+  \item\textbf {Calcular el valor del estad\'istico de prueba}\\
+  \^ p=23/100=0.23,\\
+  $p_0$=0.15,\\
+  $z_0$=0.23-0.15/sqrt(0.15(1-0.15)/100)=0.24\\
+  \item\textbf {Aplicar el criterio de decisi\'on}\\
+  Como $z_0$$>$1.645, rechazamos $H_0$: p$<$=0.15
+\end{enumerate}
+
+Es decir, se concluye que el porcentaje de los positivos es mayor al 15\%.\\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Construyendo una funci\textbackslash{}'on en R para realizar la prueba de hip\textbackslash{}'otesis. }
+\hlstd{Prueba.prop} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{,} \hlkwc{n}\hlstd{,} \hlkwc{po}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\hlstd{\{}
+\hlstd{op} \hlkwb{<-} \hlkwd{options}\hlstd{();}
+\hlkwd{options}\hlstd{(}\hlkwc{digits}\hlstd{=}\hlnum{2}\hlstd{)}
+\hlstd{pe}\hlkwb{=}\hlstd{x}\hlopt{/}\hlstd{n} \hlcom{#calcula la proporci\textbackslash{}'on muestral }
+\hlstd{SE} \hlkwb{<-} \hlkwd{sqrt}\hlstd{((po} \hlopt{*} \hlstd{(}\hlnum{1}\hlopt{-}\hlstd{po))}\hlopt{/}\hlstd{n)} \hlcom{# calcula la varianza de la proporci\textbackslash{}'on muestral }
+\hlstd{Zo} \hlkwb{<-} \hlstd{(pe}\hlopt{-}\hlstd{po)}\hlopt{/}\hlstd{SE} \hlcom{#calcula el estad\textbackslash{}'istico de prueba }
+\hlcom{# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"} \hlopt{||} \hlstd{H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlstd{Z} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(alfa,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba unilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Prop_Estimada}\hlstd{=pe,} \hlkwc{Prop_Hipotetica}\hlstd{=po,} \hlkwc{Z_critico}\hlstd{=Z,}\hlkwc{Estadistico}\hlstd{= Zo)}
+\hlstd{\}}
+\hlkwa{else}
+\hlstd{\{}
+\hlstd{Z} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba  bilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Prop_Estimada}\hlstd{=pe,} \hlkwc{Prop_Hipotetica} \hlstd{=po,} \hlkwc{Z_critico_menor}\hlstd{=}\hlopt{-}\hlstd{Z,}
+\hlkwc{Z_critico_mayor} \hlstd{=Z, Zo)}
+\hlstd{\}} \hlcom{# esto es para encontrar los valores cr\textbackslash{}'iticos }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{< -}\hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico>="}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                        \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlkwa{if} \hlstd{(Zo} \hlopt{>} \hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                              \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+\hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <="}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                       \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Distinto"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{< -}\hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{>} \hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                               \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico pertenece a ["}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),} \hlstr{","}\hlstd{,}
+\hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),} \hlstr{"], entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}} \hlcom{# esto para llevar a cabo los contraste de hip\textbackslash{}'otesis }
+\hlkwd{print}\hlstd{(valores)}
+\hlkwd{print}\hlstd{(decision)}
+\hlkwd{options}\hlstd{(op)} \hlcom{# restablece todas las opciones iniciales }
+\hlstd{\}}
+\hlcom{# note que en la funci\textbackslash{}'on anterior, el argumento "H1" especifica el }
+\hlcom{# tipo de contraste que se est\textbackslash{}'a realizando, bilateral (H1= "Distinto") o }
+\hlcom{# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y }
+\hlcom{# comente sobre los resultados y diferencias obtenidas en cada caso. }
+\hlkwd{Prueba.prop}\hlstd{(}\hlnum{23}\hlstd{,} \hlnum{100}\hlstd{,} \hlnum{0.15}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Menor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                 [,1]
+## Prop_Estimada   0.23
+## Prop_Hipotetica 0.15
+## Z_critico       1.64
+## Estadistico     2.24
+## [1] "Como Estadistico>= -1.645 , entonces aceptamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.prop}\hlstd{(}\hlnum{23}\hlstd{,} \hlnum{100}\hlstd{,} \hlnum{0.15}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Mayor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                 [,1]
+## Prop_Estimada   0.23
+## Prop_Hipotetica 0.15
+## Z_critico       1.64
+## Estadistico     2.24
+## [1] "Como Estadistico > 1.645 , entonces rechazamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.prop}\hlstd{(}\hlnum{23}\hlstd{,} \hlnum{100}\hlstd{,} \hlnum{0.15}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                  [,1]
+## Prop_Estimada    0.23
+## Prop_Hipotetica  0.15
+## Z_critico_menor -1.96
+## Z_critico_mayor  1.96
+## Zo               2.24
+## [1] "Como Estadistico > 1.96 , entonces rechazamos Ho"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+R ya tiene incorporada una funci\'on para realizar contraste sobre proporciones, \'unicamente debemos familiarizarnos con los par\'ametros correspondientes. La funci\'on a utilizar es prop.test(), y los par\'ametros son los siguientes:
+
+\begin{itemize}
+  \item En x se especifica el n\'umero de elementos en la muestra que tienen la caracter\'istica de inte\'es.
+  \item En n se especifica el tama\~no de la muestra. 
+  \item En p se indica el valor de la proporci\'on poblacional indicado en la hip\'otesis poblacional (proporci\'on hipot\'etica).
+  \item En alternative se especifica si corresponde a un contraste bilateral (alternative="two.sided") o unilateral (alternative="less"  o alternative="greater"). 
+  \item Conf.level se especifica el nivel de significancia utilizado para realizar el contraste.
+\end{itemize}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# ejecutar las siguientes instrucciones y comparar con los obtenidos por la }
+\hlcom{# funci\textbackslash{}'on que se ha creado previamente. }
+\hlkwd{prop.test}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{23}\hlstd{,} \hlkwc{n}\hlstd{=}\hlnum{100}\hlstd{,} \hlkwc{p}\hlstd{=}\hlnum{0.15}\hlstd{,} \hlkwc{alternative}\hlstd{=}\hlstr{"less"}\hlstd{,} \hlkwc{conf.level}\hlstd{=}\hlnum{0.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	1-sample proportions test with continuity correction
+## 
+## data:  23 out of 100, null probability 0.15
+## X-squared = 4.4118, df = 1, p-value = 0.9822
+## alternative hypothesis: true p is less than 0.15
+## 95 percent confidence interval:
+##  0.0000000 0.3111509
+## sample estimates:
+##    p 
+## 0.23
+\end{verbatim}
+\begin{alltt}
+\hlkwd{prop.test}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{23}\hlstd{,} \hlkwc{n}\hlstd{=}\hlnum{100}\hlstd{,} \hlkwc{p}\hlstd{=}\hlnum{0.15}\hlstd{,} \hlkwc{alternative}\hlstd{=}\hlstr{"greater"}\hlstd{,} \hlkwc{conf.level}\hlstd{=}\hlnum{0.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	1-sample proportions test with continuity correction
+## 
+## data:  23 out of 100, null probability 0.15
+## X-squared = 4.4118, df = 1, p-value = 0.01785
+## alternative hypothesis: true p is greater than 0.15
+## 95 percent confidence interval:
+##  0.1640827 1.0000000
+## sample estimates:
+##    p 
+## 0.23
+\end{verbatim}
+\begin{alltt}
+\hlkwd{prop.test}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{23}\hlstd{,} \hlkwc{n}\hlstd{=}\hlnum{100}\hlstd{,} \hlkwc{p}\hlstd{=}\hlnum{0.15}\hlstd{,} \hlkwc{alternative}\hlstd{=}\hlstr{"two.sided"}\hlstd{,} \hlkwc{conf.level}\hlstd{=}\hlnum{0.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	1-sample proportions test with continuity correction
+## 
+## data:  23 out of 100, null probability 0.15
+## X-squared = 4.4118, df = 1, p-value = 0.03569
+## alternative hypothesis: true p is not equal to 0.15
+## 95 percent confidence interval:
+##  0.154215 0.326941
+## sample estimates:
+##    p 
+## 0.23
+\end{verbatim}
+\begin{alltt}
+\hlcom{# note que si cambiamos la instrucci\textbackslash{}'on p=0.15 a por ejemplo p=0.18, obtenemos }
+\hlcom{# diferentes resultados, sin embargo, los intervalos de confianza (regi\textbackslash{}'on de }
+\hlcom{# aceptaci\textbackslash{}'on) permanecen sin cambio.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE UNA MEDIA, VARIANZA CONOCIDA.}
+
+Los siguientes datos corresponden a la longitud medida en cent\'imetros de 18 pedazos de cable sobrantes en cada rollo utilizado:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Medidacable} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{9.0}\hlstd{,} \hlnum{3.41}\hlstd{,} \hlnum{6.13}\hlstd{,} \hlnum{1.99}\hlstd{,} \hlnum{6.92}\hlstd{,} \hlnum{3.12}\hlstd{,} \hlnum{7.86}\hlstd{,} \hlnum{2.01}\hlstd{,} \hlnum{5.98}\hlstd{,} \hlnum{4.15}\hlstd{,} \hlnum{6.87}\hlstd{,}
+                 \hlnum{1.97}\hlstd{,} \hlnum{4.01}\hlstd{,} \hlnum{3.56}\hlstd{,} \hlnum{8.04}\hlstd{,} \hlnum{3.24}\hlstd{,} \hlnum{5.05}\hlstd{,} \hlnum{7.37}\hlstd{);}
+\hlstd{Medidacable}
+\end{alltt}
+\begin{verbatim}
+##  [1] 9.00 3.41 6.13 1.99 6.92 3.12 7.86 2.01 5.98 4.15 6.87 1.97 4.01 3.56
+## [15] 8.04 3.24 5.05 7.37
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Basados en estos datos \¿podemos decir que la longitud media de los pedazos de cable sobrante es mayor de 4 cm? Suponga poblaci\'on normal con desviaci\'on t\'ipica poblacional igual a 2.45 y un nivel de significancia de 5\%.\\
+
+Escribir una funci\'on en R para realizar dicho contraste, la funci\'on debe permitir realizar contraste bilaterales y los dos tipos de contrastes unilateral. Sugerencia, modificar la funci\'on utilizada para el contraste de una proporci\'on y la siguiente estructura.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+  \item Formular las hip\'otesis\\
+  Sea $\µ$ la media poblacional\\
+  $H_0$: $\µ$$<$=4\\
+  $H_1$: $\µ$$>$4
+  \item Establecer $alfa$\\
+  $alfa$=0.05
+  \item Determinar el estad\'istico de prueba\\
+  $z_0$=$\µ$-$\µ_0$/sqrt($sigma$^2/n)$
+  \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC)={z$>$z_\ 0.05$=1.645} 
+  \item Calcular el valor del estad\'istico de prueba\\
+$z_0$=$5.038$-$4$/sqrt($2.45$^2/18)$=1.798
+  \item Aplicar el criterio de decisi\'on\\
+  Como $z_0$$>$=1.645, rechazamos $H_0$: $\µ$$<$=4
+\end{enumerate}
+
+Es decir, se concluye que la longitud media de los pedazos de cable sobrantes es mayor a 4 cm.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Medidacable} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{9.0}\hlstd{,} \hlnum{3.41}\hlstd{,} \hlnum{6.13}\hlstd{,} \hlnum{1.99}\hlstd{,} \hlnum{6.92}\hlstd{,} \hlnum{3.12}\hlstd{,} \hlnum{7.86}\hlstd{,} \hlnum{2.01}\hlstd{,} \hlnum{5.98}\hlstd{,} \hlnum{4.15}\hlstd{,} \hlnum{6.87}\hlstd{,}
+                 \hlnum{1.97}\hlstd{,} \hlnum{4.01}\hlstd{,} \hlnum{3.56}\hlstd{,} \hlnum{8.04}\hlstd{,} \hlnum{3.24}\hlstd{,} \hlnum{5.05}\hlstd{,} \hlnum{7.37}\hlstd{);}
+\hlstd{Medidacable}
+\end{alltt}
+\begin{verbatim}
+##  [1] 9.00 3.41 6.13 1.99 6.92 3.12 7.86 2.01 5.98 4.15 6.87 1.97 4.01 3.56
+## [15] 8.04 3.24 5.05 7.37
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Construyendo una funci\textbackslash{}'on en R para realizar la prueba de hip\textbackslash{}'otesis.}
+\hlstd{Prueba.mediavaricono} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{mu}\hlstd{,} \hlkwc{sigma}\hlstd{,} \hlkwc{n}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\hlstd{\{}
+\hlstd{op} \hlkwb{<-} \hlkwd{options}\hlstd{();}
+\hlkwd{options}\hlstd{(}\hlkwc{digits}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{media}\hlkwb{=}\hlkwd{mean}\hlstd{(Medidacable)} \hlcom{#calcula la media }
+\hlstd{ES} \hlkwb{<-} \hlkwd{sqrt}\hlstd{((sigma}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{/}\hlstd{n)}
+\hlstd{Zo} \hlkwb{<-} \hlstd{(media}\hlopt{-}\hlstd{mu)}\hlopt{/}\hlstd{ES} \hlcom{#calcula el estad\textbackslash{}'istico de prueba }
+\hlcom{# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"} \hlopt{||} \hlstd{H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlstd{Z} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(alfa,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba unilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Media_Estimada}\hlstd{=media,} \hlkwc{Media_Hipotetica}\hlstd{=mu,} \hlkwc{Z_critico}\hlstd{=Z,}\hlkwc{Estadistico}\hlstd{= Zo)}
+\hlstd{\}}
+\hlkwa{else}
+\hlstd{\{}
+\hlstd{Z} \hlkwb{<-} \hlkwd{qnorm}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{,} \hlkwc{mean}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba  bilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Media_Estimada}\hlstd{=media,} \hlkwc{Media_Hipotetica}\hlstd{=mu,} \hlkwc{Z_critico_menor}\hlstd{=}\hlopt{-}\hlstd{Z,}
+\hlkwc{Z_critico_mayor} \hlstd{=Z, Zo)}
+\hlstd{\}} \hlcom{# esto es para encontrar los valores cr\textbackslash{}'iticos }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{< -}\hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico>="}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                        \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlkwa{if} \hlstd{(Zo} \hlopt{>} \hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                              \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+\hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <="}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                       \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Distinto"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{< -}\hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{if} \hlstd{(Zo} \hlopt{>} \hlstd{Z) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),}
+                               \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico pertenece a ["}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{Z,}\hlnum{3}\hlstd{),} \hlstr{","}\hlstd{,}
+\hlkwd{round}\hlstd{(Z,}\hlnum{3}\hlstd{),} \hlstr{"], entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}} \hlcom{# esto para llevar a cabo los contraste de hip\textbackslash{}'otesis }
+\hlkwd{print}\hlstd{(valores)}
+\hlkwd{print}\hlstd{(decision)}
+\hlkwd{options}\hlstd{(op)} \hlcom{# restablece todas las opciones iniciales }
+\hlstd{\}}
+\hlcom{# note que en la funci\textbackslash{}'on anterior, el argumento "H1" especifica el }
+\hlcom{# tipo de contraste que se est\textbackslash{}'a realizando, bilateral (H1= "Distinto") o }
+\hlcom{# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y }
+\hlcom{# comente sobre los resultados y diferencias obtenidas en cada caso. }
+\hlkwd{Prueba.mediavaricono} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{2.45}\hlstd{,} \hlnum{18}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Menor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                       [,1]
+## Media_Estimada   5.0377778
+## Media_Hipotetica 4.0000000
+## Z_critico        1.6448536
+## Estadistico      1.7971095
+## [1] "Como Estadistico>= -1.645 , entonces aceptamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.mediavaricono} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{2.45}\hlstd{,} \hlnum{18}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Mayor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                       [,1]
+## Media_Estimada   5.0377778
+## Media_Hipotetica 4.0000000
+## Z_critico        1.6448536
+## Estadistico      1.7971095
+## [1] "Como Estadistico > 1.645 , entonces rechazamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.mediavaricono} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{2.45}\hlstd{,} \hlnum{18}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                        [,1]
+## Media_Estimada    5.0377778
+## Media_Hipotetica  4.0000000
+## Z_critico_menor  -1.9599640
+## Z_critico_mayor   1.9599640
+## Zo                1.7971095
+## [1] "Como Estadistico pertenece a [ -1.96 , 1.96 ], entonces aceptamos Ho"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE UNA MEDIA, VARIANZA DESCONOCIDA.}
+
+
+Los siguientes datos corresponden a la longitud medida en cent\'imetros de 18 pedazos de cable sobrantes en cada rollo utilizado: 
+ 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Medidacable} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{9.0}\hlstd{,} \hlnum{3.41}\hlstd{,} \hlnum{6.13}\hlstd{,} \hlnum{1.99}\hlstd{,} \hlnum{6.92}\hlstd{,} \hlnum{3.12}\hlstd{,} \hlnum{7.86}\hlstd{,} \hlnum{2.01}\hlstd{,} \hlnum{5.98}\hlstd{,} \hlnum{4.15}\hlstd{,} \hlnum{6.87}\hlstd{,}
+                 \hlnum{1.97}\hlstd{,} \hlnum{4.01}\hlstd{,} \hlnum{3.56}\hlstd{,} \hlnum{8.04}\hlstd{,} \hlnum{3.24}\hlstd{,} \hlnum{5.05}\hlstd{,} \hlnum{7.37}\hlstd{);}
+\hlstd{Medidacable}
+\end{alltt}
+\begin{verbatim}
+##  [1] 9.00 3.41 6.13 1.99 6.92 3.12 7.86 2.01 5.98 4.15 6.87 1.97 4.01 3.56
+## [15] 8.04 3.24 5.05 7.37
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Basados en estos datos \¿podemos decir que la longitud media de los pedazos de cable sobrante es mayor de 4 cm? Suponga poblaci\'on normaly un nivel de significancia de 5\%.\\
+
+Escribir una funci\'on en R para realizar dicho contraste, la funci\'on debe permitir realizar contraste bilaterales y los dos tipos de contrastes unilaterales.Sugerencia, modificar la funci\'on obtenida para el contraste de la media cuando la varianza poblacional es conocida, reemplazando la desviaci\'on poblacional por la cuasidesviaci\'on muestral y la distribuci\'on  N(0;1) por la t de Student.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos: 
+\begin{enumerate}
+  \item Formular las hip\'otesis\\
+  Sea $\µ$ la media poblacional\\
+  $H_0$: $\µ$$<$=4\\
+  $H_1$: $\µ$$>$4
+  \item Establecer $alfa$\\
+  $alfa$=0.05
+  \item Determinar el estad\'istico de prueba\\
+  $t_0$=$\µ$-$\µ_0$/sqrt($Var$^2/n)$
+  \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC)={t$>$t_\ 0.05,18-1$=1.740} 
+\item Calcular el valor del estad\'istico de prueba\\
+$t_0$=$5.038$-$4$/sqrt($5.2089$^2/18)$=1.93
+  \item Aplicar el criterio de decisi\'on\\
+  Como $t_0$$>$=1.74, rechazamos $H_0$: $\µ$$<$=4
+\end{enumerate}
+
+Es decir, se concluye que la longitud media de los pedazos de cable sobrantes es mayor a 4 cm.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Medidacable} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{9.0}\hlstd{,} \hlnum{3.41}\hlstd{,} \hlnum{6.13}\hlstd{,} \hlnum{1.99}\hlstd{,} \hlnum{6.92}\hlstd{,} \hlnum{3.12}\hlstd{,} \hlnum{7.86}\hlstd{,} \hlnum{2.01}\hlstd{,} \hlnum{5.98}\hlstd{,} \hlnum{4.15}\hlstd{,} \hlnum{6.87}\hlstd{,}
+                 \hlnum{1.97}\hlstd{,} \hlnum{4.01}\hlstd{,} \hlnum{3.56}\hlstd{,} \hlnum{8.04}\hlstd{,} \hlnum{3.24}\hlstd{,} \hlnum{5.05}\hlstd{,} \hlnum{7.37}\hlstd{);}
+\hlstd{Medidacable}
+\end{alltt}
+\begin{verbatim}
+##  [1] 9.00 3.41 6.13 1.99 6.92 3.12 7.86 2.01 5.98 4.15 6.87 1.97 4.01 3.56
+## [15] 8.04 3.24 5.05 7.37
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Construyendo una funci\textbackslash{}'on en R para realizar la prueba de hip\textbackslash{}'otesis.}
+\hlstd{Prueba.mediavaridesco} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{mu}\hlstd{,} \hlkwc{n}\hlstd{,} \hlkwc{df}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+
+\hlstd{\{}
+\hlstd{op} \hlkwb{<-} \hlkwd{options}\hlstd{();}
+\hlkwd{options}\hlstd{(}\hlkwc{digits}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{media}\hlkwb{=}\hlkwd{mean}\hlstd{(Medidacable)} \hlcom{#calcula la media}
+\hlstd{varianza}\hlkwb{=}\hlkwd{var}\hlstd{(Medidacable)} \hlcom{#calcula la varianza}
+\hlstd{df}\hlkwb{=}\hlstd{n}\hlopt{-}\hlnum{1}
+\hlstd{ES} \hlkwb{<-} \hlkwd{sqrt}\hlstd{((varianza)}\hlopt{/}\hlstd{n)}
+\hlstd{to} \hlkwb{<-} \hlstd{(media}\hlopt{-}\hlstd{mu)}\hlopt{/}\hlstd{ES} \hlcom{#calcula el estad\textbackslash{}'istico de prueba }
+\hlcom{# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"} \hlopt{||} \hlstd{H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+
+\hlstd{\{}
+  \hlstd{t} \hlkwb{<-} \hlkwd{qt}\hlstd{(alfa,} \hlkwc{df}\hlstd{=n}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+  \hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba unilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Media_Estimada}\hlstd{=media,} \hlkwc{Media_Hipotetica}\hlstd{=mu,} \hlkwc{t_critico}\hlstd{=t,}\hlkwc{Estadistico}\hlstd{= to)}
+\hlstd{\}}
+\hlkwa{else}
+\hlstd{\{}
+\hlstd{t} \hlkwb{<-} \hlkwd{pt}\hlstd{(alfa,} \hlkwc{df}\hlstd{=n}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba  bilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Media_Estimada}\hlstd{=media,} \hlkwc{Media_Hipotetica}\hlstd{=mu,} \hlkwc{t_critico_menor}\hlstd{=}\hlopt{-}\hlstd{t,}
+\hlkwc{t_critico_mayor} \hlstd{=t, to)}
+\hlstd{\}} \hlcom{# esto es para encontrar los valores cr\textbackslash{}'iticos }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(to} \hlopt{< -}\hlstd{t) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{t,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico>="}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{t,}\hlnum{3}\hlstd{),}
+                        \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlkwa{if} \hlstd{(to} \hlopt{>} \hlstd{t) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(t,}\hlnum{3}\hlstd{),}
+                              \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+\hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <="}\hlstd{,} \hlkwd{round}\hlstd{(t,}\hlnum{3}\hlstd{),}
+                       \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Distinto"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(to} \hlopt{< -}\hlstd{t) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{t,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{if} \hlstd{(to} \hlopt{>} \hlstd{t) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(t,}\hlnum{3}\hlstd{),}
+                               \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico pertenece a ["}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{t,}\hlnum{3}\hlstd{),} \hlstr{","}\hlstd{,}
+\hlkwd{round}\hlstd{(t,}\hlnum{3}\hlstd{),} \hlstr{"], entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}} \hlcom{# esto para llevar a cabo los contraste de hip\textbackslash{}'otesis }
+\hlkwd{print}\hlstd{(valores)}
+\hlkwd{print}\hlstd{(decision)}
+\hlkwd{options}\hlstd{(op)} \hlcom{# restablece todas las opciones iniciales }
+\hlstd{\}}
+\hlcom{# note que en la funci\textbackslash{}'on anterior, el argumento "H1" especifica el }
+\hlcom{# tipo de contraste que se est\textbackslash{}'a realizando, bilateral (H1= "Distinto") o }
+\hlcom{# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y }
+\hlcom{# comente sobre los resultados y diferencias obtenidas en cada caso. }
+\hlkwd{Prueba.mediavaridesco} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{18}\hlstd{,} \hlnum{17}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Menor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                        [,1]
+## Media_Estimada    5.0377778
+## Media_Hipotetica  4.0000000
+## t_critico        -1.7396067
+## Estadistico       1.9291396
+## [1] "Como Estadistico>= 1.74 , entonces aceptamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.mediavaridesco} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{18}\hlstd{,} \hlnum{17}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Mayor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                        [,1]
+## Media_Estimada    5.0377778
+## Media_Hipotetica  4.0000000
+## t_critico        -1.7396067
+## Estadistico       1.9291396
+## [1] "Como Estadistico > -1.74 , entonces rechazamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.mediavaridesco} \hlstd{(}\hlnum{4}\hlstd{,} \hlnum{18}\hlstd{,} \hlnum{17}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                         [,1]
+## Media_Estimada    5.03777778
+## Media_Hipotetica  4.00000000
+## t_critico_menor  -0.51964742
+## t_critico_mayor   0.51964742
+## to                1.92913961
+## [1] "Como Estadistico > 0.52 , entonces rechazamos Ho"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+En el caso de que la varianza poblacional sea desconocida R permite realizar contraste sobre la media poblacional. La funci\'on que se debe utilizar es t.test(), los par\'ametros a considerar para su utilizaci\'on son los siguientes. 
+
+\begin{itemize}
+  \item X corresponde al vector de observaciones. 
+  \item En alternative se especifica el tipo de contraste (similar a prop.test()).
+  \item Conf.level se especifica el nivel de significancia utilizado para realizar el contraste. 
+\end{itemize}
+
+Una soluci\'on con esta alternativa podr\'ia ser la siguiente:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+ \hlstd{Medidacable}\hlkwb{=} \hlkwd{c}\hlstd{(}\hlnum{9.0}\hlstd{,}\hlnum{3.41}\hlstd{,}\hlnum{6.13}\hlstd{,}\hlnum{1.99}\hlstd{,}\hlnum{6.92}\hlstd{,}\hlnum{3.12}\hlstd{,}\hlnum{7.86}\hlstd{,}\hlnum{2.01}\hlstd{,}\hlnum{5.98}\hlstd{,}\hlnum{4.15}\hlstd{,}\hlnum{6.87}\hlstd{,}\hlnum{1.97}\hlstd{,}\hlnum{4.01}\hlstd{,}
+                \hlnum{3.56}\hlstd{,}\hlnum{8.04}\hlstd{,}\hlnum{3.24}\hlstd{,}\hlnum{5.05}\hlstd{,}\hlnum{7.37}\hlstd{)}
+\hlcom{# digitamos las observaciones }
+\hlkwd{t.test}\hlstd{(Medidacable,}\hlkwc{mu}\hlstd{=}\hlnum{4}\hlstd{,}\hlkwc{alternative}\hlstd{=}\hlstr{"greater"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	One Sample t-test
+## 
+## data:  Medidacable
+## t = 1.9291, df = 17, p-value = 0.03529
+## alternative hypothesis: true mean is greater than 4
+## 95 percent confidence interval:
+##  4.101959      Inf
+## sample estimates:
+## mean of x 
+##  5.037778
+\end{verbatim}
+\begin{alltt}
+\hlcom{# note que al no especificar el nivel de confianza se trabaja con el 95%, el }
+\hlcom{# valor por defecto.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE LA VARIANZA.}
+
+
+Un fabricante de bater\'ias para autom\'ovil asegura que las bater\'ias duran en promedio 2 a\~nos con una desviaci\'on est\'andar de 0.5 a\~nos. Se toma una muestra aleatoria de 5 bater\'ias siendo su duraci\'on: 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Bateriasdura} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1.5}\hlstd{,} \hlnum{2.5}\hlstd{,} \hlnum{2.9}\hlstd{,} \hlnum{3.2}\hlstd{,} \hlnum{4}\hlstd{)}
+\hlstd{Bateriasdura}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.5 2.5 2.9 3.2 4.0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Con un nivel de significaci\'on de 5\%, qu\'e podemos decir de la variabilidad afirmada por el fabricante.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+   \item Formular las hip\'otesis\\
+     Sea $sigma^2$ la varianza poblacional\\
+     $H_0$: $sigma^2$=(0.5)^2\\
+     $H_1$: $sigma^2$ "distinto" (0.5)^2
+     
+   \item Establecer $alfa$ \\
+   $alfa$=0.05
+   
+   \item Determinar el estad\'istico de prueba\\
+   $X_0$^2=(n-1)$S^2$/$sigma^2_0$
+   
+   \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC) = \{$X^2$$<$$X^2_\ 0,025,5-1$=0.4844\} U \{$X^2$$<$$X^2_\ 0.975,5-1$=11.14329\}\\
+
+\textbf{(La distribuci\'on Chi-Cuadrado no es sim\'etrica)}
+
+\item Calcular el valor del estad\'istico de prueba\\
+$X_0$^2=(5-1)0.847/0.5^2=13.55
+
+\item Aplicar el criterio de decisi\'on\\
+Como $X^2_0$$>$11.43; rechazamos $H_0$: $sigma^2$=(0.5)^2
+
+\end{enumerate}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Bateriasdura} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1.5}\hlstd{,} \hlnum{2.5}\hlstd{,} \hlnum{2.9}\hlstd{,} \hlnum{3.2}\hlstd{,} \hlnum{4}\hlstd{)}
+\hlstd{Bateriasdura}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.5 2.5 2.9 3.2 4.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Construyendo una funci\textbackslash{}'on en R para realizar la prueba de hip\textbackslash{}'otesis.}
+\hlstd{Prueba.varianza} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{sigma}\hlstd{,} \hlkwc{n}\hlstd{,} \hlkwc{df}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+
+\hlstd{\{}
+\hlstd{op} \hlkwb{<-} \hlkwd{options}\hlstd{();}
+\hlkwd{options}\hlstd{(}\hlkwc{digits}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{varianza}\hlkwb{=}\hlkwd{var}\hlstd{(Bateriasdura)} \hlcom{#calcula la varianza}
+\hlstd{df}\hlkwb{=}\hlstd{n}\hlopt{-}\hlnum{1}
+\hlstd{ME} \hlkwb{<-} \hlstd{(sigma}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlstd{Xo} \hlkwb{<-} \hlstd{((n}\hlopt{-}\hlnum{1}\hlstd{)}\hlopt{*}\hlstd{varianza)}\hlopt{/}\hlstd{ME} \hlcom{#calcula el estad\textbackslash{}'istico de prueba }
+\hlcom{# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"} \hlopt{||} \hlstd{H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+
+\hlstd{\{}
+  \hlstd{X} \hlkwb{<-} \hlkwd{qchisq}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{),} \hlkwc{df}\hlstd{=n}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+  \hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba unilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Varianza_Estimada}\hlstd{= varianza,} \hlkwc{Varianza_Hipotetica}\hlstd{=sigma,}
+                 \hlkwc{X_critico}\hlstd{=X,}\hlkwc{Estadistico}\hlstd{= Xo)}
+\hlstd{\}}
+\hlkwa{else}
+\hlstd{\{}
+\hlstd{X} \hlkwb{<-} \hlkwd{qchisq}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{(alfa}\hlopt{/}\hlnum{2}\hlstd{),} \hlkwc{df}\hlstd{=n}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{lower.tail} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{log.p} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# calcula los valores cr\textbackslash{}'iticos de la distribuci\textbackslash{}'on N(0;1) en el caso de una }
+\hlcom{# prueba  bilateral }
+\hlstd{valores} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwc{Varianza_Estimada}\hlstd{=varianza,} \hlkwc{Varianza_Hipotetica}\hlstd{=sigma,}
+                 \hlkwc{X_critico_menor}\hlstd{=}\hlopt{-}\hlstd{X,}
+\hlkwc{X_critico_mayor} \hlstd{=X, Xo)}
+\hlstd{\}} \hlcom{# esto es para encontrar los valores cr\textbackslash{}'iticos }
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Menor"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Xo} \hlopt{< -}\hlstd{X) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{X,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico>="}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{X,}\hlnum{3}\hlstd{),}
+                        \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Mayor"}\hlstd{)}
+\hlstd{\{}
+\hlkwa{if} \hlstd{(Xo} \hlopt{>} \hlstd{X) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(X,}\hlnum{3}\hlstd{),}
+                              \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+\hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <="}\hlstd{,} \hlkwd{round}\hlstd{(X,}\hlnum{3}\hlstd{),}
+                       \hlstr{", entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}}
+\hlkwa{if} \hlstd{(H1} \hlopt{==} \hlstr{"Distinto"}\hlstd{)}
+\hlstd{\{}
+ \hlkwa{if} \hlstd{(Xo} \hlopt{< -}\hlstd{X) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico <"}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{X,}\hlnum{3}\hlstd{),}
+                                \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{if} \hlstd{(Xo} \hlopt{>} \hlstd{X) decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico >"}\hlstd{,} \hlkwd{round}\hlstd{(X,}\hlnum{3}\hlstd{),}
+                               \hlstr{", entonces rechazamos Ho"}\hlstd{)}
+ \hlkwa{else} \hlstd{decision} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"Como Estadistico pertenece a ["}\hlstd{,} \hlkwd{round}\hlstd{(}\hlopt{-}\hlstd{X,}\hlnum{3}\hlstd{),} \hlstr{","}\hlstd{,}
+\hlkwd{round}\hlstd{(X,}\hlnum{3}\hlstd{),} \hlstr{"], entonces aceptamos Ho"}\hlstd{)}
+\hlstd{\}} \hlcom{# esto para llevar a cabo los contraste de hip\textbackslash{}'otesis }
+\hlkwd{print}\hlstd{(valores)}
+\hlkwd{print}\hlstd{(decision)}
+\hlkwd{options}\hlstd{(op)} \hlcom{# restablece todas las opciones iniciales }
+\hlstd{\}}
+\hlcom{# note que en la funci\textbackslash{}'on anterior, el argumento "H1" especifica el }
+\hlcom{# tipo de contraste que se est\textbackslash{}'a realizando, bilateral (H1= "Distinto") o }
+\hlcom{# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y }
+\hlcom{# comente sobre los resultados y diferencias obtenidas en cada caso. }
+\hlkwd{Prueba.varianza} \hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{4}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Menor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                          [,1]
+## Varianza_Estimada    0.847000
+## Varianza_Hipotetica  0.500000
+## X_critico           11.143287
+## Estadistico         13.552000
+## [1] "Como Estadistico>= -11.143 , entonces aceptamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.varianza} \hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{4}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Mayor"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                          [,1]
+## Varianza_Estimada    0.847000
+## Varianza_Hipotetica  0.500000
+## X_critico           11.143287
+## Estadistico         13.552000
+## [1] "Como Estadistico > 11.143 , entonces rechazamos Ho"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Prueba.varianza} \hlstd{(}\hlnum{0.5}\hlstd{,} \hlnum{5}\hlstd{,} \hlnum{4}\hlstd{,} \hlkwc{H1}\hlstd{=}\hlstr{"Distinto"}\hlstd{,} \hlkwc{alfa}\hlstd{=}\hlnum{0.05}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                           [,1]
+## Varianza_Estimada     0.847000
+## Varianza_Hipotetica   0.500000
+## X_critico_menor     -11.143287
+## X_critico_mayor      11.143287
+## Xo                   13.552000
+## [1] "Como Estadistico > 11.143 , entonces rechazamos Ho"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{document}

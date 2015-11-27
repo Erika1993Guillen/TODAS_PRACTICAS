@@ -1,0 +1,499 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CINCO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'i Guill\'en Pineda}\\[3 cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 22}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{PRUEBA DE HIP\'OTESIS ACERCA DEL VALOR DE UNA PROPORCI\'ON.}
+
+
+Una muestra de 100 empleados que hab\'ian estado encontacto con sangre o derivados de \'esta, fue examinada por presentar evidencia serol\'ogica de hepatitis B. Se encontr\'o que 23 de ellos presentaron reacci\'on positiva. \¿Puede concluirse a partir de estos datos que la proporci\'on de los positivos es mayor que 0.15? Tome un nivel de significancia del 5\%.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+  \item\textbf{Formular las hip\'otesis}\\
+  Sea para la proporci\'on de positivos en la poblaci\'on}\\
+  $H_0$: $p$$<$=0.15\\
+  $H_1$: $p$$>$0.15
+  \item\textbf {Establecer n y alfa}
+  $n=100$ $alfa=0.05$\\
+  \item\textbf {Determinar el estad\'istico de prueba}\\
+  $z_0$=\^ p-$p_0$/sqrt($p_0$(1-$p_0$)/n)\\
+  \item\textbf {Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)}\\
+  Regi\'on cr\'itica (RC)={$z_0$$>$$z_\ 0.05$=1.645}\\
+  \item\textbf {Calcular el valor del estad\'istico de prueba}\\
+  \^ p=23/100=0.23,\\
+  $p_0$=0.15,\\
+  $z_0$=0.23-0.15/sqrt(0.15(1-0.15)/100)=0.24\\
+  \item\textbf {Aplicar el criterio de decisi\'on}\\
+  Como $z_0$$>$1.645, rechazamos $H_0$: p$<$=0.15
+\end{enumerate}
+
+Es decir, se concluye que el porcentaje de los positivos es mayor al 15\%.\\
+<<>>=
+# Construyendo una funci\'on en R para realizar la prueba de hip\'otesis. 
+Prueba.prop <- function(x, n, po, H1="Distinto", alfa=0.05) 
+{ 
+op <- options(); 
+options(digits=2) 
+pe=x/n #calcula la proporci\'on muestral 
+SE <- sqrt((po * (1-po))/n) # calcula la varianza de la proporci\'on muestral 
+Zo <- (pe-po)/SE #calcula el estad\'istico de prueba 
+# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] 
+if (H1 == "Menor" || H1 == "Mayor") 
+{ 
+Z <- qnorm(alfa, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba unilateral 
+valores <- rbind(Prop_Estimada=pe, Prop_Hipotetica=po, Z_critico=Z,Estadistico= Zo) 
+} 
+else 
+{ 
+Z <- qnorm(alfa/2, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba  bilateral 
+valores <- rbind(Prop_Estimada=pe, Prop_Hipotetica =po, Z_critico_menor=-Z, 
+Z_critico_mayor =Z, Zo) 
+} # esto es para encontrar los valores cr\'iticos 
+if (H1 == "Menor") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico>=", round(-Z,3), 
+                        ", entonces aceptamos Ho") 
+} 
+if (H1 == "Mayor") 
+{ 
+if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                              ", entonces rechazamos Ho") 
+else decision <- paste("Como Estadistico <=", round(Z,3), 
+                       ", entonces aceptamos Ho") 
+} 
+if (H1 == "Distinto") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                               ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico pertenece a [", round(-Z,3), ",", 
+round(Z,3), "], entonces aceptamos Ho") 
+} # esto para llevar a cabo los contraste de hip\'otesis 
+print(valores) 
+print(decision) 
+options(op) # restablece todas las opciones iniciales 
+} 
+# note que en la funci\'on anterior, el argumento "H1" especifica el 
+# tipo de contraste que se est\'a realizando, bilateral (H1= "Distinto") o 
+# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y 
+# comente sobre los resultados y diferencias obtenidas en cada caso. 
+Prueba.prop(23, 100, 0.15, H1="Menor", alfa=0.05) 
+Prueba.prop(23, 100, 0.15, H1="Mayor", alfa=0.05) 
+Prueba.prop(23, 100, 0.15, H1="Distinto", alfa=0.05) 
+@
+
+R ya tiene incorporada una funci\'on para realizar contraste sobre proporciones, \'unicamente debemos familiarizarnos con los par\'ametros correspondientes. La funci\'on a utilizar es prop.test(), y los par\'ametros son los siguientes:
+
+\begin{itemize}
+  \item En x se especifica el n\'umero de elementos en la muestra que tienen la caracter\'istica de inte\'es.
+  \item En n se especifica el tama\~no de la muestra. 
+  \item En p se indica el valor de la proporci\'on poblacional indicado en la hip\'otesis poblacional (proporci\'on hipot\'etica).
+  \item En alternative se especifica si corresponde a un contraste bilateral (alternative="two.sided") o unilateral (alternative="less"  o alternative="greater"). 
+  \item Conf.level se especifica el nivel de significancia utilizado para realizar el contraste.
+\end{itemize}
+
+<<>>=
+# ejecutar las siguientes instrucciones y comparar con los obtenidos por la 
+# funci\'on que se ha creado previamente. 
+prop.test(x=23, n=100, p=0.15, alternative="less", conf.level=0.95) 
+prop.test(x=23, n=100, p=0.15, alternative="greater", conf.level=0.95) 
+prop.test(x=23, n=100, p=0.15, alternative="two.sided", conf.level=0.95) 
+# note que si cambiamos la instrucci\'on p=0.15 a por ejemplo p=0.18, obtenemos 
+# diferentes resultados, sin embargo, los intervalos de confianza (regi\'on de 
+# aceptaci\'on) permanecen sin cambio.
+@
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE UNA MEDIA, VARIANZA CONOCIDA.}
+
+Los siguientes datos corresponden a la longitud medida en cent\'imetros de 18 pedazos de cable sobrantes en cada rollo utilizado:
+<<>>=
+Medidacable <- c(9.0, 3.41, 6.13, 1.99, 6.92, 3.12, 7.86, 2.01, 5.98, 4.15, 6.87, 
+                 1.97, 4.01, 3.56, 8.04, 3.24, 5.05, 7.37); 
+Medidacable
+@
+
+Basados en estos datos \¿podemos decir que la longitud media de los pedazos de cable sobrante es mayor de 4 cm? Suponga poblaci\'on normal con desviaci\'on t\'ipica poblacional igual a 2.45 y un nivel de significancia de 5\%.\\
+
+Escribir una funci\'on en R para realizar dicho contraste, la funci\'on debe permitir realizar contraste bilaterales y los dos tipos de contrastes unilateral. Sugerencia, modificar la funci\'on utilizada para el contraste de una proporci\'on y la siguiente estructura.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+  \item Formular las hip\'otesis\\
+  Sea $\μ$ la media poblacional\\
+  $H_0$: $\μ$$<$=4\\
+  $H_1$: $\μ$$>$4
+  \item Establecer $alfa$\\
+  $alfa$=0.05
+  \item Determinar el estad\'istico de prueba\\
+  $z_0$=$\μ$-$\μ_0$/sqrt($sigma$^2/n)$
+  \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC)={z$>$z_\ 0.05$=1.645} 
+  \item Calcular el valor del estad\'istico de prueba\\
+$z_0$=$5.038$-$4$/sqrt($2.45$^2/18)$=1.798
+  \item Aplicar el criterio de decisi\'on\\
+  Como $z_0$$>$=1.645, rechazamos $H_0$: $\μ$$<$=4
+\end{enumerate}
+
+Es decir, se concluye que la longitud media de los pedazos de cable sobrantes es mayor a 4 cm.
+
+<<>>=
+Medidacable <- c(9.0, 3.41, 6.13, 1.99, 6.92, 3.12, 7.86, 2.01, 5.98, 4.15, 6.87, 
+                 1.97, 4.01, 3.56, 8.04, 3.24, 5.05, 7.37); 
+Medidacable
+
+# Construyendo una funci\'on en R para realizar la prueba de hip\'otesis.
+Prueba.mediavaricono <- function(mu, sigma, n, H1="Distinto", alfa=0.05)
+{
+op <- options(); 
+options(digits=8)
+media=mean(Medidacable) #calcula la media 
+ES <- sqrt((sigma^2)/n)  
+Zo <- (media-mu)/ES #calcula el estad\'istico de prueba 
+# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] 
+if (H1 == "Menor" || H1 == "Mayor")  
+{ 
+Z <- qnorm(alfa, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba unilateral 
+valores <- rbind(Media_Estimada=media, Media_Hipotetica=mu, Z_critico=Z,Estadistico= Zo) 
+} 
+else 
+{ 
+Z <- qnorm(alfa/2, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba  bilateral 
+valores <- rbind(Media_Estimada=media, Media_Hipotetica=mu, Z_critico_menor=-Z, 
+Z_critico_mayor =Z, Zo) 
+} # esto es para encontrar los valores cr\'iticos 
+if (H1 == "Menor") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico>=", round(-Z,3), 
+                        ", entonces aceptamos Ho") 
+} 
+if (H1 == "Mayor") 
+{ 
+if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                              ", entonces rechazamos Ho") 
+else decision <- paste("Como Estadistico <=", round(Z,3), 
+                       ", entonces aceptamos Ho") 
+} 
+if (H1 == "Distinto") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                               ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico pertenece a [", round(-Z,3), ",", 
+round(Z,3), "], entonces aceptamos Ho") 
+} # esto para llevar a cabo los contraste de hip\'otesis 
+print(valores) 
+print(decision) 
+options(op) # restablece todas las opciones iniciales 
+} 
+# note que en la funci\'on anterior, el argumento "H1" especifica el 
+# tipo de contraste que se est\'a realizando, bilateral (H1= "Distinto") o 
+# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y 
+# comente sobre los resultados y diferencias obtenidas en cada caso. 
+Prueba.mediavaricono (4, 2.45, 18, H1="Menor", alfa=0.05)
+Prueba.mediavaricono (4, 2.45, 18, H1="Mayor", alfa=0.05) 
+Prueba.mediavaricono (4, 2.45, 18, H1="Distinto", alfa=0.05) 
+@
+
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE UNA MEDIA, VARIANZA DESCONOCIDA.}
+
+
+Los siguientes datos corresponden a la longitud medida en cent\'imetros de 18 pedazos de cable sobrantes en cada rollo utilizado: 
+ 
+<<>>=
+Medidacable <- c(9.0, 3.41, 6.13, 1.99, 6.92, 3.12, 7.86, 2.01, 5.98, 4.15, 6.87, 
+                 1.97, 4.01, 3.56, 8.04, 3.24, 5.05, 7.37); 
+Medidacable
+@
+
+Basados en estos datos \¿podemos decir que la longitud media de los pedazos de cable sobrante es mayor de 4 cm? Suponga poblaci\'on normaly un nivel de significancia de 5\%.\\
+
+Escribir una funci\'on en R para realizar dicho contraste, la funci\'on debe permitir realizar contraste bilaterales y los dos tipos de contrastes unilaterales.Sugerencia, modificar la funci\'on obtenida para el contraste de la media cuando la varianza poblacional es conocida, reemplazando la desviaci\'on poblacional por la cuasidesviaci\'on muestral y la distribuci\'on  N(0;1) por la t de Student.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos: 
+\begin{enumerate}
+  \item Formular las hip\'otesis\\
+  Sea $\μ$ la media poblacional\\
+  $H_0$: $\μ$$<$=4\\
+  $H_1$: $\μ$$>$4
+  \item Establecer $alfa$\\
+  $alfa$=0.05
+  \item Determinar el estad\'istico de prueba\\
+  $t_0$=$\μ$-$\μ_0$/sqrt($Var$^2/n)$
+  \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC)={t$>$t_\ 0.05,18-1$=1.740} 
+\item Calcular el valor del estad\'istico de prueba\\
+$t_0$=$5.038$-$4$/sqrt($5.2089$^2/18)$=1.93
+  \item Aplicar el criterio de decisi\'on\\
+  Como $t_0$$>$=1.74, rechazamos $H_0$: $\μ$$<$=4
+\end{enumerate}
+
+Es decir, se concluye que la longitud media de los pedazos de cable sobrantes es mayor a 4 cm.
+<<>>=
+Medidacable <- c(9.0, 3.41, 6.13, 1.99, 6.92, 3.12, 7.86, 2.01, 5.98, 4.15, 6.87, 
+                 1.97, 4.01, 3.56, 8.04, 3.24, 5.05, 7.37); 
+Medidacable
+
+# Construyendo una funci\'on en R para realizar la prueba de hip\'otesis.
+Prueba.mediavaridesco <- function(mu, n, df, H1="Distinto", alfa=0.05)
+  
+{
+op <- options(); 
+options(digits=8)
+media=mean(Medidacable) #calcula la media
+varianza=var(Medidacable) #calcula la varianza
+df=n-1
+ES <- sqrt((varianza)/n)  
+to <- (media-mu)/ES #calcula el estad\'istico de prueba 
+# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] 
+if (H1 == "Menor" || H1 == "Mayor")  
+  
+{
+  t <- qt(alfa, df=n-1, lower.tail = TRUE, log.p = FALSE)
+  # calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba unilateral 
+valores <- rbind(Media_Estimada=media, Media_Hipotetica=mu, t_critico=t,Estadistico= to) 
+} 
+else 
+{ 
+t <- pt(alfa, df=n-1, lower.tail = TRUE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba  bilateral 
+valores <- rbind(Media_Estimada=media, Media_Hipotetica=mu, t_critico_menor=-t, 
+t_critico_mayor =t, to) 
+} # esto es para encontrar los valores cr\'iticos 
+if (H1 == "Menor") 
+{ 
+ if (to < -t) decision <- paste("Como Estadistico <", round(-t,3), 
+                                ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico>=", round(-t,3), 
+                        ", entonces aceptamos Ho") 
+} 
+if (H1 == "Mayor") 
+{ 
+if (to > t) decision <- paste("Como Estadistico >", round(t,3), 
+                              ", entonces rechazamos Ho") 
+else decision <- paste("Como Estadistico <=", round(t,3), 
+                       ", entonces aceptamos Ho") 
+} 
+if (H1 == "Distinto") 
+{ 
+ if (to < -t) decision <- paste("Como Estadistico <", round(-t,3), 
+                                ", entonces rechazamos Ho") 
+ if (to > t) decision <- paste("Como Estadistico >", round(t,3), 
+                               ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico pertenece a [", round(-t,3), ",", 
+round(t,3), "], entonces aceptamos Ho") 
+} # esto para llevar a cabo los contraste de hip\'otesis 
+print(valores) 
+print(decision) 
+options(op) # restablece todas las opciones iniciales 
+} 
+# note que en la funci\'on anterior, el argumento "H1" especifica el 
+# tipo de contraste que se est\'a realizando, bilateral (H1= "Distinto") o 
+# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y 
+# comente sobre los resultados y diferencias obtenidas en cada caso. 
+Prueba.mediavaridesco (4, 18, 17, H1="Menor", alfa=0.05)
+Prueba.mediavaridesco (4, 18, 17, H1="Mayor", alfa=0.05) 
+Prueba.mediavaridesco (4, 18, 17, H1="Distinto", alfa=0.05) 
+@
+  
+En el caso de que la varianza poblacional sea desconocida R permite realizar contraste sobre la media poblacional. La funci\'on que se debe utilizar es t.test(), los par\'ametros a considerar para su utilizaci\'on son los siguientes. 
+
+\begin{itemize}
+  \item X corresponde al vector de observaciones. 
+  \item En alternative se especifica el tipo de contraste (similar a prop.test()).
+  \item Conf.level se especifica el nivel de significancia utilizado para realizar el contraste. 
+\end{itemize}
+
+Una soluci\'on con esta alternativa podr\'ia ser la siguiente:
+<<>>=
+ Medidacable= c(9.0,3.41,6.13,1.99,6.92,3.12,7.86,2.01,5.98,4.15,6.87,1.97,4.01,
+                3.56,8.04,3.24,5.05,7.37) 
+# digitamos las observaciones 
+t.test(Medidacable,mu=4,alternative="greater") 
+# note que al no especificar el nivel de confianza se trabaja con el 95%, el 
+# valor por defecto.
+@
+
+
+\section{PRUEBA DE HIP\'OTESIS SOBRE LA VARIANZA.}
+
+
+Un fabricante de bater\'ias para autom\'ovil asegura que las bater\'ias duran en promedio 2 a\~nos con una desviaci\'on est\'andar de 0.5 a\~nos. Se toma una muestra aleatoria de 5 bater\'ias siendo su duraci\'on: 
+<<>>=
+Bateriasdura <- c(1.5, 2.5, 2.9, 3.2, 4)
+Bateriasdura
+@
+
+Con un nivel de significaci\'on de 5\%, qu\'e podemos decir de la variabilidad afirmada por el fabricante.\\
+
+El contraste de hip\'otesis se realizar\'a en los siguientes pasos:
+\begin{enumerate}
+   \item Formular las hip\'otesis\\
+     Sea $sigma^2$ la varianza poblacional\\
+     $H_0$: $sigma^2$=(0.5)^2\\
+     $H_1$: $sigma^2$ "distinto" (0.5)^2
+     
+   \item Establecer $alfa$ \\
+   $alfa$=0.05
+   
+   \item Determinar el estad\'istico de prueba\\
+   $X_0$^2=(n-1)$S^2$/$sigma^2_0$
+   
+   \item Definir el criterio o regla de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\ 
+Regi\'on cr\'itica (RC) = \{$X^2$$<$$X^2_\ 0,025,5-1$=0.4844\} U \{$X^2$$<$$X^2_\ 0.975,5-1$=11.14329\}\\
+
+\textbf{(La distribuci\'on Chi-Cuadrado no es sim\'etrica)}
+
+\item Calcular el valor del estad\'istico de prueba\\
+$X_0$^2=(5-1)0.847/0.5^2=13.55
+
+\item Aplicar el criterio de decisi\'on\\
+Como $X^2_0$$>$11.43; rechazamos $H_0$: $sigma^2$=(0.5)^2
+
+\end{enumerate}
+
+<<>>=
+Bateriasdura <- c(1.5, 2.5, 2.9, 3.2, 4)
+Bateriasdura
+
+# Construyendo una funci\'on en R para realizar la prueba de hip\'otesis.
+Prueba.varianza <- function(sigma, n, df, H1="Distinto", alfa=0.05)
+  
+{
+op <- options(); 
+options(digits=8)
+varianza=var(Bateriasdura) #calcula la varianza
+df=n-1
+ME <- (sigma^2)  
+Xo <- ((n-1)*varianza)/ME #calcula el estad\'istico de prueba 
+# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] 
+if (H1 == "Menor" || H1 == "Mayor")  
+  
+{
+  X <- qchisq(1-(alfa/2), df=n-1, lower.tail = TRUE, log.p = FALSE)
+  # calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba unilateral 
+valores <- rbind(Varianza_Estimada= varianza, Varianza_Hipotetica=sigma, 
+                 X_critico=X,Estadistico= Xo) 
+} 
+else 
+{ 
+X <- qchisq(1-(alfa/2), df=n-1, lower.tail = TRUE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba  bilateral 
+valores <- rbind(Varianza_Estimada=varianza, Varianza_Hipotetica=sigma, 
+                 X_critico_menor=-X, 
+X_critico_mayor =X, Xo) 
+} # esto es para encontrar los valores cr\'iticos 
+if (H1 == "Menor") 
+{ 
+ if (Xo < -X) decision <- paste("Como Estadistico <", round(-X,3), 
+                                ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico>=", round(-X,3), 
+                        ", entonces aceptamos Ho") 
+} 
+if (H1 == "Mayor") 
+{ 
+if (Xo > X) decision <- paste("Como Estadistico >", round(X,3), 
+                              ", entonces rechazamos Ho") 
+else decision <- paste("Como Estadistico <=", round(X,3), 
+                       ", entonces aceptamos Ho") 
+} 
+if (H1 == "Distinto") 
+{ 
+ if (Xo < -X) decision <- paste("Como Estadistico <", round(-X,3), 
+                                ", entonces rechazamos Ho") 
+ if (Xo > X) decision <- paste("Como Estadistico >", round(X,3), 
+                               ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico pertenece a [", round(-X,3), ",", 
+round(X,3), "], entonces aceptamos Ho") 
+} # esto para llevar a cabo los contraste de hip\'otesis 
+print(valores) 
+print(decision) 
+options(op) # restablece todas las opciones iniciales 
+} 
+# note que en la funci\'on anterior, el argumento "H1" especifica el 
+# tipo de contraste que se est\'a realizando, bilateral (H1= "Distinto") o 
+# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y 
+# comente sobre los resultados y diferencias obtenidas en cada caso. 
+Prueba.varianza (0.5, 5, 4, H1="Menor", alfa=0.05)
+Prueba.varianza (0.5, 5, 4, H1="Mayor", alfa=0.05) 
+Prueba.varianza (0.5, 5, 4, H1="Distinto", alfa=0.05) 
+
+@
+
+\end{document}

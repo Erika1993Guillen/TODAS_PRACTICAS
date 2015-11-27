@@ -1,0 +1,523 @@
+\documentclass[12pt,letterpaper]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\ [0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\ [0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD TRES"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 13}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\textbf {GENERACI\'ON DE ESPACIOS MUESTRALES Y DE MUESTRAS ALEATORIAS.}
+
+
+La funci\'on sample(): permite seleccionar una muestra aleatoria de tama?o n, especificado el vector x desde el cual tomar\'a la muestra (normalmente es un vector de caracteres aunque no es indispensable), la selecci\'on puede ser con o sin reemplazo. La sintaxis general de esta funci\'on es:\\
+
+\textbf{ sample(X, size, replace = FALSE, prob = NULL)}\\
+\textbf{donde}
+\begin{itemize}
+\item X: es el vector del cual se seleccionan la muestra (podr\'ia decirse que representa el marco muestral).
+\item size: es el tama\~no de la muestra.
+\item replace = FALSE indica que la muestra en sin reposici\'on, si fuera TRUE ser\'ia con reposici\'on.
+\item prob: vector de pesos o probabilidad de obtener los elementos del vector X que est\'e siendo muestreado (en caso de que los elementos tengan distintas probabilidades). 
+\end{itemize}
+
+\begin{enumerate}
+\item  Activa tu directorio de trabajo
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{getwd}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "C:/Users/User/Documents/TODAS_PRACTICAS"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{setwd}\hlstd{(}\hlstr{"C:/Users/User/Documents/TODAS_PRACTICAS"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\item  Crea un nuevo Script y llamarle "Script13-Probabilidades1"
+
+\item Simular 10 lanzamientos de una moneda
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# vector del cual se tomara la muestra}
+
+\hlstd{moneda} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"C"}\hlstd{,} \hlstr{"+"}\hlstd{); moneda}
+\end{alltt}
+\begin{verbatim}
+## [1] "C" "+"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Tama?o de la muestra }
+
+\hlstd{n} \hlkwb{<-} \hlnum{10}\hlstd{; n}
+\end{alltt}
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Generando la muestra aleatoria con reemplazamiento (replace=TRUE)}
+
+\hlstd{lanzamientos} \hlkwb{<-} \hlkwd{sample}\hlstd{(moneda, n,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{); lanzamientos}
+\end{alltt}
+\begin{verbatim}
+##  [1] "+" "+" "+" "C" "C" "+" "+" "+" "C" "+"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\item Elegir 6 n\'umeros de una loter?a de 54 n\'umeros 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# se define el espacio muestral del cual se tomara la muestra}
+
+\hlstd{espacio} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{54}\hlstd{;espacio}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+## [24] 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+## [47] 47 48 49 50 51 52 53 54
+\end{verbatim}
+\begin{alltt}
+\hlcom{# Se define el tama\textbackslash{}~no de la muestra}
+
+\hlstd{n} \hlkwb{<-} \hlnum{6}\hlstd{; n}
+\end{alltt}
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# seleccionando la muestra sin reposici?n}
+
+\hlstd{muestra} \hlkwb{<-} \hlkwd{sample}\hlstd{(espacio, n); muestra}
+\end{alltt}
+\begin{verbatim}
+## [1] 23  3  4 29 16 13
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\textbf{OBSERVACI\'ON:} por defecto la selecci\'on es sin reemplazo o sin reposici\'on, pero no se reduce el espacio muestral; en otras palabras lo que esto significa es que a pesar de que la muestra se selecciona sin reposici\'on, el vector (del cual se selecciona la muestra) permanece sin cambio alguno; para nuestro ejemplo en particular en el vector muestra se almacenan los 6 elementos seleccionados del vector espacio, sin embargo, en el vector espacio estos elementos se conservan; esto presentan un inconveniente si se desea seleccionar una segunda muestra pero en la cual no se encuentre ning?n elemento contenido en la primera, tendr\'ian que descartarse primero antes de tomar una segunda muestra.\\
+
+\item Simular 4 lanzamientos de dos dados 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# genera el espacio muestral del lanzamiendo de los dos dados}
+
+\hlstd{espacio} \hlkwb{=} \hlkwd{as.vector}\hlstd{(}\hlkwd{outer}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,} \hlnum{1}\hlopt{:}\hlnum{6}\hlstd{, paste)); espacio}
+\end{alltt}
+\begin{verbatim}
+##  [1] "1 1" "2 1" "3 1" "4 1" "5 1" "6 1" "1 2" "2 2" "3 2" "4 2" "5 2"
+## [12] "6 2" "1 3" "2 3" "3 3" "4 3" "5 3" "6 3" "1 4" "2 4" "3 4" "4 4"
+## [23] "5 4" "6 4" "1 5" "2 5" "3 5" "4 5" "5 5" "6 5" "1 6" "2 6" "3 6"
+## [34] "4 6" "5 6" "6 6"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# la funci\textbackslash{}'on outer genera un arreglo (una matriz) decaracteres en el cual el }
+\hlcom{# primer elemento es un n\textbackslash{}'umero entre 1 y 6 (obtenido por la instruccion 1:6),}
+\hlcom{# mientras que en el segundo tambi\textbackslash{}'en es un n?mero entre 1 y 6 (obtenido por }
+\hlcom{# la instrucci\textbackslash{}'on 1:6). Es un arreglo de orden 6 x 6. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# con la instrucci\textbackslash{}'on as.vector se convierte en un vector el arreglor. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# se define el tama\textbackslash{}~no de la muestra}
+
+\hlstd{n} \hlkwb{<-} \hlnum{4}\hlstd{; n}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# finalmente se selecciona la muestra }
+
+\hlstd{muestra} \hlkwb{<-} \hlkwd{sample}\hlstd{(espacio, n,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{); muestra}
+\end{alltt}
+\begin{verbatim}
+## [1] "5 4" "3 4" "6 6" "5 2"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\item  Seleccionar cinco cartas de un naipe de 52 cartas
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#genera el espacio muestral de las 52 cartas }
+
+\hlstd{naipe} \hlkwb{=} \hlkwd{paste}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"A"}\hlstd{,} \hlnum{2}\hlopt{:}\hlnum{10}\hlstd{,} \hlstr{"J"}\hlstd{,} \hlstr{"Q"}\hlstd{,} \hlstr{"K"}\hlstd{),} \hlnum{4}\hlstd{),}
+              \hlkwd{c}\hlstd{(}\hlstr{"OROS"}\hlstd{,}\hlstr{"COPAS"}\hlstd{,} \hlstr{"BASTOS"}\hlstd{,} \hlstr{"ESPADAS"}\hlstd{));naipe}
+\end{alltt}
+\begin{verbatim}
+##  [1] "A OROS"     "2 COPAS"    "3 BASTOS"   "4 ESPADAS"  "5 OROS"    
+##  [6] "6 COPAS"    "7 BASTOS"   "8 ESPADAS"  "9 OROS"     "10 COPAS"  
+## [11] "J BASTOS"   "Q ESPADAS"  "K OROS"     "A COPAS"    "2 BASTOS"  
+## [16] "3 ESPADAS"  "4 OROS"     "5 COPAS"    "6 BASTOS"   "7 ESPADAS" 
+## [21] "8 OROS"     "9 COPAS"    "10 BASTOS"  "J ESPADAS"  "Q OROS"    
+## [26] "K COPAS"    "A BASTOS"   "2 ESPADAS"  "3 OROS"     "4 COPAS"   
+## [31] "5 BASTOS"   "6 ESPADAS"  "7 OROS"     "8 COPAS"    "9 BASTOS"  
+## [36] "10 ESPADAS" "J OROS"     "Q COPAS"    "K BASTOS"   "A ESPADAS" 
+## [41] "2 OROS"     "3 COPAS"    "4 BASTOS"   "5 ESPADAS"  "6 OROS"    
+## [46] "7 COPAS"    "8 BASTOS"   "9 ESPADAS"  "10 OROS"    "J COPAS"   
+## [51] "Q BASTOS"   "K ESPADAS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# con la instrucci\textbackslash{}'on rep(c("A", 2:10, "J", "Q", "K"), 4) se crea un vector de}
+\hlcom{# caracteres, el primer elemento es "A", los elementos de segundo al undecimo }
+\hlcom{# son n\textbackslash{}'umero del 2 al 10, los siguientes elementos son "J", "Q" y "K"; }
+\hlcom{# y los elementos se repiten en este orden cuatro veces. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#con la funci\textbackslash{}'on paste se crea un vector en el que sus elementos son: un }
+\hlcom{# elemento del vector (rep(c("A", 2:10, "J", "Q", "K"), 4)}
+\hlcom{# concatenado con uno del vector c("OROS","COPAS", "BASTOS", "ESPADAS")) }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{itemize}
+\item El primer elemento de rep(c(''A'', 2:10, ''J'', "Q", "K"), 4) con el primero de c(''OROS'',''COPAS'', ''BASTOS'', ''ESPADAS'').
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{naipe1} \hlkwb{=} \hlkwd{paste}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"A"}\hlstd{),} \hlnum{4}\hlstd{),}
+              \hlkwd{c}\hlstd{(}\hlstr{"OROS"}\hlstd{));naipe1}
+\end{alltt}
+\begin{verbatim}
+## [1] "A OROS" "A OROS" "A OROS" "A OROS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\item El segundo elemento de rep(c(''A", 2:10, "J", "Q", "K"), 4) con el segundo de c(''OROS'',''COPAS'', ''BASTOS'', ''ESPADAS''). 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{naipe2} \hlkwb{=} \hlkwd{paste}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(} \hlnum{2}\hlopt{:}\hlnum{10}\hlstd{),} \hlnum{4}\hlstd{),}
+              \hlkwd{c}\hlstd{(}\hlstr{"COPAS"}\hlstd{));naipe2}
+\end{alltt}
+\begin{verbatim}
+##  [1] "2 COPAS"  "3 COPAS"  "4 COPAS"  "5 COPAS"  "6 COPAS"  "7 COPAS" 
+##  [7] "8 COPAS"  "9 COPAS"  "10 COPAS" "2 COPAS"  "3 COPAS"  "4 COPAS" 
+## [13] "5 COPAS"  "6 COPAS"  "7 COPAS"  "8 COPAS"  "9 COPAS"  "10 COPAS"
+## [19] "2 COPAS"  "3 COPAS"  "4 COPAS"  "5 COPAS"  "6 COPAS"  "7 COPAS" 
+## [25] "8 COPAS"  "9 COPAS"  "10 COPAS" "2 COPAS"  "3 COPAS"  "4 COPAS" 
+## [31] "5 COPAS"  "6 COPAS"  "7 COPAS"  "8 COPAS"  "9 COPAS"  "10 COPAS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\item El tercer elemento de rep(c(''A", 2:10, "J", "Q", "K"), 4) con el tercero de c(''OROS'',''COPAS'', ''BASTOS'', ''ESPADAS''). 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{naipe3} \hlkwb{=} \hlkwd{paste}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"J"}\hlstd{),}\hlnum{4}\hlstd{),}
+              \hlkwd{c}\hlstd{(}\hlstr{"BASTOS"}\hlstd{));naipe3}
+\end{alltt}
+\begin{verbatim}
+## [1] "J BASTOS" "J BASTOS" "J BASTOS" "J BASTOS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\item El cuarto elemento de rep(c(''A", 2:10, "J", "Q", "K"), 4) con el cuarto de c(''OROS'',''COPAS'', ''BASTOS'', ''ESPADAS'').
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{naipe4} \hlkwb{=} \hlkwd{paste}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"Q"}\hlstd{),} \hlnum{4}\hlstd{),}
+              \hlkwd{c}\hlstd{(}\hlstr{"ESPADAS"}\hlstd{));naipe4}
+\end{alltt}
+\begin{verbatim}
+## [1] "Q ESPADAS" "Q ESPADAS" "Q ESPADAS" "Q ESPADAS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# se define el tama?no de la muestra }
+
+\hlstd{n} \hlkwb{<-} \hlnum{5}\hlstd{; n}
+\end{alltt}
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# se obtiene la muestra sin reemplazo (aunque no se especifique }
+\hlcom{# con replace=FALSE) }
+
+\hlstd{cartas} \hlkwb{<-} \hlkwd{sample}\hlstd{(naipe, n) ; cartas}
+\end{alltt}
+\begin{verbatim}
+## [1] "3 COPAS"  "2 COPAS"  "5 BASTOS" "8 COPAS"  "2 OROS"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{itemize}
+
+\item Generar una muestra aleatoria de tama?no 120,con los n\'umeros del 1 
+al 6 en el que las probabilidades de cada uno de los n?meros son respectivamente los siguientes valores: 0.5, 0.25, 0.15, 0.04, 0.03 y 0.003.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sample}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{6}\hlstd{,}\hlnum{120}\hlstd{,}\hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{,} \hlkwd{c}\hlstd{(}\hlnum{0.5}\hlstd{,}\hlnum{0.25}\hlstd{,}\hlnum{0.15}\hlstd{,}\hlnum{0.04}\hlstd{,}\hlnum{0.03}\hlstd{,}\hlnum{0.03}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##   [1] 1 1 1 2 2 1 5 1 3 2 2 1 2 2 1 4 2 1 1 1 1 1 4 1 4 3 4 1 1 2 1 3 2 2 5
+##  [36] 2 6 1 1 1 1 1 2 2 1 2 1 1 3 1 3 1 2 1 1 1 1 2 2 1 1 2 3 1 3 1 2 1 1 3
+##  [71] 3 3 5 1 1 1 2 1 2 3 6 1 1 3 1 4 1 2 1 2 2 1 3 1 1 1 1 2 1 3 1 2 4 1 1
+## [106] 3 1 1 2 2 5 1 2 1 3 1 1 1 6 3
+\end{verbatim}
+\begin{alltt}
+ \hlcom{# note que en el vector c(0.5,0.25,0.15,0.04,0.03,0.03) se especifican }
+\hlcom{# las probabilidades de cada uno de los elementos, por lo que la suma de cada }
+\hlcom{# uno de los elementos del vector debe ser uno. }
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# note que R siempre generara la muestra sin importar si la suma es o no la }
+\hlcom{# unidad, sin embargo, para que la muestra sea verdaderamente aleatoria la }
+\hlcom{# suma de las probabilidades debe ser igual a la unidad.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\item Escriba una funci\'on que reciba los n\'umeros enteros entre 1 y 500 
+inclusive, la funci\'on retornar\'a el espacio formado por los n\'umeros divisibles entre 7. Despu\'es de llamar a esta funci\'on se extraer\'a aleatoriamente 12 de estos n?meros, con reemplazo.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# definiendo la funci?n que generara el espacio formado }
+
+\hlstd{espacio} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{num}\hlstd{)}
+
+\hlstd{\{}
+
+  \hlstd{numDiv7} \hlkwb{<-} \hlkwd{numeric}\hlstd{(}\hlnum{0}\hlstd{)}
+  \hlstd{ind} \hlkwb{<-} \hlnum{0}
+  \hlkwa{for}\hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(num))}
+\hlkwa{if} \hlstd{((num[i]} \hlopt{%%} \hlnum{7}\hlstd{)}\hlopt{==}\hlnum{0}\hlstd{)}
+
+\hlstd{\{}
+
+   \hlstd{ind} \hlkwb{<-} \hlstd{ind}\hlopt{+}\hlnum{1}
+   \hlstd{numDiv7[ind]}\hlkwb{=}\hlstd{num[i]}
+
+\hlstd{\}}
+
+ \hlkwd{return}\hlstd{(numDiv7)}
+
+  \hlstd{\}}
+
+\hlstd{numeros} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{500}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# generando el espacio muestral }
+
+\hlstd{s} \hlkwb{<-} \hlkwd{espacio}\hlstd{(numeros); s}
+\end{alltt}
+\begin{verbatim}
+##  [1]   7  14  21  28  35  42  49  56  63  70  77  84  91  98 105 112 119
+## [18] 126 133 140 147 154 161 168 175 182 189 196 203 210 217 224 231 238
+## [35] 245 252 259 266 273 280 287 294 301 308 315 322 329 336 343 350 357
+## [52] 364 371 378 385 392 399 406 413 420 427 434 441 448 455 462 469 476
+## [69] 483 490 497
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# seleccionando la muestra }
+
+\hlstd{muestra} \hlkwb{<-} \hlkwd{sample}\hlstd{(s,} \hlnum{12}\hlstd{,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{); muestra}
+\end{alltt}
+\begin{verbatim}
+##  [1] 455 322 378  14 105 182 371 126 343 112 112 315
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{enumerate}
+
+
+
+\end{document}

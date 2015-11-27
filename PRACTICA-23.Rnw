@@ -1,0 +1,417 @@
+ \documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CINCO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+
+\lhead{PR\'ACTICA 23}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{PRUEBA DE HIP\'OTESIS ACERCA DE LA DIFERENCIA ENTRE DOS PROPORCIONES }
+
+
+Una f\'abrica de cigarrillos distribuye dos marcas de este producto. Se encuentra que 56 de 200 fumadores prefieren la marca A y que 29 de 150 prefieren la marca B. \¿Se puede concluir con un nivel de significancia de 5\%, que la marca A desplaza a la marca B en un 10\%?
+
+\begin{itemize}
+  \item Formular las hip\'otesis\\
+  $H_o$:$P_A$=$P_B$+0.1 ******* $H_o$:$P_A$+$P_B$=0.1\\
+  $H_1$:$P_A$$>$$P_B$+0.1 ******* $H_1$:$P_A$-$P_B$$>$0.1
+  \item Establecer n y $alfa$\\
+  $n_A$=200; $n_B$=150; $alfa$=0.05
+  \item Defenimos el estad\'istico de prueba\\
+  $\^ P_A$=$X_A$/$n_A$, $\^ P_B$=$X_B$/$n_B$\\
+  $Z$ = ($\^ P_A$ - $\^ P_B$) - 0.1 / sqrt(($\^ P_A$(1 - $\^ P_A$)/$n_A$) + ($\^ P_B$(1 - $\^ P_B$)/$n_B$)) 
+  \item Definir el criterio de decisi\'on (regi\'on cr\'itica o zona de rechazo)\\
+  (RC)=\{$Z_O$$>$$Z_\ 0.05$=1.645\}
+  \item Calculamos el valor del estad\'istico de prueba\\
+  $\^ P_A$ = 56/200 = 0.28;  $\^ P_B$ = 29/150 = 0.193\\
+  $Z_o$ = (0.28 - 0.193) - 0.1 / sqrt((0.28(1 - 0.28)/200) + (0.193(1 - 0.193)/150)) = 0.287
+  \item Aplicar el criterio de decisi\'on\\
+  Como $Z_o$$<$1.645; aceptamos $H_o$
+\end{itemize}
+
+Es decir, que la marca A no desplaza a la marca B en un 10\%.
+<<>>=
+# Construyendo una funci\'on en R para realizar la prueba de hip\'otesis.
+Prueba.difeprop <- function(nA, nB, XA, XB, po, H1="Distinto", alfa=0.05)
+{
+op <- options(); 
+options(digits=8)
+PA = XA/nA  
+PB = XB/nB
+PE = (XA + XB)/(nA + nB)
+CM = (PE*(1 - PE))/nA
+MC = (PE*(1 - PE))/nB
+Zo <- ((PA - PB) - 0.1) /sqrt(CM + MC) #calcula el estad\'istico de prueba 
+# Si lower.tail = TRUE (por defecto), P[X <= x], en otro caso P[X > x] 
+if (H1 == "Menor" || H1 == "Mayor") 
+{ 
+Z <- qnorm(alfa, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba unilateral 
+valores <- rbind(Prop_Estimada=PE, Prop_Hipotetica=po, Z_critico=Z,Estadistico= Zo) 
+} 
+else 
+{ 
+Z <- qnorm(alfa/2, mean=0, sd=1, lower.tail = FALSE, log.p = FALSE) 
+# calcula los valores cr\'iticos de la distribuci\'on N(0;1) en el caso de una 
+# prueba  bilateral 
+valores <- rbind(Prop_Estimada=PE, Prop_Hipotetica =po, Z_critico_menor=-Z, 
+Z_critico_mayor =Z, Zo) 
+} # esto es para encontrar los valores cr\'iticos 
+if (H1 == "Menor") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico>=", round(-Z,3), 
+                        ", entonces aceptamos Ho") 
+} 
+if (H1 == "Mayor") 
+{ 
+if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                              ", entonces rechazamos Ho") 
+else decision <- paste("Como Estadistico <=", round(Z,3), 
+                       ", entonces aceptamos Ho") 
+} 
+if (H1 == "Distinto") 
+{ 
+ if (Zo < -Z) decision <- paste("Como Estadistico <", round(-Z,3), 
+                                ", entonces rechazamos Ho") 
+ if (Zo > Z) decision <- paste("Como Estadistico >", round(Z,3), 
+                               ", entonces rechazamos Ho") 
+ else decision <- paste("Como Estadistico pertenece a [", round(-Z,3), ",", 
+round(Z,3), "], entonces aceptamos Ho") 
+} # esto para llevar a cabo los contraste de hip\'otesis 
+print(valores) 
+print(decision) 
+options(op) # restablece todas las opciones iniciales 
+} 
+# note que en la funci\'on anterior, el argumento "H1" especifica el 
+# tipo de contraste que se est\'a realizando, bilateral (H1= "Distinto") o 
+# unilateral (H1= "Menor" o H1= "Mayor") ejecute las siguientes instrucciones y 
+# comente sobre los resultados y diferencias obtenidas en cada caso. 
+Prueba.difeprop (200, 150, 56, 29, 0.1, H1="Menor", alfa=0.05) 
+Prueba.difeprop (200, 150, 56, 29, 0.1, H1="Mayor", alfa=0.05) 
+Prueba.difeprop (200, 150, 56, 29, 0.1, H1="Distinto", alfa=0.05)
+@
+
+Nota: R tiene incorporada una funci\'on propia para contrastar \'unicamente la hip\'otesis de igualdad de dos proporciones, es decir, para contrastar $H_o$: $P_A$ = $P_B$, un contraste en el cual la hip\'otesis sea como la anterior no es permitido en R. La funci\'on a  utilizar es prot.test() \'unicamente considerar los observaciones comentadas al caso cuando se presentaron los intervalos de confianza para dos poblaciones.\\
+
+
+\section{PRUEBAS SOBRE DOS MUESTRAS INDEPENDIENTES}
+
+
+Volviendo al problema de la importancia del estado nutricional (introducido en la practica 21) en pacientes diab\'eticos (pacientes) y saludables (grupo control) con complicaciones. Los datos se muestran en los siguientes cuadros.
+
+<<>>=
+sujecto <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+                       18); 
+sujecto  
+IMC_Control <- c(23.6, 22.7, 21.2, 21.7, 20.7, 22.0, 21.8, 24.2, 20.1,
+                 21.3, 20.5, 21.1, 21.4, 22.2, 22.6,
+                 20.4, 23.3, 24.8); 
+IMC_Control
+hoja1 <- data.frame(Sujecto=sujecto, IMC_Control=IMC_Control); hoja1 
+@
+
+<<>>=
+sujecto <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14); 
+sujecto  
+IMC_Pacientes <- c(25.6, 22.7, 25.9, 24.3, 25.2, 29.6, 21.3, 25.5, 27.4, 
+                   22.3, 24.4, 23.7, 20.6, 22.8)
+IMC_Pacientes
+hoja1 <- data.frame(Sujecto=sujecto, IMC_Pacientes=IMC_Pacientes); hoja1
+@
+
+Suponga ahora que los sujetos del grupo 1 y 2 corresponden a muestras de una supuesta poblaci\'on subyacente. El test implicado intentar\'a probar si ambas medias no difieren, lo que implica que ambas muestras provienen de la misma poblaci\'on y contrariamente si difieren.\\
+
+En el caso de contar con dos muestras, para nuestro ejemplo los grupos control y de pacientes, la prueba m\'as difundida es la "t-Student". La prueba  t es la prueba param\'etrica m\'as utilizada; la misma est\'a basada en el c\'alculo del estad\'istico t y de los grados de libertad, con estos dos resultados y utilizando o bien una tabla o bien un c\'alculo de la distribuci\'on t se puede calcular el valor de P.\\
+
+La prueba t de Student se basa en los dos siguientes supuestos:
+\begin{itemize}
+  \item La distribuci\'on de los datos en cada una de las poblaciones es normal,
+  \item Las muestras son independientes entre s\'i, y 
+\end{itemize}
+
+\begin{description}
+  \item * Las hip\'otesis a contrastar son:\\ 
+  $H_o$: $\μ_1$ = $\μ_2$\\
+  $H_1$: $\μ_1$ distinto $\μ_2$
+\end{description}
+
+En la pr\'actica 21 se realiz\'o el contraste de normalidad para ambas muestras, aceptado la normalidad de los datos en ambos casos.\\
+
+En lenguaje R est\'a implementada la prueba t, el siguiente c\'odigo ejemplo la calcula para las dos muestras: 
+
+<<>>=
+# Primero digitamos las observaciones correspondientes a ambas muestras
+
+IMC_Control <- c(23.6, 22.7, 21.2, 21.7, 20.7, 22.0, 21.8, 24.2, 20.1, 21.3, 
+                 20.5, 21.1, 21.4, 22.2, 22.6, 20.4, 23.3, 24.8) 
+
+IMC_Pacientes <- c(25.6, 22.7, 25.9, 24.3, 25.2, 29.6, 21.3, 25.5, 27.4, 22.3, 
+                   24.4, 23.7, 20.6, 22.8)
+
+# Realizamos el contraste de igualdad de medias 
+
+t.test(IMC_Control, IMC_Pacientes, var.equal=TRUE, mu=0)
+
+# Se concluye entonces que existe diferencia significativa en el IMC para ambos 
+# grupos de pacientes, pues el p valor de la prueba resulta ser muy peque\~no. 
+@
+
+Note que en var.equal= TRUE se especifica si la varianza de ambas poblaciones son iguales, en caso de ser distintas debe usarse var.equal= FALSE. Adem\'as, no es necesario especificar el nivel de confianza de la prueba, puesto no afecta nuestra decisi\'on. Mientras que en mu=0 se especifica el valor te\'orico de la diferencia de medias (inclusive puede ser cualquier valor distinto de cero).\\
+
+\section{PRUEBAS SOBRE DOS MUESTRAS PAREADAS.}
+
+
+El ejemplo anterior fue sobre dos muestras provenientes de dos grupos de distintos sujetos, en ciertas ocasiones necesitamos trabajar sobre un mismo grupo de sujetos al cual se les observa en forma repetida; por ejemplo antes y despu\'es de un tratamiento, en este caso los sujetos son controles de ellos mismos. La prueba t es distinta para poder tener en cuenta que las observaciones son repetidas sobre el mismo grupo de sujetos. Se define una nueva variable la cual es \'unicamente la diferencia entre las observaciones correspondientes de un mismo individuo (antes-despu\'es), y considerar a las diferencias as\'i obtenidas como una nueva muestra, con el cual se contrastar\'a la hip\'otesis de que la media poblacional es nula (equivalente a la igualdad de medias de ambas poblaciones).\\
+
+La tabla 4 muestra los datos simulados (con fines did\'acticos), de las observaciones de la presi\'on arterial sist\'olica (PAS) en un grupo de 10 pacientes antes y despu\'es de un tratamiento consistente en una dieta especial de bajo sodio y medicamentos.\\
+
+Tabla 3: Presi\'on Arterial Sist\'olica (PAS) antes y despu\'es del tratamiento. 
+<<>>=
+sujecto <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10); 
+sujecto 
+
+PAS.Antes <- c(160, 155, 180, 140, 150, 130, 190, 192, 170, 165)
+PAS.Antes
+
+PAS.Despues <- c(139, 135, 175, 120, 145, 140, 170, 180, 149, 146)
+PAS.Despues
+
+hoja1 <- data.frame(Sujecto=sujecto, PAS.Antes=PAS.Antes, PAS.Despues=PAS.Despues); hoja1
+@
+
+\begin{itemize}
+  \item Las hip\'otesis a contrastar son:\\
+  $H_o$: $\μ_1$ = $\μ_2$  (Es decir la PAS es igual antes y despu\'es del tratamiento.)\\
+  $H_1$: $\μ_1$ distinto $\μ_2$
+\end{itemize}
+
+Como siempre primero verificamos la normalidad de las variable de inter\'es, los resultados de las pruebas Shapiro-Wilk y Kolmogorov-Smirnov fueron:
+\begin{description}
+  \item a) antes del tratamiento: P = 0.89 y P = 0.99, y
+  \item b) despu\'es del tratamiento: P = 0.40 y P = 0.65; la normalidad de las muestras es aceptada.
+\end{description}
+
+El c\'odigo en lenguaje R para calcular la prueba t para dos muestras apareadas es el siguiente:
+
+<<>>=
+#introduciendo los datos 
+
+PAS.antes <- c(160, 155, 180, 140, 150, 130, 190, 192, 170, 165) 
+
+PAS.despues <- c(139, 135, 175, 120, 145, 140, 170, 180, 149, 146)
+
+#verificando la normalidad 
+
+shapiro.test(PAS.antes) 
+
+shapiro.test(PAS.despues)
+
+ks.test(PAS.antes,"pnorm",mean=mean(PAS.antes),sd=sd(PAS.antes)) 
+
+ks.test(PAS.despues,"pnorm",mean=mean(PAS.despues),sd=sd(PAS.despues))
+
+#realizando la prueba t 
+
+t.test(PAS.antes, PAS.despues, paired=TRUE, mu=0) 
+
+# El valor del estad\'istico t es 4.0552, con gl = 9, P = 0.0029. Con estos 
+# resultados se rechaza Ho y por lo tanto se concluye que la PAS antes y despu\'es 
+# del tratamiento es distinta, es decir, el tratamiento ha sido efectivo. 
+@
+
+Note que en la instrucci\'on paired=TRUE indicamos que se tratan de muestras dependientes 
+(pareadas). Del mismo modo no es necesario especificar el nivel de confianza (significancia) en la prueba, pues el p valor no se ve afectado. Adem\'as en mu=0 especificamos el valor te\'orico (hipot\'etico) de la diferencia de medias.\\
+
+
+\section{PRUEBA DE HIP\'OTESIS ACERCA DE LA VARIANZA DE DOS POBLACIONES.}
+
+
+El director de una sucursal de una compa\~nía de seguros espera que dos de sus mejores agentes consigan formalizar por t\'ermino medio el mismo número de p\'olizas mensuales. Los siguientes datos indican las p\'olizas formalizadas en los \'ultimos 5 meses por ambos agentes. 
+
+<<>>=
+Agente_A <- c(12, 11, 18, 16, 13)
+
+Agente_B <- c(14, 18, 18, 17, 16)
+
+hoja1 <- data.frame(Agente_A, Agente_B); hoja1
+@
+
+Admitiendo que el n\'umero de p\'olizas contratadas mensualmente por los dos agentes son variables aleatorias independientes y distribuidas normalmente, pruebe la igualdad de varianzas con un nivel de significaci\'on de 5\%.\\
+
+\begin{itemize}
+  \item Las hip\'otesis a contrastar son:\\
+  $H_o$: $sigma_1$ = $sigma_2$\\
+  $H_1$: $sigma_1$ distinto $sigma_2$
+\end{itemize}
+
+El c\'odigo en lenguaje R para calcular la prueba t para dos muestras apareadas es el siguiente:
+<<>>=
+#introduciendo los datos 
+
+Agente_A <- c(12, 11, 18, 16, 13) 
+
+Agente_B <- c(14, 18, 18, 17, 16)
+
+# realizando el contraste de igualdad de varianzas
+
+var.test(Agente_A, Agente_B) 
+
+# Como el p valor es alto se concluye que las varianzas pueden considerarse 
+# iguales. 
+@
+
+\textbf{Ejercicio:}\\
+ \textbf{Realizar una comparaci\'on de medias para los datos que se muestran a continuaci\'on.}\\
+ 
+Las tablas 5a y 5b muestran las observaciones de densidad de potencia espectral (DPE) calculados sobre los intervalos RR (RRi) provenientes de 30 minutos de ECG en reposo, en dos grupos: control y de pacientes con neuropat\'ia auton\'omica cardiaca (datos simulados con fines did\'acticos).\\ 
+
+Realiza la prueba en los siguientes pasos:
+\begin{enumerate}
+  \item Primero contrastar la igualdad de varianzas. 
+  \item Luego realizar el contraste de igualdad de medias. 
+\end{enumerate}
+
+\begin{center}
+Tabla 5a: DPE RRi grupo control (en $ms^2$)
+\end{center}
+
+<<>>=
+sujecto <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 
+             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 
+             37, 38, 39, 40) 
+sujecto 
+
+Tabla_A <- c(2098, 2082, 2246, 2340, 2714, 2777, 2625, 2388, 2766, 3112, 3030, 
+             3375, 3038, 3017, 3136, 3204, 3174, 3220, 3464, 3870, 3689, 3783, 
+             3457, 4151, 4230, 3707, 4158, 4315, 4790, 4464, 4499, 4819, 4739, 
+             4912, 4494, 5698, 6349, 6630, 7585,8183)
+Tabla_A
+
+hoja1 <- data.frame(sujecto=sujecto, Tabla_A=Tabla_A); hoja1
+@
+
+\begin{center}
+Tabla 5b: DPE RRi grupo pacientes (en $ms^2$)
+\end{center}
+
+<<>>=
+sujecto <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 
+             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 
+             37, 38, 39, 40) 
+sujecto 
+
+Tabla_B<- c(1209, 1115, 1151, 1208, 1170, 1198, 1390, 1480, 1359, 1337, 1415, 
+            1530, 1453, 1324, 1477, 1501, 1661, 1562, 1764, 1796, 1976, 1802,
+            2000, 1923, 2097, 2110, 2214, 2069, 2324, 2309, 2353, 2091, 2187,
+            2399, 2630, 2722, 2998, 3392, 3379, 3627)
+
+Tabla_B
+
+hoja1 <- data.frame(sujecto=sujecto, Tabla_B=Tabla_B); hoja1
+@
+
+\textbf{Solucci\'on:}
+
+\begin{enumerate}
+  \item Primero contrastar la igualdad de varianzas.
+
+<<>>=
+# introduciendo los datos 
+
+Tabla_A <- c(2098, 2082, 2246, 2340, 2714, 2777, 2625, 2388, 2766, 3112, 3030, 
+             3375, 3038, 3017, 3136, 3204, 3174, 3220, 3464, 3870, 3689, 3783, 
+             3457, 4151, 4230, 3707, 4158, 4315, 4790, 4464, 4499, 4819, 4739, 
+             4912, 4494, 5698, 6349, 6630, 7585,8183)
+
+Tabla_B<- c(1209, 1115, 1151, 1208, 1170, 1198, 1390, 1480, 1359, 1337, 1415, 
+            1530, 1453, 1324, 1477, 1501, 1661, 1562, 1764, 1796, 1976, 1802,
+            2000, 1923, 2097, 2110, 2214, 2069, 2324, 2309, 2353, 2091, 2187,
+            2399, 2630, 2722, 2998, 3392, 3379, 3627)
+
+# realizando el contraste de igualdad de varianzas
+
+var.test(Tabla_A, Tabla_B) 
+
+# Como el p valor es bajo se concluye que las varianzas pueden considerarse iguales. 
+@
+
+\item Luego realizar el contraste de igualdad de medias.
+
+<<>>=
+# Primero digitamos las observaciones correspondientes a ambas muestras 
+
+Tabla_A <- c(2098, 2082, 2246, 2340, 2714, 2777, 2625, 2388, 2766, 3112, 3030, 
+             3375, 3038, 3017, 3136, 3204, 3174, 3220, 3464, 3870, 3689, 3783, 
+             3457, 4151, 4230, 3707, 4158, 4315, 4790, 4464, 4499, 4819, 4739, 
+             4912, 4494, 5698, 6349, 6630, 7585,8183)
+
+Tabla_B<- c(1209, 1115, 1151, 1208, 1170, 1198, 1390, 1480, 1359, 1337, 1415, 
+            1530, 1453, 1324, 1477, 1501, 1661, 1562, 1764, 1796, 1976, 1802,
+            2000, 1923, 2097, 2110, 2214, 2069, 2324, 2309, 2353, 2091, 2187,
+            2399, 2630, 2722, 2998, 3392, 3379, 3627)
+
+# Realizamos el contraste de igualdad de medias 
+
+t.test(Tabla_A, Tabla_B, var.equal=TRUE, mu=0)
+
+# Se concluye que existe diferencia significativa en la densidad de potencia 
+# espectral (DPE) para ambos grupos, puesto que el p valor de la prueba 
+# resulta ser muy peque\~no.
+@
+\end{enumerate}
+\end{document}

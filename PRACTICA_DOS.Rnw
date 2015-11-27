@@ -1,0 +1,517 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Defincion}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estadist\'ica}\\[1.25cm]
+{\large Control Estad\'istico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboracion}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposicion}[section]
+
+\lhead{Practica 02}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{CREACI\'ON Y MANEJO DE VECTORES DE DATOS}
+
+\subsection{VECTORES NUM\'ERICOS}
+\textbf{FORMA 1-Crear un vector num\'erico vac\'io y a\~nadirle luego sus elementos.}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+v <- numeric(3);v
+# El vector tiene longitud 3 y sus componentes ser\'an NA (datos omitidos o faltantes).
+@
+\item Ejemplo 2: 
+<<>>=
+v[3] <- 17; v
+# Asigna el valor de 17 en la tercera posici\'on del vector v.
+@
+\end{itemize}
+
+
+\textbf{FORMA 2-Crear un vector num\'erico asign\'andole todos sus elementos o valores.}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+x <- c(2, 4, 3.1, 8, 6);
+x;
+is.integer(x);
+is.double(x);
+length(x)
+@
+\item Ejemplo 2: Modifique el vector agreg\'andole el valor 9 en la posici?n 3
+<<>>=
+#x <- edit(x)
+@
+\end{itemize}
+
+\textbf{FORMA 3-Crear un vector num\'erico dando un rango de valores}
+\begin{itemize}
+\item Ejemplo 1: 
+<<>>=
+y = 1:4; 
+y
+# Crea un vector de valores enteros en que su primer elemento es 1 su \'ultimo es 4
+@
+\item Ejemplo 2: Modificaci\'on de los elementos de un vector
+<<>>=
+y[2] <- 5;
+y
+@
+\item Ejemplo 3: Crear un vector con elementos de otro
+<<>>=
+u <- 1:12; 
+u;
+u1=u[2 * 1:5];
+u1
+# Vector de tama?o 5 con elementos de las posiciones pares de u
+@
+\end{itemize}
+
+\textbf{FORMA 4-Crear un vector nu\'erico utilizando la funci\'on assign()}
+\begin{itemize}
+\item Ejemplo 1
+<<>>=
+assign("z", c(x, 0, x)); 
+z
+# Crea un vector en dos copias de x con un cero entre ambas
+@
+\end{itemize}
+
+\newpage
+
+\textbf{FORMA 5-Crear un vector num\'erico generando una sucesi\'on de valores}
+\begin{itemize}
+\item Ejemplo 1: 
+<<>>=
+s1 <- seq(2, 10); 
+s1
+# Comp\'arese a como fue generado el vector y y u
+@
+\item Ejemplo 2:
+<<>>=
+s2 = seq(from=-1, to=5); 
+s2
+# Crea un vector cuyo elemento inicial es 1 y su elemento final es 5, y cada dos
+#elementos consecutivos del vector tienen una diferencia de una unidad.
+@
+\item Ejemplo 3:
+<<>>=
+s3<-seq(to=2, from=-2); 
+s3
+# Note que puede invertir el orden de "to" y de "from"
+@
+\item Ejemplo 4: Secuencia con incremento o decremento:
+<<>>=
+s4=seq(from=-3, to=3, by=0.2); 
+s4
+# Crea una secuencia que inicia en -3 y termina en 3 con incrementos de 0.2 en 0.2.
+@
+\item Ejemplo 5. Repetici\'on de una secuencia
+<<>>=
+s5 <- rep(s3, times=3); 
+s5
+@
+\end{itemize}
+
+
+\subsubsection{OPERACIONES CON VECTORES NUM\'ERICOS}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+1/x;
+x
+# Observe que calcula el inverso de cada elemento del vector
+@
+\item Ejemplo 2:
+<<>>=
+v=2*x+z+1; 
+v 
+# Genera un nuevo vector, v, de longitud 11, construido sumando,
+# elemento a elemento, el vector 2*x repetido 2.2 veces, el vector y, 
+# y el n?mero 1 repetido 11 veces "Reciclado en R es repetir 
+# las veces necesarias un vector cuando en una 
+# operaci?n intervienen vectores de distinta longitud"
+@
+\item Ejemplo 3:
+<<>>=
+e1 <- c(1, 2, 3, 4); 
+e2<-c(4, 5, 6, 7); 
+crossprod(e1, e2) 
+# Calcula el producto interno entre dos vectores. 
+# Ambos deben tener el mismo número de elementos.
+@
+<<>>=
+t(e1)%*%e2 
+# Calcula el producto interno entre dos vectores. 
+# Ambos deben tener el mismo n?mero de elementos.
+@
+\end{itemize}
+
+\subsubsection{OPERACIONES DE FUNCIONES SOBRE VECTORES NUM\'ERICOS}
+\begin{itemize}
+\item Ejemplo 1: Vector transpuesto del vector x:
+<<>>=
+xt = t(x); 
+xt
+@
+\item Ejemplo 2: 
+<<>>=
+u = exp(y);
+y;
+u 
+# Crea un nuevo vector de la misma longitud que y, en el cual cada
+# elemento es la exponencial elevando a su respectivo elemento en y
+@
+<<>>=
+options(digits=10); 
+u 
+# Permite visualizar un m\'inimo de 10 d\'igitos
+@
+\end{itemize}
+\newpage
+
+\textbf{OTRAS OPERACIONES:}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+resum <- c(length(y), sum(y), prod(y), min(y), max(y)); 
+y;
+resum
+@
+\item Ejemplo 2: Ordenamiento de un vector
+<<>>=
+yo <- sort(y); 
+y;
+yo
+@
+\end{itemize}
+
+\subsection{VECTORES DE CARACTERES}
+\textbf {FORMA 1-Crear un vector de caracteres vac\'io y a\~nadirle luego sus elementos}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+S<-character()
+@
+\end{itemize}
+
+\textbf {FORMA 2-Crear un vector de caracteres asign\'andole todos sus elementos}
+\begin{itemize}
+\item Ejemplo 1: Crear el vector de caracteres:
+<<>>=
+deptos <- c("Santa Ana", "Sonsonate", "San Salvador"); 
+deptos
+@
+\item Ejemplo 2: Agregue el elemento "Ahuachap\'an" en la cuarta posici\'on.
+<<>>=
+deptos[4]="Ahuachap\'an"; 
+deptos 
+# R Permite incrementar el tama\~no del vector en cualquier instante.
+@
+\end{itemize}
+
+\textbf {FORMA 3-Crear un vector de caracteres d\'andole nombres a los elementos para identificarlos m\'as f\'acilmente}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+codDeptos <- c(11, 12, 13, 14)
+names(codDeptos) <- c("Usulut\'an", "San Miguel", "Moraz\'an", "La Uni\'on");
+codDeptos
+Oriente <- codDeptos [c("La Uni\'on", "San Miguel")];
+Oriente
+@
+\item Ejemplo 2: Crear un vector con las etiquetas X1, Y2, ... , X9, Y10
+<<>>=
+etiqs<-paste(c("X", "Y"), 1:10, sep=""); 
+etiqs
+# Crea un vector de caracteres resultado de la Uni\'on de "X" o de "Y"
+# con uno de los n\'umero comprendidos entre 1 y 10, sep=""
+# indica que no se deja espaciado en la Uni\'on.
+@
+\end{itemize}
+\newpage
+
+\section{CREACI\'ON Y MANEJO DE MATRICES}
+\subsection{CREACI\'ON DE MATRICES NUM\'ERICAS}
+\textbf {FORMA 1-Crear una matriz num\'erica vac\'ia y a\~nadirle luego sus elementos}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+M <- matrix(numeric(), nrow = 3, ncol=4);
+M
+@
+\item Ejemplo 2: Asignaci\'on de los elementos de una matriz:
+<<>>=
+M[2,3] <- 6; 
+M
+# Similar a la de un vector pero considerando que deben utilizarse 
+#dos \'indices para indicar fila y columna.
+@
+\end{itemize}
+
+\textbf {FORMA 2-Crear una matriz num?rica asign\'andole todos sus elementos o valores}
+\begin{itemize} 
+\item Ejemplo 1:
+<<>>=
+A <- matrix(c(2, 4, 6, 8, 10, 12), nrow=2, ncol=3); 
+A;
+mode(A); 
+dim(A); 
+attributes(A); 
+is.matrix(A); 
+is.array(A)
+# Observe que R almacena los elementos por columna.  
+@
+\end{itemize}
+
+\textbf {FORMA 3-Crear una matriz num\'erica dando un rango de valores}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+B <- matrix(1:12, nrow=3, ncol=4); 
+B
+@
+\end{itemize}
+
+\textbf {FORMA 4-Crear una matriz a partir de la uni\'on de vectores}
+\begin{itemize}
+\item Crear tres vectores
+<<>>=
+x1 <- seq(0, 10, 2); 
+x1
+x2 <- seq(1, 11, 2); 
+x2
+x3 <- runif(6); 
+x3 # Vector con valores de una uniforme(0,1)
+@
+\item Unir los tres vectores en una matriz por columnas.
+<<>>=
+Xcol <- cbind(x1, x2, x3); 
+Xcol
+@
+\item Unir los tres vectores en una matriz por filas.
+<<>>=
+Xfil <- rbind(x1, x2, x3); 
+Xfil
+@
+\item Acceso a las filas y columnas de una matriz.
+<<>>=
+X <- Xfil[1:3, c(2, 3)]; 
+X 
+# Crea una submatriz de dimensi\'on 3x2 (el 3 se indica por 1:3), las
+# columnas est\'an conformadas por la segunda y tercera columna de la 
+# matriz Xfill (se indica por C(2,3))
+@
+\end{itemize}
+
+\subsection{OPERACIONES CON MATRICES NUM\'ERICAS}
+
+\textbf {MULTIPLICACI\'ON DE MATRICES NUM\'ERICAS:}
+
+\begin{itemize}
+\item Ejemplo 1: Multiplicaci\'on de un vector por una matriz:
+<<>>=
+v<-c(1, 2); 
+v %*%A
+@
+\item Ejemplo 2: Multiplicaci\'on de matrices:
+<<>>=
+P <- A %*% B; 
+P
+@
+\item Ejemplo 3: Multiplicaci\'on de un escalar por una matriz:
+<<>>=
+2*A
+# N?tese que al usar 2%*%A se obtiene un error pues las 
+# dimensiones no son compatibles.
+@
+\end{itemize}
+
+\textbf {OPERACIONES DE FUNCIONES SOBRE MATRICES NUM?RICAS:}
+
+\begin{itemize}
+\item Ejemplo 1: Longitud o n?mero de elementos:
+<<>>=
+A; 
+length(A)
+@
+\item Ejemplo 2:
+<<>>=
+T=sqrt(B); 
+B; 
+T 
+# Observe que la ra?z se saca a cada elemento de la matriz
+@
+\item Ejemplo 3: Transpuesta de una matriz:
+<<>>=
+A;
+t(A)
+@
+\item Ejemplo 4: Determinante de una matriz:
+<<>>=
+C <- matrix(c(2, 1, 10, 12), nrow=2, ncol=2); 
+C
+det(C)
+@
+\item Ejemplo 5: Inversa de una matriz, resulta de resolver el sistema Ax = b con b=I:
+<<>>=
+InvC <- solve(C) ; 
+C;
+InvC
+@
+O tambi?n:
+<<>>=
+b=diag(2); InvC<-solve(C, b); 
+C;
+InvC
+@
+\item Ejemplo 6: Autovalores y autovectores de uma matriz sim\'etrica:
+<<>>=
+C;
+eigen(C)
+@
+\item Ejemplo 7: La funci\'on diag(nombMatriz), devuelve un vector formado por los elementos en la
+diagonal de la matriz nombMatriz.
+<<>>=
+A;
+diag(A)
+@
+\item Ejemplo 8: La funci\'on diag(nomVector), devuelve una matriz diagonal cuyos elementos en la diagonal son los elementos del vector nomVector.
+<<>>=
+y;
+diag(y)
+@
+\item Ejemplo 9: La funci\'on diag(escalar), devuelve la matriz identidad de tama\~no nxn.
+<<>>=
+diag(4)
+@
+\end{itemize}
+
+\textbf {OTRAS OPERACIONES:}
+
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+A;
+c(length(A), sum(A), prod(A), min(A), max(A))
+@
+\item Ejemplo 2:
+<<>>=
+O <- matrix(sort(C), nrow=2, ncol=2); 
+O
+# sort() genera um vector en los cual sus elementos han sido ordenados 
+# de menor a mayor a partir de los elementos de la matriz C
+@
+\end{itemize}
+\newpage
+
+\subsection{CREACI\'ON DE UNA MATRIZ DE CADENAS}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+nombres <- matrix(c("Carlos", "Jos\'e", "Ana", "Ren?", "Mar?a", "Mario"),nrow=3, 
+                  ncol=2); 
+nombres
+@
+\end{itemize}
+
+\section{CREACI\'ON Y MANEJO DE MATRICES INDEXADAS (ARRAY)}
+Una variable indexada (array) es una colecci\'on de datos, por ejemplo num\'ericos, indexada por varios \'indices. R permite crear y manipular variables indexadas en general y en particular, matrices. Una variable indexada puede utilizar no s\'olo un vector de \'indices, sino incluso una variable indexada de ?ndices, tanto para asignar un vector a una colecci\'on irregular de elementos de una variable indexada como para extraer una colecci\'on irregular de elementos.\\\\
+Un vector es un array unidimensional y una matiz es un array bidimensional.\\\\
+Una variable indexada se construye con la funci\'on array(), que tiene la forma general siguiente:
+\textbf {NombMatriz <- array(vector-de-datos, vector-de-dimensiones)}
+\begin{itemize}
+\item Ejemplo 1:
+<<>>=
+X <- array(c(1, 3, 5, 7, 9, 11), dim=c(2, 3)); 
+X
+@
+\item Ejemplo 2:
+<<>>=
+Z <- array(1, c(3, 3)); 
+Z
+@
+\item Ejemplo 3: Operaciones aritm\'eticas:
+<<>>=
+W <- 2*Z+1; 
+W
+@
+\newpage
+\item Ejemplo 4: Operaciones con funciones:
+<<>>=
+TX <- t(X); 
+TX
+@
+\item Ejemplo 5: Producto exterior de dos vectores con: operador %o%
+<<>>=
+a <- c(2, 4, 6); 
+a
+b <- 1:3;
+b
+M <- a %o% b; 
+M 
+# M es un array o matriz
+@
+Nota: c = a * b; c devuelve un vector con el producto de elemento por elemento
+<<>>=
+c = a * b; 
+c
+@
+\newpage
+\item Ejemplo 6. Una matriz de tres dimensiones (i, j, k)
+<<>>=
+Arreglo3 <- array(c(1:8, 11:18, 111:118), dim = c(2, 4, 3));
+Arreglo3 
+# Un arreglo de 3 matrices cada una de 2 filas y 4 columnas.
+@
+
+
+\end{document}

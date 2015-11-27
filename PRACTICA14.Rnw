@@ -1,0 +1,480 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\ [0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\ [0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD TRES"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr?ctica 14}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{INTRODUCCI\'ON A LAS DISTRIBUCIONES DE PROBABILIDAD.}
+
+
+La teor\'ia de la probabilidad y de variable aleatoria van a permitir establecer un amplio cat\'alogo de modelos te?ricos, tanto discretos como continuos, con los cuales se van a poder asimilar muchas de las situaciones de la vida real. El estudio de los modelos te\'oricos, incluyendo la caracterizaci\'on a trav\'es de sus par\'ametros, el c\'alculo de probabilidades en sus distintos formatos y la generaci\'on de n\'umeros aleatorios, van a facilitar enormemente el an?lisis de estas situaciones reales, algunos ejemplos de estos fen\'omenos son:\\
+
+\begin{itemize}
+  \item Si se contesta al azar un examen tipo test de 10 preguntas, donde cada una de ellas tiene 4 posibilidades siendo s\'olo una de ellas la correcta, Qu\'e n\'umero de aciertos es m\'as probable? 
+  \item Se sabe que las bombillas de bajo consumo de 14 w tienen una vida media \'util de 10,000 horas, mientras que las bombillas cl\'asicas por incandescencia de 60 w tienen una vida media \'util de 1,000 horas. Si cada d?a se encienden unas 4 horas Cu\'al es la probabilidad de que despu\'es de un a\~o est\'an funcionando las dos?, ?ninguna de las dos?, ?al menos una de las dos? 
+\end{itemize}
+
+El primer problema a resolver ser\'a la elecci\'on del modelo te\'orico apropiado para cada caso en estudio. Para tener un buen manejo matem\'atico de las distintas situaciones que se puedan plantear dada la distinta naturaleza y la diversidad de los resultados que proporcionan los experimentos, se necesita realizar una abstracci\'on cuantificada del experimento. Esto lleva a una primera gran clasificaci\'on entre modelos de probabilidad discretos y continuos.\\
+
+\\ Las probabilidades asociadas a cada uno de los valores de la variable aleatoria pueden ser organizadas como una distribuci\'on de probabilidad, expres\'andose mediante una tabla, una gr\'afica o una f\'ormula, denomin\'andose en este \'ultimo caso, a la regla de correspondencia-valores probabilidades, funci\'on de probabilidad.\\
+
+Como sabemos, los n\'umeros aleatorios son descritos por una distribuci\'on. Esto es, alguna funci\'on la cual especifica la probabilidad que un n\'umero aleatorio este en alg\'un rango, por ejemplo P(a$<$X$<$b). Frecuentemente es dada por una densidad de probabilidad (en el caso continuo) o por una funci\'on masa de probabilidad P(X=x)=p(x) en el caso discreto. Con R podemos obtener n?meros seleccionados aleatoriamente de diferentes distribuciones, para ello s\'olo tenemos que familiarizarnos con los par\'ametros que hay que dar a las funciones tal como la media, o una proporci\'on, etc (dependiendo de la distribuci\'pn que se est\'e considerando y de lo que se est\'e analizando).\\
+
+\newpage
+
+\section{DISTRIBUCIONES DISCRETAS}
+
+
+\begin{enumerate}
+\item \textbf{Distribuci\'on Binomial.}
+
+\begin{itemize}
+\item \textbf{Par\'ametros}
+\begin{center}
+\item x = n?mero de ?xitos
+\item size = n?mero de ensayos
+\item p = proporci?n de ?xitos
+\item lower.tail = TRUE P(X$<$=x)
+\item lower.tail = FALSE P(X$>$=x) 
+\item n = tama\~no de la muestra 
+\end{center}
+  
+\item \textbf{Sintasis en R.}\\
+
+\textbf{dbinom(x, size, prob, log = FALSE)}
+<<>>=
+dbinom(2, 4, 0.5, log = FALSE) 
+@
+
+\textbf{pbinom(x, size, prob, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+pbinom(7, 10, 0.3, lower.tail = TRUE, log.p = FALSE) 
+@
+
+\textbf{qbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+qbinom(0.3, 4, 0.5, lower.tail = TRUE, log.p = FALSE) 
+@
+
+\textbf{rbinom(n, size, prob)} 
+<<>>=
+rbinom(10, 4, 0.3) 
+@
+
+\end{itemize}
+
+\item  \textbf{Distribuci\'on Geom\'etrica}
+\begin{itemize}
+\item \textbf{Par\'ametros}
+\begin{center}
+x = ensayos necesarios para obtener el primer \'exito\\
+p = proporci?n de ?xitos\\
+lower.tail = TRUE P(X$<$=x)\\
+lower.tail = FALSE P(X$>$=x)\\ 
+n = tama\~no de la muestra 
+\end{center}
+  
+\item \textbf{Sintasis en R.}\\
+
+\textbf{dgeom(x, prob, log = FALSE)}
+<<>>=
+dgeom(4, 0.25, log = FALSE)
+@
+
+\textbf{pgeom(x, prob, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+pgeom(4, 0.25, lower.tail = TRUE, log.p = FALSE) 
+@
+
+\textbf{qgeom(p, prob, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+qgeom(0.75, 0.25, lower.tail = TRUE, log.p = FALSE) 
+
+@
+
+\textbf{rgeom(n, prob)}
+<<>>=
+rgeom(15, 0.25) 
+@
+\end{itemize}
+
+\item  \textbf{Distribuci\'on Hipergeom\'etrica}
+\begin{itemize}
+\item \textbf{Par\'ametros}
+\begin{center}
+\itm x = objetos seleccionados tipo m (primer tipo)
+\item m = total de objetos (primer tipo)
+\item n = total de objetos (segundo tipo)
+\item y = el n\'umero total de objetos seleccionados primer tipo y segundo tipo
+\item size = tama\~no de la muestra\\ 
+\end{center}
+  
+\item \textbf{Sintasis en R}
+
+\textbf{dhyper(x, m, n, y, log = FALSE)}
+<<>>=
+dhyper(8, 8, 5, 13, log = FALSE)
+@
+
+\textbf{phyper(x, m, n, y, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+phyper(5, 5, 14, 19, lower.tail = TRUE, log.p = FALSE) 
+@
+
+\textbf{qhyper(p, m, n, y, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+qhyper(0.25, 6, 5, 11, lower.tail = TRUE, log.p = FALSE)
+@
+
+\textbf{rhyper(size, n, m, n,y)}
+<<>>=
+rhyper(20, 4, 6, 10)
+@
+\end{itemize}
+
+\item  \textbf{Distribuci\'on Poisson}
+\begin{itemize}
+\item \textbf{Par\'ametros}
+\begin{center}
+\item x = valor cualqueira\\
+\item p = probabilidad \\
+\item lambda = media de la distribuci\'on\\
+\tem size = tama\~no de la muestra\\ 
+\end{center}
+  
+\item \textbf{Sintasis en R.}\\
+
+\textbf{dpois(x, lambda, log = FALSE)}
+<<>>=
+dpois(3, 0.8, log = FALSE)
+@
+
+\textbf{ppois(x, lambda, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+ppois(3, 7.5, lower.tail = TRUE, log.p = FALSE) 
+
+@
+
+\textbf{qpois(p, lambda, lower.tail = TRUE, log.p = FALSE)}
+<<>>=
+qpois(0.5162, 3.75, lower.tail = TRUE, log.p = FALSE) 
+@
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+
+Para cada una de las distribuciones discretas o continuas est?n disponibles las siguientes opciones:
+\begin{itemize}
+\item Gr\'afica de la distribuci\'on: Genera la gr\'afica de la funci\'on de probabilidad.
+\item Probabilidades: Determina la probabilidad deque la variable tome un valor dado. 
+\item Probabilidades Acumuladas: Calcula bien el valor de P(X$<$=x)(cola de la izquierda), o bien, P(X$>$x)(cola de la derecha) para cada cuantil(q) de X.
+\item Cuantiles: Permite calcular el valor de la variable que deja a derecha o a izquierda (seg\'un se seleccione) una determinada probabilidad. 
+\item Muestra de la distribuci\'on: Genera muestras aleatorias extra\'idas de la distribuci\'on. 
+\end{itemize}
+
+El Paquete R proporciona 4 funciones para cada distribuci\'on (ya sea continua o discreta) que pueden usarse escribiendo el nombre de la distribuci\'on, anteponi?ndole una d, si se quiere la funci\'on de densidad o la probabilidad de que la variable tome el valor especificado en x, es decir P(X=x); una p para la funci\'on de distribuci?n acumulada, es decir P(X$<$=x); una q para los cuantiles, es decir, el valor x de la distribuci\'on acumulada que deja un \'area igual p P(X$<$=x)=p, y una r para generar una muestra aleatoria de la distribuci\'on; \'unicamente hay que tener en cuenta la sintaxis presentada en el cuadro anterior.
+
+
+\section{C\'ALCULO DE PROBABILIDADES.}
+
+\begin{itemize}
+\item \textbf{Ejemplo 1:}\\
+
+Si un estudiante responde al azar a un examen de 8 preguntas de verdadero o falso.
+\begin{description}
+\item a) Cu\'al es la probabilidad de que acierte 4? P[X=4]
+ \end{description}
+La variable X="n\'umero de aciertos" sigue una distribuci\'on Binomial de par\'ametros n = 8 y p=1$/$2(p probabilidad de ?xito).
+<<>>=
+# Usando la funciones propias de R
+
+dbinom(4,8,0.5) 
+
+# dbinom calcula la probabilidad en un valor concreto 
+@
+
+\begin{description}
+   \item b) Cu\'al es la probabilidad de que acierte a lo sumo 2? P[X$<$=2]
+<<>>=
+x <- 2; n=8; p=1/2 
+
+pbinom(x, size = n, prob = p, lower.tail=TRUE) 
+
+# pbinom es la funcion de distribucion acumulada 
+@
+ \end{description}
+ 
+\begin{description}
+   \item b) ?Cu\'al es la probabilidad de que acierte 5 o m?s? P[X$>$=5]
+<<>>=
+x <- 4; n=8; p=1/2  
+
+#primera forma
+
+F <- 1 - pbinom(x, n, p, lower.tail=TRUE); F 
+@
+<<>>=
+#segunda forma
+
+pbinom(4, size=8, prob=0.5, lower.tail=FALSE) 
+@
+\end{description}
+
+\item \textbf{Ejemplo 2:}\\
+
+Una cierta \'area de Estados Unidos es afectada, en promedio, por 6 huracanes al a?o. Encuentre la probabilidad de que en un determinado a?o esta \'area sea afectada por:
+\begin{description}
+  \item a) Menos de 4 huracanes.P[X$<$4]=F(3)
+\end{description}
+Se define la variable X = "n\'umero de huracanes por a\~o" y asumiendo que dicha variable tiene una distribuci\'on de Poisson de par?metro lambda igual a 6, porque describe el n\'umero de \'exitos por unidad de tiempo y porque son independientes del tiempo desde el \'ultimo evento. Se calcular\'an ahora las probabilidades: 
+<<>>=
+x <- 3; mu <- 6 
+
+ppois(x, lambda = mu, lower.tail=TRUE) 
+@
+\begin{description}
+\item b) Entre 6 y 8 huracanes.P[6$<$=X$<$=8]=P[X$<$=8]-P[X$<$=5]=F(8)-F(5)
+\end{description}
+Para calcular la probabilidad de que ocurran entre 6 y 8 huracanes, se pueden sumar las probabilidades P(X=6)+P(X=7)+P(X=8)
+
+\textbf{# primera forma}
+<<>>=
+sum(dpois(c(6,7,8),lambda = 6)) 
+@
+
+\textbf{# segunda forma}
+<<>>=
+# O restar las probabilidades acumuladas, con la opcion Cola izquierda, 
+# P(X<=8)-P(X<=5).Como antes se realizan en primer lugar las probabilidades 
+# acumuladas y se restan los resultados obtenidos:
+
+F8 <- ppois(8, lambda = 6, lower.tail=TRUE) 
+F5 <- ppois(5,lambda = 6, lower.tail=TRUE) 
+F8 - F5 
+@
+\begin{description}
+  \item c) Represente gr\'aficamente la funci\'on de probabilidad de la variable aleatoria que mide el n\'umero de huracanes por a\~no.
+\end{description}
+
+<<>>=
+n <- 30 
+
+# genera 30 valores de una distribucion de Poisson con lambda igual a 6 
+
+x <- rpois(n, lambda=mu) 
+x <- rpois(30, lambda=6) 
+
+#calcula las probabilidades para cada valor generado 
+
+y <- dpois(x, lambda=mu)
+y <- dpois(x, lambda=6)
+
+
+#genera el grafico de distribuci?n
+
+plot(x, y, xlab="x", ylab="Funcion de probalidad", main="Distribucion 
+     de Poisson: lambda = 6", type="h")
+
+#une los puntos a las lineas
+
+points(x, y, pch=21) 
+@
+\item \textbf{Ejemplo 3:}\\
+
+En un juego se disponen 15 globos llenos de agua, de los que 4 tienen premio. Los participantes en el juego, con los ojos vendados, golpean los globos con un bate por orden hasta que cada uno consigue romper 2. 
+
+\begin{description}
+  \item a) Cu\'al es la probabilidad de que el primer participante consiga un premio?
+\end{description}  
+
+mero de premios conseguidos entre 2 posibles" sigue una distribuci\'on hipergeom\'etrica de par\'ametros m=11, n=4, K=2. 
+
+<<>>=
+x <- 0:2; m = 11; n <- 4; k=2 
+
+# x define el n\'umero de globos con premio 
+# se construye la distribucion de frecuencias del numero de premios 
+
+Tabla <- data.frame(Probabilidad=dhyper(x, m, n, k)) 
+rownames(Tabla) <- c("Ningun premio","Solamente uno", "Dos premios") 
+Tabla 
+@
+
+\begin{description}
+  \item b) Si el primer participante ha conseguido s\'olo un premio, cu\'al es la probabilidad de que el segundo participante consiga otro? 
+\end{description}
+
+Para el segundo participante la variable seguir\'a una hipergeom\'etrica de par\'ametros m= 10, n= 3 y k= 2, 
+
+<<>>=
+x = 1; m= 10; n= 3; k= 2; 
+dhyper(x, m, n, k) 
+@
+
+\item \textbf{Ejemplo 4:}\\
+Un vendedor de alarmas de hogar tiene \'exito enuna casa de cada diez que visita. 
+Calcula:
+
+\begin{description}
+\item a) La probabilidad de que en un da determinado consiga vender la primera alarma en la sexta casa que visita. 
+\end{description}
+
+Se define la variable X="n\'umero de casas que visita antes de conseguir vender la primera alarma", que sigue una distribuci\'on Geom\'etrica con Probabilidad de \'exito=0.1 \\
+
+Habr\'ia que calcular la probabilidadde que tenga 5 fracasos antes del primer \'exito, obteniendo de la tabla la probabilidad P(X=5)=0.059049
+
+<<>>=
+# x define el n\'umero de intentos fallidos
+
+x <- 0:5; p=0.1
+
+# creando la tabla de distribucion de frecuencias del n\'umero de intentos 
+# fallidos antes de obtener la primera venta. 
+
+Tabla <- data.frame(Probabilidad=dgeom(x, prob=p))
+
+# nombrando las filas de la distribuci\'on de frecuencias
+
+rownames(Tabla) <- c("Venta en el primer intento", 
+                     "Venta en el segundo intento", 
+                     "Venta en el tercer intento", 
+                     "Venta en el cuarto intento", 
+                     "Venta en el quinto intento", 
+                     "Venta en el sexto intento")
+
+Tabla 
+@
+
+\begin{description}
+  \item b) La probabilidad de que no venda ninguna despu\'es de siete viviendas visitadas. 
+\end{description}
+
+La variable X="n\'umero de alarmas vendidas en 7 viviendas" sigue una distribuci\'on Binomial con n=7 Ensayos binomiales y Probabilidad de \'exito p=0.1, luego en nuestro caso se tiene P(X=0)=0.4782969
+
+<<>>=
+x=0; n=7; p=0.1 
+dbinom(x, n, p, log = FALSE) 
+@
+
+\begin{description}
+  \item c) Si se plantea vender tres alarmas, cu\'al es la probabilidad deque consiga su objetivo en la octava vivienda que visita?  
+\end{description}
+
+Para abordar esta cuesti\'on, se define la variable Y= "n\'umero de casas que visita antes de conseguir vender la tercera alarma. Esta variable sigue una distribuci\'on Binomial Negativa de par\'ametros N\'umero de \'exitos= 3, Probabilidad de \'exito p=0.1, de donde: P(Y=5)=0.01240029
+
+<<>>=
+y <- 0:5; r=3; p <- 0.1 
+
+Tabla <- data.frame(Probabilidad=dnbinom(y, size=r, prob=p))
+
+rownames(Tabla) <- 0:5 
+
+Tabla 
+@
+\end{itemize}
+
+\section{GENERACI\'ON DE MUESTRAS ALEATORIAS DE LAS DISTRIBUCIONES.}
+
+
+\begin{itemize}
+\item \textbf{Ejemplo 1:} Generar 100 n\'umeros aleatorios de una distribuci?n Binomial de par\'ametros n=15 ensayos o pruebas y una probabilidad de \'exito de 0.25.
+
+<<>>=
+# Definir los parametros apropiados
+
+n <- 15; p <- 0.25 
+
+# generar 100 numeros aleatorios binomiales
+
+x = rbinom(100, n, p); x 
+
+# Histograma para la muestra aleatoria de tamaño 100
+
+hist(x, main="X ~ Binomial(n=15, p=0.25)", xlab="X = N?mero de exitos", 
+ylab="masa de probabilidad", probability=TRUE, col="blue") 
+
+# Graficar la funci?n de probabilidad te?rica, use la funci?n points(), no 
+# debe cerrar el gr?fico obtenido con la instrucci?n anterior
+
+xvals=0:n; points(xvals, dbinom(xvals, n, p), type="h", lwd=3) 
+points(xvals, dbinom(xvals, n, p), type="p", lwd=3)
+@
+
+\item \textbf{Ejemplo 2:}\\
+Generar 100 n\'umeros aleatorios de una distribuci\'on Poisson con 200000 ensayos o pruebas y una probabilidad de \'exito de 3/100000
+<<>>=
+# Definir los par?metros apropiados
+
+n <- 200000; p <- 3/100000; lambda=n*p
+
+# generar 100 n\'umeros aleatorios de la distribuci\'on
+
+x = rpois(100, lambda); x 
+
+# Histograma para la muestra aleatoria de tama\~no 100
+
+hist(x, main=expression(paste("X ~ Poisson( ", lambda, " = 6 )")), 
+xlab="X = Numero de eventos a una tasa constante", ylab="masa de 
+probabilidad", probability=TRUE, col="blue") 
+
+# Graficar la funci\'on de probabilidad teorica, use la funci\'on points()
+
+xvals=0:n; points(xvals, dpois(xvals, lambda), type="h", lwd=3) 
+points(xvals, dpois(xvals, lambda), type="p", lwd=3)
+@
+\end{itemize}
+\end{document}

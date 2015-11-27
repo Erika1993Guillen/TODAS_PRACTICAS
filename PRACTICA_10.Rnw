@@ -1,0 +1,301 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\ [0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\ [1.25cm]
+{\large Control Estad\'istico del Paquete R }\\ [2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD DOS"}}\\ [3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\ [2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 10}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\textbf {AN\'ALISIS DE UNA VARIABLE BIDIMENSIONAL (CATEG\'ORICA, CONTINUA)}\\\\
+
+\textbf{Ejemplo 1:}
+Se est\'an estudiando tres procesos (A, B, C) para fabricar pilas o bater\'ias. Se sospecha que el proceso incide en la duraci\'on (en semanas) de las bater\'ias, es decir, que la duraci\'on (en semanas) de los procesos es diferente. Se seleccionan aleatoriamente cinco bater\'ias de cada proceso y al medirles aleatoriamente su duraci\'on los datos que se obtienen\\\\
+
+\textbf{1) Activa tu directorio de trabajo}
+<<>>=
+getwd()
+setwd("C:/Users/User/Documents/TODAS_PRACTICAS")
+@
+
+\textbf{2) Crea un nuevo script y llamarle "Script10-DatosBivariados2"} \\\\
+
+\textbf{3) Crea un vector de datos para cada proceso descrito en el problema.} 
+<<>>=
+A <- c(100,96,92,96,92); A
+B <- c(76,80,75,84,82); B
+C <- c(108,100,96,98,100); C
+@
+\textbf{4) Crea una hoja de datos teniendo como componentes (columnas) los tres vectores (se puede hacer
+pues el n\'umero de datos en cada proceso es igual, de lo contrario se deber\'ia de crear dos variables
+una para la duraci\'on de cada proceso y otra para identificar a qu\'e proceso corresponde).} 
+<<>>=
+Baterias <- data.frame(procesoA=A, procesoB=B, procesoC=C);Baterias
+# Para editar los datos puede utilizar la funci?n fix() fix(Baterias)
+fix(Baterias)
+@
+\textbf{5) Guarda la hoja de datos en un archivo.}
+<<>>=
+write.table(Baterias, file="Baterias.txt", append=FALSE, quote=TRUE, sep=" ", na="NA",
+col.names=TRUE)
+
+@
+\textbf{6) Elimina todos objetos que existen en el espacio de trabajo (Workspace)}
+<<>>=
+ls(); rm(list=ls(all=TRUE)); ls()
+@
+\textbf{7) Recupera la hoja de datos, para probar si fue guardada.} 
+<<>>=
+Baterias <- read.table("Baterias.txt", header=TRUE); Baterias
+@
+\textbf{8) Conecta o adjunta la hoja de datos a la segunda ruta o lista de b?squeda.} 
+<<>>=
+attach(Baterias, pos=2)
+search()
+@
+\textbf{9) Dibuja un gr\'afico horizontal de puntos para los tres procesos.} 
+<<>>=
+stripchart(Baterias, main="Grafico de puntos para los tres procesos", method = "stack", vertical =
+FALSE, col="blue", pch=1, xlab="Duracion (semanas)", ylab="Proceso")
+# Note que con ayuda de este gr\'afico podemos observar s? los tres procesos se comportan de manera distinta o parecida en cuanto a duraci\'on en semanas de las bater\'ias.
+@
+\textbf{10) Muestra un resumen estad\'istico para los tres procesos.} 
+<<>>=
+summary(Baterias)
+@
+\textbf{11) Dibuja un gr\'afico de cajas (box-plot) para los tres procesos.}
+<<>>=
+# Horizontal
+boxplot(Baterias, width=NULL, varwidth=TRUE, names, add= FALSE, horizontal = TRUE,
+main="Grafico de caja por proceso", border=par("fg"), col=c("yellow", "cyan", "red"), 
+xlab ="Duracion (semanas)", ylab="Proceso")
+
+# Vertical
+boxplot(Baterias, width=NULL, varwidth=TRUE, names, add= FALSE, horizontal = FALSE,
+main="Grafico de caja por proceso", border=par("fg"), col=c("yellow", "cyan", "red"), 
+xlab ="Duracion (semanas)", ylab="Proceso")
+@
+\textbf{12) Presenta la matriz de covarianzas muestral.} 
+<<>>=
+options(digits=3) # s\'olo imprime 3 lugares decimales
+S <- var(Baterias); S
+@
+\textbf{13) Presenta la desviaci\'on est?ndar de cada proceso.}  
+<<>>=
+desv <- sd(procesoA); desv
+desv <- sd(procesoB); desv
+desv <- sd(procesoC); desv
+@
+\textbf{14) Realiza un an\'alisis de varianza de una v\'ia, para probar la hip\'otesis nula de que el proceso no influye en la duraci\'on de las bater\'ias, es decir, que no hay diferencias entre los tres procesos.} 
+<<>>=
+# Concatena los tres vectores dentro de un vector simple, junto con un vector 
+# factor indicador de la categor\'ia o tratamiento (A, B, C) que origina cada
+# observacion. El resultado es un data.frame que tiene como componentes los 
+# dos vectores anteriores.
+
+Baterias <- stack(Baterias); Baterias 
+names(Baterias) # Muestra los encabezados de los vectores
+
+# Prueba de igualdad de medias por descomposicion de la varianza en dos 
+# fuentes de variacion: la variabilidad que hay entre los grupos (debida a 
+# la variable independiente o los tratamientos), y la variabilidad que 
+# existe dentro de cada grupo (variabilidad no explicada por los tratamientos).
+
+aov.Baterias <- aov(values~ind, data=Baterias)
+# values~ind relaciona los valores muestrales con los respectivos grupos
+
+summary(aov.Baterias) 
+# Note que es necesario la instruccion anterior para poder visualizar la 
+# tabla ANOVA 
+@
+\textbf{Decisi\'on: ya que  α$=$ 0.05 $>$ p-value obtenido, entonces se rechaza Ho}
+<<>>=
+# Prueba de igualdad de medias en un diseño de una via (o unifactorial) 
+# asumiendo  que las varianzas de los grupos son iguales 
+oneway.test(values~ind, data=Baterias, var.equal = TRUE)
+@
+\textbf {15) Deshace la concatenaci?n del vector de valores y el vector indicador de categor\'ia} 
+<<>>=
+Baterias = unstack(Baterias);Baterias 
+@
+\textbf{16) Desconecta la hoja de datos de la segunda ruta o lista de b\'usqueda}
+<<>>=
+detach(Baterias, pos=2); search()
+@
+
+
+\textbf{Ejemplo 2:}
+\\\ Suponga que un estudiante hace una encuesta para evaluar s\'i los estudiantes que fuman estudian menos que los que no fuman.\\\\\
+
+\textbf {REALICE UN ESTUDIO ESTAD?STICO DE LOS DATOS.}\\\\
+
+\textbf {1) Activa tu directorio de trabajo.}
+<<>>=
+getwd() 
+setwd("C:/Users/User/Documents/TODAS_PRACTICAS")
+@
+\textbf {2) Crea un nuevo script y llamarle "Script11-DatosBivariados3".}
+
+\textbf {3) Crea dos vectores con los datos.} 
+<<>>=
+Fuma = c("Si","No","No","Si","No","Si","Si","Si","No","Si"); 
+Fuma 
+Cantidad = c(1,2,2,3,3,1,2,1,3,2); 
+Cantidad 
+@
+
+\textbf{4) Crea una hoja de datos que tenga comocomponentes o columnas los dos vectores.} 
+<<>>=
+Estudia <- data.frame(Fuma=Fuma, Cantidad=Cantidad); 
+Estudia 
+
+# Puedes editar los datos utilizando 
+fix(Estudia)
+@
+
+\textbf {5) Guarda la hoja de datos en un archivo.}  
+<<>>=
+write.table(Estudia, file="Estudia.txt", append=FALSE, quote=TRUE, 
+            sep=" ", na="NA", col.names=TRUE) 
+@
+
+\textbf {6) Elimina los objetos almacenados enel \'area de trabajo (Workspace)}
+<<>>=
+ls() 
+rm(list=ls(all=TRUE)) 
+ls() 
+@
+
+\textbf {7) Recupera desde el archivo la hoja de datos.} 
+
+<<>>=
+Estudia <- read.table("Estudia.txt", header=TRUE) 
+Estudia 
+@
+
+\textbf {8) Conecta la hoja de datos a la segunda ruta o lista de b\'usqueda}
+
+<<>>=
+attach(Estudia, pos=2) 
+search() 
+@
+
+\textbf {9) Crea una tabla de contigencia o de doble entrada.} 
+
+<<>>=
+tablaCont <- table(Estudia) 
+tablaCont 
+@
+
+\textbf {10) Calcula las tablas de proporciones o de probabilidades.}
+
+<<>>=
+options(digits=3) # solo imprime 3 lugares decimales
+
+# Proporciones basadas en el total de la muestra, la suma de filas y 
+# columnas suman 1 
+propTotal <- prop.table(tablaCont); propTotal
+
+# Proporciones basadas en el total por fila, cada fila suma 1 
+propFila <- prop.table(tablaCont, 1) 
+propFila 
+
+# Proporciones basadas en el total por columna, cada columna suma 1 
+propCol <- prop.table(tablaCont, 2) 
+propCol 
+@
+
+\textbf {11) Construya los gr\'aficos de barras de la variable bidimensional.} 
+
+<<>>=
+# Grafico de barras apiladas con la frecuencia de Cantidad como altura
+
+barplot(table(Estudia$Cantidad, Estudia$Fuma), beside = FALSE, 
+horizontal=FALSE, main="Grafico de barras (Fuma, Cantidad de 
+horas de estudio)", legend.text =T, xlab="Fuma", ylab="Cantidad de 
+horas-estudio",col=c("yellow", "white", "cyan")) 
+
+# Grafico de barras apiladas con la frecuencia de Fuma como altura
+
+barplot(table(Estudia$Fuma, Estudia$Cantidad), beside = FALSE, 
+horizontal=FALSE,main="Gráfico de barras (Cantidad de horas de 
+estudio,Fuma)", legend.text =T, xlab="Cantidad de horas-estudio", 
+ylab="Fuma",col=c("yellow", "white", "cyan")) 
+
+# Grafico de barras no apiladas y colocacion de leyenda 
+
+# Crear un factor para los nombres en la leyenda 
+
+Fuma=factor(Estudia$Fuma); 
+Fuma 
+barplot(table(Estudia$Cantidad, Estudia$Fuma), main="Grafico de 
+barras (Fuma, Cantidad de horas de estudio)", xlab="Fuma", 
+ylab="Cantidad dehoras-estudio", beside=TRUE, 
+col=c("yellow", "white", "cyan"),legend.text=T) 
+barplot(table(Estudia$Cantidad, Estudia$Fuma), main="Grafico de 
+barras (Fuma, Cantidad de horas de estudio)", xlab="Fuma", 
+ylab="Cantidad de horas-estudio", beside=TRUE, col=c("yellow", 
+"white", "cyan"),legend.text=c("menor que 5", "5-10", "mayor que 10")) 
+@
+
+\textbf {12) Realiza la prueba o contraste Chi-cuadrado para las probabilidades dadas chisq.test(tablaCont)}
+
+<<>>=
+# Si p-value > α aceptar Ho: Las variables son independientes
+# Recuerde que las frecuencias esperadas deben ser mayores a 5 para poder 
+# utilizarlas. 
+# Probabilidades esperadas para la prueba Chi-cuadrada
+
+chisq.test(tablaCont) $expected 
+@
+\end{document}

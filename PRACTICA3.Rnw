@@ -1,0 +1,144 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estad?stico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD UNO"}}\\[3 cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{Pr\'actica 03}
+
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+\section{1. FACTORES NOMINALES Y ORDINALES.}
+\subsection {FACTORES NOMINALES}
+\textbf{Ejemplo 1:} Variables sexo (categ\'orica) y edad en una muestra de 7 alumnos del curso
+
+<<>>=
+# Supongamos que se obtuvieron los siguientes datos:
+
+sexo <- c("M", "F", "F", "M", "F", "F", "M"); 
+sexo
+edad <- c(19, 20, 19, 22, 20, 21, 19); 
+edad
+
+# Podemos construir un factor con los niveles o categor\'ias de sexo
+
+FactorSexo = factor(sexo); 
+FactorSexo
+
+# Se pueden ver los niveles o categor?as del factor con: levels(FactorSexo)
+# Crear una tabla que contenga la media muestral por categor\'ia de 
+# sexo (nivel del factor):
+
+mediaEdad <- tapply(edad, FactorSexo, mean); 
+mediaEdad
+
+# Note que el primer argumento debe ser un vector, que es del cual se 
+# encontrar\'an las medidas de resumen; el segundo es el factor que se est\'a 
+# considerando, mientras que en el tercero se especifica la medida de inter\'es, 
+# solamente puede hacerse una medida a la vez.
+# Qu\'e tipo de objeto es la variable mediaEdad?: is.vector(mediaEdad); 
+# is.matrix(mediaEdad); is.list(mediaEdad); is.table(mediaEdad); is.array(mediaEdad)
+
+is.vector(mediaEdad); 
+is.matrix(mediaEdad);
+is.list(mediaEdad); 
+is.table(mediaEdad); 
+is.array(mediaEdad)
+@
+Vemos que el tipo de objeto de la variable mediaEdad es un ARRAY
+\subsection{FACTORES ORDINALES}
+ La funci\'on ordered() crea este tipo de factores y su uso es id\'entico al de la funci\'on "factor()". Los factores creados por la funci\'on "factor()"  los denominaremos nominales o simplemente factores cuando no haya lugar a confusi\'on, y los creados por la funci\'on ordered() los denominaremos ordinales. En la mayor\'ia de los casos la \'inica diferencia entre ambos tipos de factores consiste en que los ordinales se imprimen indicando el orden de los niveles. Sin embargo,los contrastes generados por los dos tipos de factores al ajustar Modelos lineales, son diferentes.
+
+\section{CREACI\'ON Y MANEJO DE LISTAS}
+\textbf{Ejemplo 1:} Crear una Lista con cuatro componentes.
+<<>>=
+lista1<-list(padre="Pedro", madre="Mar?a", no.hijos=3, edad.hijos=c(4,7,9))
+lista1
+is.matrix(lista1); 
+is.vector(lista1$edad.hijos)
+@
+\textbf{Ejemplo 2:} Acceso a las componentes de una lista:
+<<>>=
+lista1[1] # Accede a la componente como una lista (con etiqueta y valor)
+lista1["padre"] # El acceso es igual que con lista1[1]
+lista1[[2]] 
+# Accede al valor o valores de la componente segunda pero 
+# no muestra el nombre de la componente.
+
+
+lista1["madre"] # El acceso es igual que con lista1[[1]]
+@
+\textbf{Ejemplo 3:} Acceso a los elementos de la cuarta componente:
+<<>>=
+lista1[[4]][2] 
+# Se indica el elemento a ingresar en el segundo corchete
+@
+\textbf{Ejemplo 4:} Acceso de las componentes de una lista por su nombre:
+<<>>=
+
+lista1["padre"]
+@
+Forma general: Nombre_de_lista$nombre_de_componente\\
+\\ Por ejemplo: 
+<<>>=
+lista1$padre # equivale a 
+lista1[[1]]; 
+# y 
+lista1$edad.hijos[2] # equivale a 
+lista1[[4]][2]
+@
+
+\end{documentS}
+
+
+
+\end{document}

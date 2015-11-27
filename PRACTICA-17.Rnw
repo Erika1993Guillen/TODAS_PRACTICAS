@@ -1,0 +1,189 @@
+\documentclass[12pt,letterpaper]{article}
+ \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[ansinew]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{multicol} 
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{float} 
+\usepackage{verbatim} 
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancyhead[LO]{\leftmark}
+\usepackage{caption}
+\newtheorem{definicion}{Definci\'on}
+\begin{document}
+
+\begin{titlepage}
+\setlength{\unitlength}{1 cm} %Especificar unidad de trabajo
+
+
+\begin{center}
+\textbf{{\large UNIVERSIDAD DE EL SALVADOR}\\ [0.50 cm]
+{\large FACULTAD MULTIDISCIPLINARIA DE OCCIDENTE}\\ [0.50 cm]
+{\large DEPARTAMENTO DE MATEM\'ATICA}}\\[0.50 cm]
+
+\begin{picture}(18,4)
+ \put(7,0){\includegraphics[width=4cm]{minerva.jpg}}
+\end{picture}
+\\[0.25 cm]
+
+\textbf{{\large Licenciatura en Estad\'istica}\\[1.25cm]
+{\large Control Estadistico del Paquete R }\\[2 cm]
+%\setlength{\unitlength}{1 cm}
+{\large  \textbf{''UNIDAD CUATRO"}}\\[2cm]
+{\large Alumna:}\\
+{\large Erika Beatr\'iz Guill\'en Pineda}\\[2cm]
+{\large Fecha de elaboraci\'on}\\
+Santa Ana - \today }
+\end{center}
+\end{titlepage}
+
+\newtheorem{teorema}{Teorema}
+\newtheorem{prop}{Proposici\'on}[section]
+
+\lhead{PR\'ACTICA 17}
+\lfoot{LICENCIATURA EN ESTAD\'ISTICA}
+\cfoot{UESOCC}
+\rfoot{\thepage}
+%\pagestyle{fancy} 
+
+\setcounter{page}{1}
+\newpage
+
+
+\section{INTRODUCCI\'ON}
+
+La Inferencia Estad\'istica es: El conjunto de m\'etodos estad\'isticos que permiten deducir (inferir) como se distribuye (comporta) la poblaci\'on en estudio o las relaciones estoc\'asticas entre varias variables de inter\'es a partir de la informaci\'on suministrada por una muestra aleatoria.\\
+
+La Inferencia Estad\'istica param\'etrica plantea tres tipos de problemas:
+\begin{itemize}
+  \item Estimaci\'on puntual: en la que pretendemos dar un valor puntual del par\'ametro. 
+  \item Estimaci\'on por intervalos: en elque buscamos un intervalo en el que confiamos se encuentre el verdadero valor de teta desconocido.
+  \item Contraste de hip\'otesis: donde buscamos probar una declaraci\'on o un supuesto acerca del valor de uno (o m\'as) par\'ametro(s) teta. 
+\end{itemize}
+
+Para llevar a cabo lo anterior, se parte del supuesto de que la distribuci\'on de la(s) caracter\'istica(s) que se est\'a estudiando pertenece a una familia conocida de distribuciones, siendo \'unicamente desconocidos los par\'ametros que la definen. Por lo regular pertenecen a la familia normal o a cualquiera que pueda obtenerse a partir de ella como lo es: la t de Student, la Chi-Cuadrado o la F de Snedecor.
+
+\section{ESTIMACI\'ON PUNTUAL}\\[1cm]
+
+Un estad\'istico teta estimado es igual a f($X_1$, $X_2$, $X_3$,...,$X_n$) es un estimador adecuado de un par\'ametro teta, si cumple las siguientes propiedades: 
+\begin{itemize}
+  \item \textbf{Insesgadez:}
+  si la esperanza matem\'atica del estimador coincide con el valor del par\'ametro al cual 
+est\'a intentado estimar E[teta estimado]=teta. Es decir, la distribuci\'on de probabilidad del estimador se concentra alrededor del valor que intenta predecir.
+\item \textbf{Consistencia:}
+si el estimador converge en probabilidad al valor del par\'ametro que est\'a 
+intentado estimar conforme crece el tama\~no de la muestra. Es decir si $\~teta_n$ representa el estimador para una muestra de tama\~no n, entonces se dice que $\~teta$ es consistente si: 
+el limite de n cuando tiende a infinito de E[teta estimado]=teta.
+\item \textbf{Eficiencia:}
+si entre todos los posibles estimadores (insesgados o no) que pueden obtenerse es el que tenga la menor varianza posible.
+\end{itemize}\\[1cm]
+
+\textbf{Se verifica f\'acilmente que la media muestral (estimador de la media poblacional) cumple estas tres y a\'un m\'as propiedades.}\\[1cm]
+
+
+\section{ESTIMACI\'ON POR INTERVALOS DE CONFIANZA.}
+
+
+La idea de la estimaci\'on por intervalos de confianza radica en encontrar dos n\'umeros reales, digamos $\~teta_1$ y $\~teta_2$, tales que el par\'ametro desconocido $teta$ que se quiere estimar pertenezca al intervalo formado por dichos valores con probabilidad alta, digamos $1-α$.  Es decir;
+\begin{center}
+P[$\~teta_1$$<$=$teta$$<$=$\~teta_2$]=$1-α$
+\end{center}
+Donde $\~teta_1$ y $\~teta_2$ sean valores  que dependan \'unicamente del estimador $\~teta$ y de los valores observados en la muestra $X_1$, $X_2$, $X_3$,...,$X_n$.\\
+
+Se verifica f\'acilmente que cuando la caracter\'istica de inter\'es X sigue una distribuci\'on conocida la cual es sim\'etrica (como la normal o la binomial o sus derivadas), y adem\'as los estimadores son insesgados los mejores intervalos, en el sentido de su anchura, son los intervalos sim\'etricos alrededor del par\'ametro a estimar.\\
+
+Hay que tener en cuenta que $1-α$: es la probabilidad de que par\'ametro se encuentre en el intervalo antes de extraer la muestra. Una vez seleccionada la muestra esta probabilidad es 1 \'o 0, dependiendo de si el par\'ametro se encuentra o no en el intervalo. En este sentido es que no se habla de probabilidad sino de confianza.\\
+
+El concepto de confianza puede interpretarse de la siguiente manera: si se repitiera el experimento muestral (se tomar\'an muchas muestras) muchas veces, en aproximadamente el $100($1-α$)\%$ de los casos se confiar\'ia que los intervalos de confianza encontrados contengan al verdadero valor del par\'ametro $teta$ a estimar.
+
+\section{SIMULACI\'ON DEL CONCEPTO DE INTERVALO DE CONFIANZA PARA ESTIMAR UN PAR\'AMETRO.}
+
+
+\begin{itemize}
+  \item \tetxtbf{Ejemplo 1:}
+\end{itemize}
+Sea la variable aleatoria X = el n\'umero de caras obtenidas, al lanzar una moneda balanceada 20 veces. Simulamos 50 muestras para generar intervalos de 95\% de confianza y as\'i poder estimar la proporci\'on verdadera de caras (p), y encontrar en cu\'antos de estos intervalos se encuentra el verdadero valor de la proporci\'on.\\
+
+Entonces X tiene una distribuci\'on binomial con p\'arametros n=20 y p=0.5.\\
+
+La funci\'on para generar cada una de las muestras, junto con los l\'imites inferior y superior de los intervalos de confianza se muestra en seguida y le hemos llamado "simulIntProp". 
+<<>>=
+simulIntProp <- function(m=5, n=1, p, nivel.conf=0.95) 
+{ 
+X <- rbinom(m, n, p) 
+# Matriz con 1000 valores aleatorios binomial(n,p), 50 muestras cada una de tamaño 20 
+pe <<- X/n 
+ # Calcula la proporción estimada en cada una de las muestras. 
+SE <<- sqrt(pe*(1-pe)/n) 
+# Calcula la desviación estándar estimada en cada una de las muestras. 
+alfa <- 1-nivel.conf 
+z <<- qnorm(1-alfa/2) 
+Intervalo <<- cbind(pe - z*SE, pe + z*SE) 
+# genera los extremos del intervalo de confianza 
+nInter <<- 0 
+# un contador para conocer en cuántos intervalos se encuentra la verdadera proporción. 
+for(i in 1:m) 
+if ((p >= Intervalo[i, 1]) && (p <= Intervalo[i, 2])) 
+nInter <<- nInter + 1 
+# función que cuenta cuántos intervalos contienen el verdadero valor del parámetro. 
+return(nInter) 
+} 
+n=20; m= 50; p=0.5; nivel.conf=0.95 
+simulIntProp(m, n, p, nivel.conf) 
+Intervalo # para visualizar cada uno de los intervalos generados 
+nInter # para visualizar en cuántos de estos intervalos se encuentra la 
+# verdadera proporción.
+@
+
+Gr\'afico que muestra los intervalos de confianza de 95\% que contienen y no contienen el verdadero valor del par\'ametro p. 
+<<>>=
+matplot(rbind(pe - z*SE, pe + z*SE), rbind(1:m, 1:m), type="l", lty=1) 
+abline(v=p) 
+@
+\newpage
+\begin{itemize}
+  \item \textbf{Ejercicio 1:}
+\end{itemize}
+Sea la variable aleatoria X = el n\'umero que se obtiene al lanzar un dado no cargado 30 veces. Simular 56 muestras para generar intervalos de 95\% de confianza para estimar el promedio $(\μ)$, y encontrar cu\'antos de estos intervalos contiene el valor medio verdadero.
+<<>>=
+simulIntProp <- function(m=5, n=1, p, nivel.conf=0.95) 
+{ 
+X <- rbinom(m, n, p) 
+# Matriz con 1000 valores aleatorios binomial(n,p), 56 muestras cada una de tamaño 30 
+pe <<- X/n 
+ # Calcula la proporción estimada en cada una de las muestras. 
+SE <<- sqrt(pe*(1-pe)/n) 
+# Calcula la desviación estándarestimada en cada una de las muestras. 
+alfa <- 1-nivel.conf 
+z <<- qnorm(1-alfa/2) 
+Intervalo <<- cbind(pe - z*SE, pe + z*SE) 
+# genera los extremos del intervalo de confianza 
+nInter <<- 0 
+# un contador para conocer en cuántos intervalos se encuentra la 
+#verdadera proporción. 
+for(i in 1:m) 
+if ((p >= Intervalo[i, 1]) && (p <= Intervalo[i, 2])) 
+nInter <<- nInter + 1 
+# función que cuenta cuántos intervalos contienen el verdadero valor del parámetro. 
+return(nInter) 
+} 
+n=30; m= 56; p=0.17; nivel.conf=0.95 
+simulIntProp(m, n, p, nivel.conf) 
+
+Intervalo # para visualizar cada uno de los intervalos generados 
+
+nInter # para visualizar en cuántos de estos intervalos se encuentra la 
+# verdadero valor medio.
+@
+
+
+
+
+\end{document}
